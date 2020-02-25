@@ -27,6 +27,14 @@ public class Blackjack {
 
        }
 
+
+    public void placeBet() {
+
+    }
+    public void blackjackYay() {
+        int blackjackYay = 21;
+    }
+
     public boolean checkBlackJack(Hand firstRound) {
 
         if (dealer.getHand[0].getRank() + dealer.getHand[1].getRank() = 21) {
@@ -37,10 +45,6 @@ public class Blackjack {
         }
 
 
-    public void placeBet() {
-
-    }
-
     public void hitMe() {
 
     }
@@ -48,16 +52,6 @@ public class Blackjack {
     public void stay() {
 
     }
-
-    public void blackjackYay() {
-        int blackjackYay = 21;
-    }
-
-    public void beginPlay() {
-
-    }
-
-
 
 
     }
