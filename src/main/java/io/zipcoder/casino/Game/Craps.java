@@ -32,9 +32,11 @@ public class Craps{
         this.come = 0;
         this.dontCome = 0;
         this.field = 0;
-        for (int i = 0; i < 6; i++) {
+        for (int i = 4; i <= 6; i++) {
             comeBets.put(i, 0);
+            comeBets.put(i+4, 0);
             dontComeBets.put(i, 0);
+            dontComeBets.put(i+4, 0);
         }
     }
 
@@ -128,12 +130,16 @@ public class Craps{
             setField(0);
         }
         if(roll != 7 && roll >= 4 || roll <= 10) {
-            dontComeBets.replace(roll, getDontCome());
+            dontComeBets.put(roll, getDontCome());
             getWinnings(comeBets.get(roll));
-            comeBets.replace(roll, getCome());
+            comeBets.put(roll, getCome());
             playeTurn();
         }else if(roll == 7){
-
+            comeBets.clear();
+            for (int i = 4; i <= 6; i++) {
+                dontComeBets.put(i, 0);
+                dontComeBets.put(i+4, 0);
+            }
         }
     }
 
@@ -145,6 +151,13 @@ public class Craps{
                     "2 - Place Don't Come bet\n" + "3 - Roll dice");
         }
         return decision;
+    }
+
+    public void clearSeven(){
+        comeBets.clear();
+        for (int i = 4; i <= 6; i++) {
+
+        }
     }
 
     public Integer getPassLineDecision(){
