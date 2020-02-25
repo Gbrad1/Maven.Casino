@@ -1,5 +1,6 @@
 package io.zipcoder.casino.Game;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import io.zipcoder.casino.player.Player;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,6 +23,16 @@ public class CrapsTest {
     @Test
     public void constructorTest(){
         Boolean expectedIsPoint = false;
+        Boolean actualIsPoint = testCraps.getIsPointOn();
+
+        assertEquals(expectedIsPoint, actualIsPoint);
+    }
+
+    @Test
+    public void isPointOnTest(){
+        Boolean expectedIsPoint = true;
+
+        testCraps.setIsPointOn();
         Boolean actualIsPoint = testCraps.getIsPointOn();
 
         assertEquals(expectedIsPoint, actualIsPoint);
@@ -99,4 +110,5 @@ public class CrapsTest {
 
         assertEquals(expectedCurrentPoint, actualCurrent);
     }
+
 }

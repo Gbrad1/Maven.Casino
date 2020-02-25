@@ -20,7 +20,6 @@ public class Craps{
     private Integer field;
     private Integer currentPoint;
     private Boolean isPointOn;
-    private Boolean isComeOutRoll;
     private Console console;
 
     public Craps(Player user){
@@ -30,7 +29,13 @@ public class Craps{
         this.comeBets = new HashMap<>(6);
         this.dontComeBets = new HashMap<>(6);
         this.isPointOn = false;
-        this.isComeOutRoll = true;
+        this.come = 0;
+        this.dontCome = 0;
+        this.field = 0;
+        for (int i = 0; i < 6; i++) {
+            comeBets.put(i, 0);
+            dontComeBets.put(i, 0);
+        }
     }
 
     public void play(){
@@ -38,17 +43,10 @@ public class Craps{
     }
 
     public void playeTurn(){
-        if(isComeOutRoll){
-            Integer passLineDecision = getPassLineDecision();
-            if(passLineDecision == 1){
-                setPassLine(placeBet());
-            }else if(passLineDecision == 2){
-                setDontPassLine(placeBet());
-            }
-
-            Integer roll = dice.tossAndSum();
-            setCurrentPoint(roll);
-
+        if(!isPointOn){
+            comeOutRoll();
+        }else {
+            decisionRoll();
         }
     }
 
@@ -56,13 +54,88 @@ public class Craps{
         return console.getIntegerInput("Enter how much to wager");
     }
 
-    public void getWinnings(){
+    public void getWinnings(Integer amount){
 
     }
 
+    public void comeOutRoll(){
+        Integer passLineDecision = getPassLineDecision();
+        Integer roll;
+        if(passLineDecision == 1){
+            setPassLine(placeBet());
+            roll = dice.tossAndSum();
+            if(roll == 7 || roll == 11){
+                getWinnings(getPassLine());
+                setPassLine(0);
+                playeTurn();
+            }else if(roll == 2 || roll == 3 || roll == 12){
+                setPassLine(0);
+                playeTurn();
+            }else {
+                setIsPointOn();
+                setCurrentPoint(roll);
+                playeTurn();
+            }
+        }else if(passLineDecision == 2){
+            setDontPassLine(placeBet());
+            roll = dice.tossAndSum();
+            if(roll == 7 || roll == 11){
+                setDontPassLine(0);
+                playeTurn();
+            }else if(roll == 2 || roll == 3){
+                getWinnings(getDontPassLine());
+                setDontPassLine(0);
+                playeTurn();
+            }else if( roll == 12){
+                playeTurn();
+            }else {
+                setIsPointOn();
+                setCurrentPoint(roll);
+                playeTurn();
+            }
+        }
+    }
+
+    public void decisionRoll(){
+        Integer decision = getDecision();
+        if(decision == 1){
+            setCome(placeBet());
+        }else if(decision == 2){
+            setDontCome(placeBet());
+        }else if(decision == 3){
+            Integer roll = dice.tossAndSum();
+            if(roll != 7 && roll >= 4 || roll <= 10){
+                dontComeBets.replace(roll, 0);
+                getWinnings(comeBets.get(roll));
+                comeBets.replace(roll, getCome());
+                playeTurn();
+            }
+        }
+    }
+
+    public Integer getDecision(){
+        Integer decision = console.getIntegerInput("1 - Place Come bet\n" +
+                "2 - Place Don't Come bet\n" + "3 - Roll dice");
+        if(decision >= 1 || decision <= 3){
+            return decision;
+        }else {
+            return getDecision();
+        }
+    }
+
     public Integer getPassLineDecision(){
-        return console.getIntegerInput("1 - Pass Line\n" +
+        Integer decision = console.getIntegerInput("1 - Pass Line\n" +
                 "2 - Don't Pass Line");
+        if(decision == 1 || decision == 2){
+            return decision;
+        }
+        else {
+            return getPassLineDecision();
+        }
+    }
+
+    public Boolean isField(Integer roll){
+        if(roll <= )
     }
 
     public void setPassLine(Integer bet){
@@ -111,6 +184,10 @@ public class Craps{
 
     public Integer getCurrentPoint(){
         return currentPoint;
+    }
+
+    public void setIsPointOn(){
+        isPointOn = !isPointOn;
     }
 
     public Boolean getIsPointOn(){
