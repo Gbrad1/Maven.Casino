@@ -3,6 +3,7 @@ package io.zipcoder.casino.Game;
 import io.zipcoder.casino.dice.Dice;
 import io.zipcoder.casino.player.Player;
 import io.zipcoder.casino.utilities.Console;
+import org.omg.PortableInterceptor.INACTIVE;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,6 +20,7 @@ public class Craps{
     private Integer field;
     private Integer currentPoint;
     private Boolean isPointOn;
+    private Boolean isComeOutRoll;
     private Console console;
 
     public Craps(Player user){
@@ -28,10 +30,39 @@ public class Craps{
         this.comeBets = new HashMap<>(6);
         this.dontComeBets = new HashMap<>(6);
         this.isPointOn = false;
+        this.isComeOutRoll = true;
     }
 
     public void play(){
 
+    }
+
+    public void playeTurn(){
+        if(isComeOutRoll){
+            Integer passLineDecision = getPassLineDecision();
+            if(passLineDecision == 1){
+                setPassLine(placeBet());
+            }else if(passLineDecision == 2){
+                setDontPassLine(placeBet());
+            }
+
+            Integer roll = dice.tossAndSum();
+            setCurrentPoint(roll);
+
+        }
+    }
+
+    public Integer placeBet(){
+        return console.getIntegerInput("Enter how much to wager");
+    }
+
+    public void getWinnings(){
+
+    }
+
+    public Integer getPassLineDecision(){
+        return console.getIntegerInput("1 - Pass Line\n" +
+                "2 - Don't Pass Line");
     }
 
     public void setPassLine(Integer bet){
@@ -94,5 +125,11 @@ public class Craps{
         return comeBets.get(number);
     }
 
+    public void setDontComeBets(Integer number, Integer bet){
+        dontComeBets.put(number, bet);
+    }
 
+    public Integer getDontComeBets(Integer number){
+        return dontComeBets.get(number);
+    }
 }

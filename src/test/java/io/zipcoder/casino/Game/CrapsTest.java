@@ -37,6 +37,15 @@ public class CrapsTest {
     }
 
     @Test
+    public void setGetDontComeBetsTest(){
+        testCraps.setDontComeBets(6, expectedBet);
+
+        Integer actualBet = testCraps.getDontComeBets(6);
+
+        assertEquals(expectedBet, actualBet);
+    }
+
+    @Test
     public void setGetPassLineTest(){
         testCraps.setPassLine(expectedBet);
 
