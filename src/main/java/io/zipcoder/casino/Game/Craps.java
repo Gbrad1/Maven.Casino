@@ -4,9 +4,14 @@ import io.zipcoder.casino.dice.Dice;
 import io.zipcoder.casino.player.Player;
 import io.zipcoder.casino.utilities.Console;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Craps{
     private Dice dice;
     private Player user;
+    private Map<Integer, Integer> comeBets;
+    private Map<Integer, Integer> dontComeBets;
     private Integer passLine;
     private Integer dontPassLine;
     private Integer come;
@@ -20,6 +25,8 @@ public class Craps{
         this.console = new Console(System.in, System.out);
         this.user = user;
         this.dice = new Dice(2);
+        this.comeBets = new HashMap<>(6);
+        this.dontComeBets = new HashMap<>(6);
         this.isPointOn = false;
     }
 
@@ -78,4 +85,14 @@ public class Craps{
     public Boolean getIsPointOn(){
         return isPointOn;
     }
+
+    public void setComeBets(Integer number, Integer bet){
+        comeBets.put(number, bet);
+    }
+
+    public Integer getComeBets(Integer number){
+        return comeBets.get(number);
+    }
+
+
 }

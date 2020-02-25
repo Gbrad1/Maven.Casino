@@ -1,6 +1,5 @@
 package io.zipcoder.casino.dice;
 
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Dice {
