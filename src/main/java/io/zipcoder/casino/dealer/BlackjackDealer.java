@@ -1,4 +1,4 @@
 package io.zipcoder.casino.dealer;
 
-public class BlackJackDealer {
+public class BlackjackDealer {
 }

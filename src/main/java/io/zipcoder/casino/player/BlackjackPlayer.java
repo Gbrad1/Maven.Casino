@@ -1,6 +1,6 @@
 package io.zipcoder.casino.player;
 
-public class BlackJackPlayer extends CardPlayer{
+public class BlackjackPlayer extends CardPlayer{
     @Override
     public void drawCard() {
 
