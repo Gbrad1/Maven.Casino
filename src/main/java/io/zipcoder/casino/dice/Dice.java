@@ -1,17 +1,12 @@
 package io.zipcoder.casino.dice;
 
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Dice {
 
     public int numberOfDice;
 
-    public Dice(int numberOfDice, int sizes, long random) {
-        this.numberOfDice = numberOfDice;
-    }
-
-    public Dice(int numberOfDice, int sizes) {
+    public Dice(int numberOfDice) {
         this.numberOfDice = numberOfDice;
     }
 
