@@ -1,12 +1,66 @@
 package io.zipcoder.casino;
 
 import io.zipcoder.casino.card.Deck;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import io.zipcoder.casino.player.Player;
+import io.zipcoder.casino.utilities.Console;
 
 public class Blackjack {
 
-    //test
-}
+    Deck deck;
+    Console console;
+    Player player;
+    Dealer dealer;
+
+
+
+    public Blackjack(Player user) {
+
+        this.deck = new Deck();
+        this.console = new Console(System.in, System.out);
+        this.player = user;
+        this.dealer =  new Dealer();
+
+
+    }
+
+    public void playGame() {
+
+       }
+
+    public boolean checkBlackJack(Hand firstRound) {
+
+        if (dealer.getHand[0].getRank() + dealer.getHand[1].getRank() = 21) {
+            if (player.getHand[0].getRank() + player.getHand[1].getRank() = 21)
+        }
+                return true;
+
+        }
+
+
+    public void placeBet() {
+
+    }
+
+    public void hitMe() {
+
+    }
+
+    public void stay() {
+
+    }
+
+    public void blackjackYay() {
+        int blackjackYay = 21;
+    }
+
+    public void beginPlay() {
+
+    }
+
+
+
+
+    }
+
+
+
