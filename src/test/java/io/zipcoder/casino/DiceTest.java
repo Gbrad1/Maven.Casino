@@ -9,7 +9,7 @@ public class DiceTest {
 
     @Test
     public void tossAndSum() {
-        Dice dice = new Dice(2, 6);
+        Dice dice = new Dice(2);
         Assert.assertTrue(dice.tossAndSum() >= 2 && dice.tossAndSum() <= 12);
     }
 }

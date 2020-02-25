@@ -12,7 +12,7 @@ public class Craps{
     private Integer come;
     private Integer dontCome;
     private Integer field;
-    private Integer piont;
+    private Integer currentPoint;
     private Boolean isPointOn;
     private Console console;
 
@@ -23,6 +23,10 @@ public class Craps{
         this.isPointOn = false;
     }
 
+    public void play(){
+
+    }
+
     public void setPassLine(Integer bet){
         passLine = bet;
     }
@@ -31,4 +35,47 @@ public class Craps{
         return passLine;
     }
 
+    public void setDontPassLine(Integer bet){
+        dontPassLine = bet;
+    }
+
+    public Integer getDontPassLine(){
+        return dontPassLine;
+    }
+
+    public void setCome(Integer bet){
+        come = bet;
+    }
+
+    public Integer getCome(){
+        return come;
+    }
+
+    public void setDontCome(Integer bet){
+        dontCome = bet;
+    }
+
+    public Integer getDontCome(){
+        return dontCome;
+    }
+
+    public void setField(Integer bet){
+        field = bet;
+    }
+
+    public Integer getField(){
+        return field;
+    }
+
+    public void setCurrentPoint(Integer newPoint){
+        currentPoint = newPoint;
+    }
+
+    public Integer getCurrentPoint(){
+        return currentPoint;
+    }
+
+    public Boolean getIsPointOn(){
+        return isPointOn;
+    }
 }
