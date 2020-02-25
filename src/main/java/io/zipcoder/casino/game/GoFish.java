@@ -7,7 +7,7 @@ public class GoFish {
     Deck deck;
     Integer playerScore;
     Integer dealerScore;
-    Console console;
+    Console console = new Console(System.in, System.out);
 
     public GoFish() {
 
