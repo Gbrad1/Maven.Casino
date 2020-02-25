@@ -54,6 +54,10 @@ public class Craps{
         return console.getIntegerInput("Enter how much to wager");
     }
 
+    public Integer placeBet(String prompt){
+        return console.getIntegerInput(prompt);
+    }
+
     public void getWinnings(Integer amount){
 
     }
@@ -63,22 +67,34 @@ public class Craps{
         Integer roll;
         if(passLineDecision == 1){
             setPassLine(placeBet());
+            makeFieldBet();
             roll = dice.tossAndSum();
+            if(isField(roll)){
+                getWinnings(getField());
+                setField(0);
+            }else if(!isField(roll)){
+                setField(0);
+            }
             if(roll == 7 || roll == 11){
                 getWinnings(getPassLine());
                 setPassLine(0);
-                playeTurn();
             }else if(roll == 2 || roll == 3 || roll == 12){
                 setPassLine(0);
-                playeTurn();
             }else {
                 setIsPointOn();
                 setCurrentPoint(roll);
-                playeTurn();
             }
+
         }else if(passLineDecision == 2){
             setDontPassLine(placeBet());
+            makeFieldBet();
             roll = dice.tossAndSum();
+            if(isField(roll)){
+                getWinnings(getField());
+                setField(0);
+            }else if(!isField(roll)){
+                setField(0);
+            }
             if(roll == 7 || roll == 11){
                 setDontPassLine(0);
                 playeTurn();
@@ -102,40 +118,58 @@ public class Craps{
             setCome(placeBet());
         }else if(decision == 2){
             setDontCome(placeBet());
-        }else if(decision == 3){
-            Integer roll = dice.tossAndSum();
-            if(roll != 7 && roll >= 4 || roll <= 10){
-                dontComeBets.replace(roll, 0);
-                getWinnings(comeBets.get(roll));
-                comeBets.replace(roll, getCome());
-                playeTurn();
-            }
+        }
+        makeFieldBet();
+        Integer roll = dice.tossAndSum();
+        if(isField(roll)){
+            getWinnings(getField());
+            setField(0);
+        }else if(!isField(roll)){
+            setField(0);
+        }
+        if(roll != 7 && roll >= 4 || roll <= 10) {
+            dontComeBets.replace(roll, getDontCome());
+            getWinnings(comeBets.get(roll));
+            comeBets.replace(roll, getCome());
+            playeTurn();
+        }else if(roll == 7){
+
         }
     }
 
     public Integer getDecision(){
         Integer decision = console.getIntegerInput("1 - Place Come bet\n" +
                 "2 - Place Don't Come bet\n" + "3 - Roll dice");
-        if(decision >= 1 || decision <= 3){
-            return decision;
-        }else {
-            return getDecision();
+        while(decision > 4 || decision < 1){
+            decision = console.getIntegerInput("1 - Place Come bet\n" +
+                    "2 - Place Don't Come bet\n" + "3 - Roll dice");
         }
+        return decision;
     }
 
     public Integer getPassLineDecision(){
         Integer decision = console.getIntegerInput("1 - Pass Line\n" +
                 "2 - Don't Pass Line");
-        if(decision == 1 || decision == 2){
-            return decision;
+        while (decision != 2 && decision != 3){
+            decision = console.getIntegerInput("1 - Pass Line\n" +
+                    "2 - Don't Pass Line");
         }
-        else {
-            return getPassLineDecision();
-        }
+        return decision;
     }
 
     public Boolean isField(Integer roll){
-        if(roll <= )
+        if(roll >= 2 && roll < 5 && roll >= 9){
+            return true;
+        }
+        return false;
+    }
+
+    public void makeFieldBet(){
+        Integer bet = placeBet("How much plays the field? (Enter bet >= 0");
+        while (bet < 0){
+            bet = placeBet("How much plays the field? (Enter bet >= 0");
+        }
+        setField(bet);
     }
 
     public void setPassLine(Integer bet){
