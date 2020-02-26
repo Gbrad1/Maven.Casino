@@ -1,8 +1,9 @@
 package io.zipcoder.casino.game;
-
+package io.zipcoder.casino.player;
 import io.zipcoder.casino.card.Deck;
 import io.zipcoder.casino.dealer.BlackjackDealer;
 import io.zipcoder.casino.player.BlackjackPlayer;
+import io.zipcoder.casino.player.CardPlayer;
 import io.zipcoder.casino.player.Player;
 import io.zipcoder.casino.utilities.Console;
 
@@ -18,4 +19,7 @@ public class Blackjack {
         this.cardDeck = new Deck();
         this.newConsole = new Console(System.in, System.out);
     }
+public void hit(CardPlayer player){
+        player.getHand().add(cardDeck.popCard());
+}
 }
