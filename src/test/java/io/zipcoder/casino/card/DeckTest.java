@@ -1,12 +1,8 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.card;
 
-import io.zipcoder.casino.card.Card;
-import io.zipcoder.casino.card.Deck;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Stack;
 import java.util.logging.Logger;
 
 
