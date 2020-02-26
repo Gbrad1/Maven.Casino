@@ -1,6 +1,7 @@
 package io.zipcoder.casino.game;
 
 import io.zipcoder.casino.dice.Dice;
+import io.zipcoder.casino.player.CrapsPlayer;
 import io.zipcoder.casino.player.Player;
 import io.zipcoder.casino.utilities.Console;
 
@@ -9,7 +10,7 @@ import java.util.Map;
 
 public class Craps{
     private Dice dice;
-    private Player user;
+    private CrapsPlayer user;
     private Map<Integer, Integer> comeBets;
     private Map<Integer, Integer> dontComeBets;
     private Integer passLine;
@@ -22,7 +23,7 @@ public class Craps{
     private Boolean isCrapOut;
     private Console console;
 
-    public Craps(Player user){
+    public Craps(CrapsPlayer user){
         this.console = new Console(System.in, System.out);
         this.user = user;
         this.dice = new Dice(2);
