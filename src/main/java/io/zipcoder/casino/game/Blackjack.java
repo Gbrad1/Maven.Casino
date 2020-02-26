@@ -1,9 +1,13 @@
 package io.zipcoder.casino.game;
+import io.zipcoder.casino.card.Card;
 import io.zipcoder.casino.card.Deck;
 import io.zipcoder.casino.dealer.BlackjackDealer;
 import io.zipcoder.casino.player.BlackjackPlayer;
 import io.zipcoder.casino.player.Player;
 import io.zipcoder.casino.utilities.Console;
+
+import java.util.ArrayList;
+import java.util.Scanner;
 
 
 public class Blackjack {
@@ -16,6 +20,10 @@ public class Blackjack {
     public Blackjack(BlackjackPlayer player, BlackjackDealer dealer){
         this.player = player;
         this.dealer = dealer;
+    }
+
+    public Deck getDeck() {
+        return deck;
     }
 
     public void createDeck(){
@@ -61,6 +69,10 @@ public class Blackjack {
         player.getHand().add(deck.popCard());
     }
 
+    public ArrayList<Card> getHandPlayer() {
+        return player.getHand();
+    }
+
     public void setDealerPlayer(){
         dealer.getHand().add(deck.popCard());
         dealer.getHand().add(deck.popCard());
@@ -81,7 +93,7 @@ public class Blackjack {
         newGame.setHandPlayer();
         newGame.setDealerPlayer();
 
-        System.out.println("Welcome to Blackjack!");
+        System.out.println("Welcome to Blackjack");
     }
 
 }

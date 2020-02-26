@@ -13,58 +13,166 @@ import java.util.logging.Logger;
 public class BlackjackTest {
 
     private static final Logger LOGGER = Logger.getLogger(BlackjackTest.class.getName());
+    Player player = new Player();
+    BlackjackPlayer blackjackPlayer = new BlackjackPlayer(player);
+    BlackjackDealer blackjackDealer = new BlackjackDealer();
+    Blackjack newGame = new Blackjack(blackjackPlayer, blackjackDealer);
 
+    @Test
+    public void createDeckTest() {
+        newGame.createDeck();
 
-        @Test
-        public void createDeckTest() {
-            Deck deck = new Deck();
-            deck.createDeck();
+        Assert.assertFalse(newGame.getDeck().isEmpty());
+    }
 
-            Assert.assertTrue(!deck.isEmpty());
-        }
+    @Test
+    public void createShuffleTest() {
+        newGame.createDeck();
+        newGame.shuffleDeck();
 
-        @Test
-        public void createShuffleTest() {
-            Deck deck1 = new Deck();
-            deck1.createDeck();
-            deck1.shuffle();
-            Card firstCard = deck1.popCard();
-            LOGGER.info("" + firstCard);
+        Card firstCard = newGame.getDeck().popCard();
+        LOGGER.info("" + firstCard);
 
-            Card secondCard = deck1.popCard();
-            LOGGER.info("" + secondCard);
+        Card secondCard = newGame.getDeck().popCard();
+        LOGGER.info("" + secondCard);
+    }
 
-            }
+     @Test
+    public void checkPlayerHandSizeTest() {
+        newGame.createDeck();
+        newGame.shuffleDeck();
+        newGame.setHandPlayer();
 
-         @Test
-        public void checkHandSizeTest() {
+        Integer expected = 2;
+        Integer actual = blackjackPlayer.getHand().size();
 
-            Player player = new Player();
-            BlackjackPlayer blackjackPlayer = new BlackjackPlayer(player);
-            BlackjackDealer blackjackDealer = new BlackjackDealer();
-            Blackjack newGame = new Blackjack(blackjackPlayer, blackjackDealer);
+        Assert.assertEquals(expected, actual);
+    }
 
-            newGame.createDeck();
-            newGame.shuffleDeck();
-            newGame.setHandPlayer();
+     @Test
+    public void checkDealerHandSizeTest() {
+        newGame.createDeck();
+        newGame.shuffleDeck();
+        newGame.setDealerPlayer();
 
-            Integer actual = blackjackPlayer.getHand().size();
+        Integer expected = 2;
+        Integer actual = blackjackDealer.getHand().size();
 
-            Integer expected = 2;
-            Assert.assertEquals(expected, actual);
+        Assert.assertEquals(expected, actual);
+    }
 
+     @Test
+    public void drawCardPlayerTest() {
+         newGame.createDeck();
+         newGame.shuffleDeck();
+         newGame.setHandPlayer();
+         newGame.drawCardPlayer();
 
+         Integer expected = 3;
+         Integer actual = blackjackPlayer.getHand().size();
 
+         Assert.assertEquals(expected, actual);
+    }
 
+     @Test
+    public void drawCardDealerTest() {
+         newGame.createDeck();
+         newGame.shuffleDeck();
+         newGame.setDealerPlayer();
+         newGame.drawCardDealer();
 
+         Integer expected = 3;
+         Integer actual = blackjackDealer.getHand().size();
 
+         Assert.assertEquals(expected, actual);
+    }
+
+     @Test
+    public void getScorePlayerTest() {
+         newGame.createDeck();
+         newGame.shuffleDeck();
+         newGame.setHandPlayer();
+
+         String result = "";
+         for (Card c: blackjackPlayer.getHand()) {
+             result += c.toString() + " ";
          }
 
+         Integer actual = blackjackPlayer.getScore();
+         LOGGER.info("" + actual);
+         LOGGER.info(result);
+    }
 
+     @Test
+    public void getScoreDealerTest() {
+         newGame.createDeck();
+         newGame.shuffleDeck();
+         newGame.setDealerPlayer();
 
-        }
+         String result = "";
+         for (Card c: blackjackDealer.getHand()) {
+             result += c.toString() + " ";
+         }
 
+         Integer actual = blackjackDealer.getScore();
+         LOGGER.info("" + actual);
+         LOGGER.info(result);
+    }
 
+     @Test
+    public void bustPlayerTest() {
+         newGame.createDeck();
+         newGame.shuffleDeck();
+         newGame.setHandPlayer();
+         newGame.drawCardPlayer();
+         newGame.drawCardPlayer();
 
+         String result = "";
+         for (Card c: blackjackPlayer.getHand()) {
+             result += c.toString() + " ";
+         }
 
+         Integer total = blackjackPlayer.getScore();
+         LOGGER.info(result);
+         LOGGER.info("" + total);
 
+         Assert.assertTrue(newGame.bustPlayer());
+    }
+
+     @Test
+    public void bustDealerTest() {
+         newGame.createDeck();
+         newGame.shuffleDeck();
+         newGame.setDealerPlayer();
+         newGame.drawCardDealer();
+         newGame.drawCardDealer();
+
+         String result = "";
+         for (Card c: blackjackDealer.getHand()) {
+             result += c.toString() + " ";
+         }
+
+         Integer total = blackjackDealer.getScore();
+         LOGGER.info(result);
+         LOGGER.info("" + total);
+
+         Assert.assertTrue(newGame.bustDealer());
+    }
+
+     @Test
+    public void seeDealerCardTest() {
+        newGame.createDeck();
+        newGame.shuffleDeck();
+        newGame.setDealerPlayer();
+
+         String result = "";
+         for (Card c: blackjackDealer.getHand()) {
+             result += c.toString() + " ";
+         }
+
+         String str = newGame.seeDealerCard();
+
+         LOGGER.info(result);
+         LOGGER.info(str);
+    }
+} 
