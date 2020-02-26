@@ -14,46 +14,69 @@ public class BlackjackTest {
 
     private static final Logger LOGGER = Logger.getLogger(BlackjackTest.class.getName());
 
-        @Test
-        public void createDeckTest() {
-            Deck deck = new Deck();
-            deck.createDeck();
+    @Test
+    public void createDeckTest() {
+        Deck deck = new Deck();
+        Player player = new Player();
+        BlackjackPlayer blackjackPlayer = new BlackjackPlayer(player);
+        BlackjackDealer blackjackDealer = new BlackjackDealer();
+        Blackjack newGame = new Blackjack(blackjackPlayer, blackjackDealer);
 
-            Assert.assertTrue(!deck.isEmpty());
+        newGame.createDeck();
+
+        Assert.assertTrue(!deck.isEmpty());
+    }
+
+    @Test
+    public void createShuffleTest() {
+        Deck deck1 = new Deck();
+        deck1.createDeck();
+        deck1.shuffle();
+        Card firstCard = deck1.popCard();
+        LOGGER.info("" + firstCard);
+
+        Card secondCard = deck1.popCard();
+        LOGGER.info("" + secondCard);
         }
 
-        @Test
-        public void createShuffleTest() {
-            Deck deck1 = new Deck();
-            deck1.createDeck();
-            deck1.shuffle();
-            Card firstCard = deck1.popCard();
-            LOGGER.info("" + firstCard);
+     @Test
+    public void checkPlayerHandSizeTest() {
 
-            Card secondCard = deck1.popCard();
-            LOGGER.info("" + secondCard);
+        Player player = new Player();
+        BlackjackPlayer blackjackPlayer = new BlackjackPlayer(player);
+        BlackjackDealer blackjackDealer = new BlackjackDealer();
+        Blackjack newGame = new Blackjack(blackjackPlayer, blackjackDealer);
 
-            }
+        newGame.createDeck();
+        newGame.shuffleDeck();
+        newGame.setHandPlayer();
 
-         @Test
-        public void checkHandSizeTest() {
+        Integer actual = blackjackPlayer.getHand().size();
 
-            Player player = new Player();
-            BlackjackPlayer blackjackPlayer = new BlackjackPlayer(player);
-            BlackjackDealer blackjackDealer = new BlackjackDealer();
-            Blackjack newGame = new Blackjack(blackjackPlayer, blackjackDealer);
+        Integer expected = 2;
+        Assert.assertEquals(expected, actual);
+     }
 
-            newGame.createDeck();
-            newGame.shuffleDeck();
-            newGame.setHandPlayer();
+     @Test
+    public void checkDealerHandSizeTest() {
+        Player player = new Player();
+        BlackjackPlayer blackjackPlayer = new BlackjackPlayer(player);
+        BlackjackDealer blackjackDealer = new BlackjackDealer();
+        Blackjack newGame = new Blackjack(blackjackPlayer, blackjackDealer);
 
-            Integer actual = blackjackPlayer.getHand().size();
+        newGame.createDeck();
+        newGame.shuffleDeck();
+        newGame.setDealerPlayer();
 
-            Integer expected = 2;
-            Assert.assertEquals(expected, actual);
-         }
+        Integer actual = blackjackDealer.getHand().size();
 
-    }
+        Integer expected = 2;
+        Assert.assertEquals(expected, actual);
+     }
+
+
+
+}
 
 
 
