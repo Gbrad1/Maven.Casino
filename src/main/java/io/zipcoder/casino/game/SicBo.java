@@ -4,14 +4,17 @@ import io.zipcoder.casino.player.Player;
 import io.zipcoder.casino.player.SicBoPlayer;
 import io.zipcoder.casino.utilities.Console;
 
-
-public class Sicbo implements Gambling {
-
-    SicBoPlayer player;
-    Console console = new Console(System.in, System.out);
+import java.sql.SQLOutput;
 
 
-    public Sicbo(SicBoPlayer player) {
+public class SicBo implements Gambling {
+
+    private SicBoPlayer player;
+    private Console console = new Console(System.in, System.out);
+    private boolean isPlayerDone;
+
+
+    public SicBo(SicBoPlayer player) {
         this.player = player;
     }
 
@@ -23,6 +26,9 @@ public class Sicbo implements Gambling {
 
 
     public void play() {
+
+
+
 
     }
 

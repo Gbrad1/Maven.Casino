@@ -1,8 +1,8 @@
-package io.zipcoder.casino;
+package io.zipcoder.casino.game;
 
 import org.junit.Test;
 
-public class SicboTest {
+public class SicBoTest {
 
     @Test
     public void getBigSum() {

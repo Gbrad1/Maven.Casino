@@ -3,7 +3,7 @@ package io.zipcoder.casino;
 
 import io.zipcoder.casino.dealer.BlackjackDealer;
 import io.zipcoder.casino.game.Blackjack;
-import io.zipcoder.casino.game.Sicbo;
+import io.zipcoder.casino.game.SicBo;
 import io.zipcoder.casino.player.BlackjackPlayer;
 import io.zipcoder.casino.player.Multiplayer;
 import io.zipcoder.casino.player.Player;
@@ -72,7 +72,11 @@ public class Casino {
 
     public void playSicBo(){
         Console consoleSicBo = new Console(System.in, System.out);
-        Sicbo sicboGame = new Sicbo(new SicBoPlayer(user));
+        SicBo sicBoGame = new SicBo(new SicBoPlayer(user));
+        System.out.println("----------------------------------------");
+        System.out.println("-               SicBo                  -");
+        System.out.println("----------------------------------------");
+
 
     }
 
