@@ -49,42 +49,10 @@ public class DeckTest {
     }
 
     @Test
-    public void testPrintDeck() {
+    public void test() {
         Deck deck = new Deck();
         deck.createDeck();
-        deck.printDeck();
-    }
-
-    @Test
-    public void testShuffleDeck() {
-        Deck deck = new Deck();
-        deck.createDeck();
-        deck.stackToArray();
         deck.shuffle();
-        deck.arrayListToStack();
-        deck.printDeck();
-    }
-
-    @Test
-    public void testStackToArray() {
-        Deck deck = new Deck();
-        deck.createDeck();
-        deck.stackToArray();
-
-        Integer actual = deck.getTempArrayList().size();
-        Integer expected = 52;
-
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testPrintShuffledStack() {
-        Deck deck = new Deck();
-        deck.createDeck();
-        deck.stackToArray();
-        deck.shuffle();
-        deck.arrayListToStack();
-
         LOGGER.info("\n" + deck.peekStack());
     }
 
