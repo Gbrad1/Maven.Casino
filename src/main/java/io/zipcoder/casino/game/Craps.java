@@ -1,18 +1,16 @@
 package io.zipcoder.casino.game;
 
-import io.zipcoder.casino.dice.Dice;
 import io.zipcoder.casino.player.CrapsPlayer;
-import io.zipcoder.casino.player.Player;
 import io.zipcoder.casino.utilities.Console;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Craps{
-    private Dice dice;
-    private CrapsPlayer user;
+    private CrapsPlayer crapsPlayer;
     private Map<Integer, Integer> comeBets;
     private Map<Integer, Integer> dontComeBets;
+    private Integer bet;
     private Integer passLine;
     private Integer dontPassLine;
     private Integer come;
@@ -23,14 +21,16 @@ public class Craps{
     private Boolean isCrapOut;
     private Console console;
 
-    public Craps(CrapsPlayer user){
+    public Craps(CrapsPlayer crapPlayer){
         this.console = new Console(System.in, System.out);
-        this.user = user;
-        this.dice = new Dice(2);
+        this.crapsPlayer = crapPlayer;
         this.comeBets = new HashMap<>(6);
         this.dontComeBets = new HashMap<>(6);
         this.isPointOn = false;
         this.isCrapOut = false;
+        this.bet = 0;
+        this.passLine = 0;
+        this.dontPassLine = 0;
         this.come = 0;
         this.dontCome = 0;
         this.field = 0;
@@ -56,16 +56,34 @@ public class Craps{
         }
     }
 
-    public Integer placeBet(){
-        return console.getIntegerInput("Enter how much to wager");
+    public void getWager(){
+        if(crapsPlayer.getPlayer().getBalance() == 0){
+            exit();
+        }
+        bet = console.getIntegerInput("Enter how much to wager");
+        while(bet > crapsPlayer.getPlayer().getBalance() || bet < 1){
+            bet = console.getIntegerInput("Enter how much to wager");
+        }
+        this.bet = bet;
     }
 
-    public Integer placeBet(String prompt){
-        return console.getIntegerInput(prompt);
+    public void getWager(String prompt){
+        if(crapsPlayer.getPlayer().getBalance() == 0){
+            exit();
+        }
+         bet = console.getIntegerInput(prompt);
+        while(bet > crapsPlayer.getPlayer().getBalance() || bet < 0){
+            bet = console.getIntegerInput(prompt);
+        }
+        this.bet = bet;
+    }
+
+    public void placeBet(){
+        crapsPlayer.getPlayer().setBalance(crapsPlayer.getPlayer().getBalance() - bet);
     }
 
     public void getWinnings(Integer amount){
-
+        crapsPlayer.getPlayer().setBalance(crapsPlayer.getPlayer().getBalance() + amount);
     }
 
     public void exit(){
@@ -76,12 +94,16 @@ public class Craps{
         Integer passLineDecision = getPassLineDecision();
         Integer roll;
         if(passLineDecision == 1){
-            setPassLine(placeBet());
+            getWager();
+            placeBet();
+            setPassLine(bet);
         }else if(passLineDecision == 2){
-            setDontPassLine(placeBet());
+            getWager();
+            placeBet();
+            setDontPassLine(bet);
         }
         makeFieldBet();
-        roll = dice.tossAndSum();
+        roll = crapsPlayer.rollDice();
         payField(roll);
         checkLineBetComeOut(roll);
         setIsPointOn();
@@ -92,12 +114,16 @@ public class Craps{
     public void decisionRoll(){
         Integer decision = getDecision();
         if(decision == 1){
-            setCome(placeBet());
+            getWager();
+            placeBet();
+            setCome(bet);
         }else if(decision == 2){
-            setDontCome(placeBet());
+            getWager();
+            placeBet();
+            setDontCome(bet);
         }
         makeFieldBet();
-        Integer roll = dice.tossAndSum();
+        Integer roll = crapsPlayer.rollDice();
         payField(roll);
         checkLineBetPointOn(roll);
         playeTurn();
@@ -135,10 +161,8 @@ public class Craps{
     }
 
     public void makeFieldBet(){
-        Integer bet = placeBet("How much plays the field? (Enter bet >= 0");
-        while (bet < 0){
-            bet = placeBet("How much plays the field? (Enter bet >= 0");
-        }
+        getWager("How much plays the field? (Enter bet >= 0");
+        placeBet();
         setField(bet + getField());
     }
 
@@ -180,7 +204,7 @@ public class Craps{
             updateComeBets(roll);
             setIsPointOn();
             setCurrentPoint(0);
-        }else if((roll != currentPoint && roll != 7) && (roll >= 4 && roll <= 10)){
+        }else if((roll != currentPoint) && (roll >= 4 && roll <= 10)){
             updateComeBets(roll);
         }
     }
@@ -292,5 +316,13 @@ public class Craps{
 
     public Boolean getIsCrapOut(){
         return isCrapOut;
+    }
+
+    public void setBet(Integer bet){
+        this.bet = bet;
+    }
+
+    public Integer getBet(){
+        return this.bet;
     }
 }
