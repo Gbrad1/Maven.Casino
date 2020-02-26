@@ -111,4 +111,52 @@ public class CrapsTest {
         assertEquals(expectedCurrentPoint, actualCurrent);
     }
 
+    @Test
+    public void payDontPassLineTest(){
+        testCraps.setPassLine(expectedBet);
+        testCraps.setDontPassLine(expectedBet);
+        testCraps.updatePassLine("dont");
+
+        Integer expectedPass = 0;
+        Integer actualPass = testCraps.getPassLine();
+        Integer actualDont = testCraps.getDontPassLine();
+
+        assertEquals(expectedBet, actualDont);
+        assertEquals(expectedPass, actualPass);
+    }
+
+    @Test
+    public void payDontPassLineTest2(){
+        testCraps.setPassLine(expectedBet);
+        testCraps.setDontPassLine(expectedBet);
+        testCraps.updatePassLine("pass");
+
+        Integer expectedDont = 0;
+        Integer actualPass = testCraps.getPassLine();
+        Integer actualDont = testCraps.getDontPassLine();
+
+        assertEquals(expectedDont, actualDont);
+        assertEquals(expectedBet, actualPass);
+    }
+
+    @Test
+    public void payDontPassLineTest3(){
+        testCraps.setPassLine(expectedBet);
+        testCraps.setDontPassLine(expectedBet);
+        testCraps.updatePassLine("12");
+
+        Integer expectedPass = 0;
+        Integer actualPass = testCraps.getPassLine();
+        Integer actualDont = testCraps.getDontPassLine();
+
+        assertEquals(expectedBet, actualDont);
+        assertEquals(expectedPass, actualPass);
+    }
+
+    @Test
+    public void payFieldTest(){
+        testCraps.setField(expectedBet);
+
+        Integer ac
+    }
 }

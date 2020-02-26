@@ -3,7 +3,6 @@ package io.zipcoder.casino.Game;
 import io.zipcoder.casino.dice.Dice;
 import io.zipcoder.casino.player.Player;
 import io.zipcoder.casino.utilities.Console;
-import org.omg.PortableInterceptor.INACTIVE;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -75,50 +74,23 @@ public class Craps{
             setPassLine(placeBet());
             makeFieldBet();
             roll = dice.tossAndSum();
-            if(isField(roll)){
-                getWinnings(getField());
-                setField(0);
-            }else if(!isField(roll)){
-                setField(0);
-            }
-            if(roll == 7 || roll == 11){
-                getWinnings(getPassLine());
-                setPassLine(0);
-                if(roll == 7){
-                    clearSeven();
-                }
-            }else if(roll == 2 || roll == 3 || roll == 12){
-                setPassLine(0);
-            }else {
-                setIsPointOn();
-                setCurrentPoint(roll);
-                playeTurn();
-            }
+            payField(roll);
+            checkLineBet(roll);
+            notDecisionRollOrSeven(roll);
+            setIsPointOn();
+            setCurrentPoint(roll);
+            playeTurn();
 
         }else if(passLineDecision == 2){
             setDontPassLine(placeBet());
             makeFieldBet();
             roll = dice.tossAndSum();
-            if(isField(roll)){
-                getWinnings(getField());
-                setField(0);
-            }else if(!isField(roll)){
-                setField(0);
-            }
-            if(roll == 7 || roll == 11){
-                setDontPassLine(0);
-                playeTurn();
-            }else if(roll == 2 || roll == 3){
-                getWinnings(getDontPassLine());
-                setDontPassLine(0);
-                playeTurn();
-            }else if( roll == 12){
-                playeTurn();
-            }else {
-                setIsPointOn();
-                setCurrentPoint(roll);
-                playeTurn();
-            }
+            payField(roll);
+            checkLineBet(roll);
+            notDecisionRollOrSeven(roll);
+            setIsPointOn();
+            setCurrentPoint(roll);
+            playeTurn();
         }
     }
 
@@ -131,12 +103,7 @@ public class Craps{
         }
         makeFieldBet();
         Integer roll = dice.tossAndSum();
-        if(isField(roll)){
-            getWinnings(getField());
-            setField(0);
-        }else if(!isField(roll)){
-            setField(0);
-        }
+        payField(roll);
         if(roll != 7 && roll >= 4 || roll <= 10) {
             dontComeBets.replace(roll, getDontCome());
             getWinnings(comeBets.get(roll));
@@ -179,11 +146,13 @@ public class Craps{
         return decision;
     }
 
-    public Boolean isField(Integer roll){
+    public void payField(Integer roll){
         if(roll >= 2 && roll < 5 || roll >= 9){
-            return true;
+            getWinnings(getField());
+            setField(0);
+        }else {
+            setField(0);
         }
-        return false;
     }
 
     public void makeFieldBet(){
@@ -192,6 +161,52 @@ public class Craps{
             bet = placeBet("How much plays the field? (Enter bet >= 0");
         }
         setField(bet);
+    }
+
+    public void checkLineBet(Integer roll){
+        if(roll == 7 || roll == 11){
+            updatePassLine("pass");
+            if(roll == 7){
+                clearSeven();
+            }
+        }else if(roll == 2 || roll == 3) {
+            updatePassLine("dont");
+        }else if(roll == 12){
+            updatePassLine("12");
+        }
+        playeTurn();
+    }
+
+    public void updatePassLine(String decision){
+        if(decision.equalsIgnoreCase("pass")){
+            getWinnings(getPassLine());
+            setDontPassLine(0);
+        }else if(decision.equalsIgnoreCase("dont")){
+            getWinnings(getDontPassLine());
+            setPassLine(0);
+        }else {
+            setPassLine(0);
+        }
+    }
+
+    public void notDecisionRollOrSeven(Integer roll){
+        switch (roll){
+            case 7:
+                playeTurn();
+                break;
+            case 11:
+                playeTurn();
+                break;
+            case 2:
+                playeTurn();
+                break;
+            case 3:
+                playeTurn();
+                break;
+            case 12:
+                play();
+                break;
+        }
     }
 
     public void setPassLine(Integer bet){
