@@ -113,9 +113,8 @@ public class Casino {
         Console consoleGoFish = new Console(System.in, System.out);
         GoFish goFishGame = new GoFish(new GoFishPlayer(user), new GoFishDealer());
 
-        //goFishGame.play();
+        goFishGame.play();
         menu();
-
     }
 
     public static void playSicBo(){

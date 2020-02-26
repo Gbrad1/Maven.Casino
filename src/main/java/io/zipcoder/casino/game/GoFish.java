@@ -80,9 +80,22 @@ public class GoFish {
     }
 
     public void play() {
-        System.out.println("Welcome to GoFish!\n");
-        String decisionToPlay = console.getStringInput("Would you like to play GoFish or Exit?");
+        System.out.println("██╗    ██╗███████╗██╗      ██████╗ ██████╗ ███╗   ███╗███████╗    ████████╗ ██████╗      ██████╗  ██████╗ ███████╗██╗███████╗██╗  ██╗\n" +
+                "██║    ██║██╔════╝██║     ██╔════╝██╔═══██╗████╗ ████║██╔════╝    ╚══██╔══╝██╔═══██╗    ██╔════╝ ██╔═══██╗██╔════╝██║██╔════╝██║  ██║\n" +
+                "██║ █╗ ██║█████╗  ██║     ██║     ██║   ██║██╔████╔██║█████╗         ██║   ██║   ██║    ██║  ███╗██║   ██║█████╗  ██║███████╗███████║\n" +
+                "██║███╗██║██╔══╝  ██║     ██║     ██║   ██║██║╚██╔╝██║██╔══╝         ██║   ██║   ██║    ██║   ██║██║   ██║██╔══╝  ██║╚════██║██╔══██║\n" +
+                "╚███╔███╔╝███████╗███████╗╚██████╗╚██████╔╝██║ ╚═╝ ██║███████╗       ██║   ╚██████╔╝    ╚██████╔╝╚██████╔╝██║     ██║███████║██║  ██║\n" +
+                " ╚══╝╚══╝ ╚══════╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝       ╚═╝    ╚═════╝      ╚═════╝  ╚═════╝ ╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝\n" +
+                "                                                                                                                                     ");
+        Player player = new Player();
+        GoFishPlayer goFishPlayer = new GoFishPlayer(player);
+        GoFishDealer goFishDealer = new GoFishDealer();
+        GoFish currentGame = new GoFish(goFishPlayer, goFishDealer);
+        currentGame.createDeck();
+        currentGame.shuffleDeck();
 
+        currentGame.setupPlayerHand();
+        currentGame.setupDealerHand();
 
     }
 }
