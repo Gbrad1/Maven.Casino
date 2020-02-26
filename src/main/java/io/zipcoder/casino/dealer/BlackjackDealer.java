@@ -36,7 +36,6 @@ public class BlackjackDealer {
             } else {
             score += hand.getHand().get(i).getRank();
             }
-
         }
             return score;
     }

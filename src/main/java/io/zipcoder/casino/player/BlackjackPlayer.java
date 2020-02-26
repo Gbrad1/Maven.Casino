@@ -37,14 +37,15 @@ public class BlackjackPlayer {
         }
         int score = 0;
         for (int i = 0; i < getHand().size(); i++) {
+
             if (getHand().get(i).getRank() > 10) {
+
                 score += 10;
             } else {
                 score += hand.getHand().get(i).getRank();
             }
-
         }
-        return score;
+            return score;
     }
 
     public boolean checkBlackjack(){
