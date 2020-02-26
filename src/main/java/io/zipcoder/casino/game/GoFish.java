@@ -1,5 +1,6 @@
 package io.zipcoder.casino.game;
 
+import io.zipcoder.casino.card.Card;
 import io.zipcoder.casino.card.Deck;
 import io.zipcoder.casino.dealer.GoFishDealer;
 import io.zipcoder.casino.player.GoFishPlayer;
@@ -26,8 +27,8 @@ public class GoFish {
         deck.shuffle();
     }
 
-    public void drawCardPlayer() {
-        deck.popCard();
+    public Card drawCardPlayer() {
+        return deck.popCard();
     }
 
     public void drawCardDealer() {

@@ -63,6 +63,7 @@ public class GoFishTest {
         GoFishDealer goFishDealer = new GoFishDealer();
         GoFishPlayer goFishPlayer = new GoFishPlayer(player);
         GoFish newGame = new GoFish(goFishPlayer, goFishDealer);
+
         newGame.createDeck();
         newGame.shuffleDeck();
 
@@ -70,6 +71,28 @@ public class GoFishTest {
         newGame.setupDealerHand();
 
         newGame.printPlayerHand();
+    }
+
+    @Test
+    public void drawCardPlayerTest() {
+        Player player = new Player();
+        GoFishDealer goFishDealer = new GoFishDealer();
+        GoFishPlayer goFishPlayer = new GoFishPlayer(player);
+        GoFish newGame = new GoFish(goFishPlayer, goFishDealer);
+
+        newGame.createDeck();
+        newGame.shuffleDeck();
+        newGame.setupPlayerHand();
+
+        Card card = newGame.drawCardPlayer();
+        goFishPlayer.drawCard(card);
+
+        newGame.printPlayerHand();
+
+        Integer actual = goFishPlayer.getPlayerHand().size();
+        Integer expected = 6;
+
+        Assert.assertEquals(expected, actual);
     }
 
 }
