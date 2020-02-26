@@ -23,4 +23,12 @@ public class GoFishDealer {
         return hand.getHand();
     }
 
+    public Integer addBookToDealer() {
+        return dealerScore++;
+    }
+
+    public Integer getDealerScore() {
+        return dealerScore;
+    }
+
 }
