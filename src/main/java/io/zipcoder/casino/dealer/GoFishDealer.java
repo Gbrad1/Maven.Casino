@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class GoFishDealer {
 
-    private Integer score = 0;
+    private Integer dealerScore = 0;
     private Hand hand = new Hand();
 
     public GoFishDealer() {
