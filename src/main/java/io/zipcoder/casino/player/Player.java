@@ -14,5 +14,13 @@ public class Player {
     public Player(){
     }
 
+    public void setBalance(int newBalance){
+        this.balance = newBalance;
+    }
+
+    public int getBalance(){
+        return this.balance;
+    }
+
 
 }

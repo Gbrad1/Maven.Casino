@@ -5,10 +5,6 @@ import io.zipcoder.casino.dealer.BlackjackDealer;
 import io.zipcoder.casino.player.BlackjackPlayer;
 import io.zipcoder.casino.utilities.Console;
 
-import java.io.BufferedReader;
-
-import java.io.IOException;
-import java.io.InputStreamReader;
 
 public class Blackjack {
 
@@ -18,6 +14,15 @@ public class Blackjack {
     Console console = new Console(System.in, System.out);
 
     public Blackjack(BlackjackPlayer player, BlackjackDealer dealer){
+        this.player = player;
+        this.dealer = dealer;
+    }
 
+    public void createDeck(){
+        this.deck.createDeck();
+    }
+
+    public void shuffleDeck(){
+        this.deck.shuffle();
     }
 }
