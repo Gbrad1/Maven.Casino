@@ -175,10 +175,4 @@ public class BlackjackTest {
          LOGGER.info(result);
          LOGGER.info(str);
     }
-}
-
-
-
-
-
-
+} 
