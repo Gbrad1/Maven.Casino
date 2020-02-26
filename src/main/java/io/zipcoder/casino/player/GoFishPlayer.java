@@ -1,19 +1,29 @@
 package io.zipcoder.casino.player;
 
+import io.zipcoder.casino.card.Card;
 import io.zipcoder.casino.card.Hand;
 
-public class GoFishPlayer extends CardPlayer {
+import java.util.ArrayList;
 
+public class GoFishPlayer {
+    private Player player;
+    private Integer score = 0;
     private Hand hand = new Hand();
 
-
-    @Override
-    public void drawCard() {
-
+    public GoFishPlayer(Player newPlayer) {
+        this.player = newPlayer;
     }
 
-    @Override
-    public void playerTurn() {
-
+    public void drawCard(Card c) {
+        hand.add(c);
     }
+
+    public ArrayList<Card> getPlayerHand() {
+        return hand.getHand();
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
 }
