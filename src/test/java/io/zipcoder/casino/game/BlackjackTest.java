@@ -29,7 +29,6 @@ public class BlackjackTest {
         newGame.createDeck();
         newGame.shuffleDeck();
 
-
         Card firstCard = newGame.getDeck().popCard();
         LOGGER.info("" + firstCard);
 
@@ -59,7 +58,6 @@ public class BlackjackTest {
         Integer actual = blackjackDealer.getHand().size();
 
         Assert.assertEquals(expected, actual);
-
     }
 
     @Test
@@ -73,7 +71,6 @@ public class BlackjackTest {
         Integer actual = blackjackPlayer.getHand().size();
 
         Assert.assertEquals(expected, actual);
-
     }
 
     @Test
@@ -87,7 +84,6 @@ public class BlackjackTest {
         Integer actual = blackjackDealer.getHand().size();
 
         Assert.assertEquals(expected, actual);
-
     }
 
     @Test
@@ -104,7 +100,6 @@ public class BlackjackTest {
         Integer actual = blackjackPlayer.getScore();
         LOGGER.info("" + actual);
         LOGGER.info(results);
-
     }
 
     @Test
@@ -159,7 +154,6 @@ public class BlackjackTest {
         LOGGER.info("" + total);
 
         Assert.assertTrue(newGame.bustDealer());
-
     }
 
     @Test
@@ -178,7 +172,6 @@ public class BlackjackTest {
         LOGGER.info(result);
         LOGGER.info(str);
     }
-
 
 }
 
