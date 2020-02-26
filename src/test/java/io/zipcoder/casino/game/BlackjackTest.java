@@ -1,12 +1,10 @@
 package io.zipcoder.casino.game;
-
 import io.zipcoder.casino.card.Card;
 import io.zipcoder.casino.dealer.BlackjackDealer;
 import io.zipcoder.casino.player.BlackjackPlayer;
 import io.zipcoder.casino.player.Player;
 import org.junit.Assert;
 import org.junit.Test;
-
 import java.util.logging.Logger;
 
 public class BlackjackTest {
@@ -36,7 +34,7 @@ public class BlackjackTest {
         LOGGER.info("" + secondCard);
     }
 
-    @Test
+     @Test
     public void checkPlayerHandSizeTest() {
         newGame.createDeck();
         newGame.shuffleDeck();
@@ -48,7 +46,7 @@ public class BlackjackTest {
         Assert.assertEquals(expected, actual);
     }
 
-    @Test
+     @Test
     public void checkDealerHandSizeTest() {
         newGame.createDeck();
         newGame.shuffleDeck();
@@ -91,12 +89,12 @@ public class BlackjackTest {
         newGame.createDeck();
         newGame.shuffleDeck();
         newGame.setHandPlayer();
-        newGame.getHandPlayer();
 
         String results = "";
         for (Card c : blackjackPlayer.getHand()) {
             results += c.toString() + " ";
         }
+
         Integer actual = blackjackPlayer.getScore();
         LOGGER.info("" + actual);
         LOGGER.info(results);
@@ -134,6 +132,7 @@ public class BlackjackTest {
         Integer total = blackjackPlayer.getScore();
         LOGGER.info("" + result);
         LOGGER.info("" + total);
+
         Assert.assertTrue(newGame.bustPlayer());
     }
 
@@ -149,6 +148,7 @@ public class BlackjackTest {
         for (Card c : blackjackDealer.getHand()) {
             result += c.toString() + " ";
         }
+
         Integer total = blackjackDealer.getScore();
         LOGGER.info("" + result);
         LOGGER.info("" + total);
@@ -172,17 +172,4 @@ public class BlackjackTest {
         LOGGER.info(result);
         LOGGER.info(str);
     }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
