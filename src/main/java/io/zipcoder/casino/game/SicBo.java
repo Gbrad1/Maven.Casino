@@ -26,7 +26,6 @@ public class SicBo implements Gambling {
     }
 
     public void play() {
-
         input = console.getIntegerInput("What would you like to bet on? \n1: Big\n2: Small\n3: Even\n4: Odds\n5: Any Triple");
 
 
@@ -58,14 +57,6 @@ public class SicBo implements Gambling {
     @Override
     public void getWinnings() {
 
-    }
-
-    enum Bets {
-        BIG,
-        SMALL,
-        EVEN,
-        ODD,
-        ANYTRIPLE;
     }
 
 
