@@ -13,14 +13,13 @@ import java.util.logging.Logger;
 public class BlackjackTest {
 
     private static final Logger LOGGER = Logger.getLogger(BlackjackTest.class.getName());
+    Player player = new Player();
+    BlackjackPlayer blackjackPlayer = new BlackjackPlayer(player);
+    BlackjackDealer blackjackDealer = new BlackjackDealer();
+    Blackjack newGame = new Blackjack(blackjackPlayer, blackjackDealer);
 
     @Test
     public void createDeckTest() {
-        Player player = new Player();
-        BlackjackPlayer blackjackPlayer = new BlackjackPlayer(player);
-        BlackjackDealer blackjackDealer = new BlackjackDealer();
-        Blackjack newGame = new Blackjack(blackjackPlayer, blackjackDealer);
-
         newGame.createDeck();
 
         Assert.assertFalse(newGame.getDeck().isEmpty());
@@ -28,11 +27,6 @@ public class BlackjackTest {
 
     @Test
     public void createShuffleTest() {
-        Player player = new Player();
-        BlackjackPlayer blackjackPlayer = new BlackjackPlayer(player);
-        BlackjackDealer blackjackDealer = new BlackjackDealer();
-        Blackjack newGame = new Blackjack(blackjackPlayer, blackjackDealer);
-
         newGame.createDeck();
         newGame.shuffleDeck();
 
@@ -45,11 +39,6 @@ public class BlackjackTest {
 
      @Test
     public void checkPlayerHandSizeTest() {
-        Player player = new Player();
-        BlackjackPlayer blackjackPlayer = new BlackjackPlayer(player);
-        BlackjackDealer blackjackDealer = new BlackjackDealer();
-        Blackjack newGame = new Blackjack(blackjackPlayer, blackjackDealer);
-
         newGame.createDeck();
         newGame.shuffleDeck();
         newGame.setHandPlayer();
@@ -62,11 +51,6 @@ public class BlackjackTest {
 
      @Test
     public void checkDealerHandSizeTest() {
-        Player player = new Player();
-        BlackjackPlayer blackjackPlayer = new BlackjackPlayer(player);
-        BlackjackDealer blackjackDealer = new BlackjackDealer();
-        Blackjack newGame = new Blackjack(blackjackPlayer, blackjackDealer);
-
         newGame.createDeck();
         newGame.shuffleDeck();
         newGame.setDealerPlayer();
@@ -79,11 +63,6 @@ public class BlackjackTest {
 
      @Test
     public void drawCardPlayerTest() {
-         Player player = new Player();
-         BlackjackPlayer blackjackPlayer = new BlackjackPlayer(player);
-         BlackjackDealer blackjackDealer = new BlackjackDealer();
-         Blackjack newGame = new Blackjack(blackjackPlayer, blackjackDealer);
-
          newGame.createDeck();
          newGame.shuffleDeck();
          newGame.setHandPlayer();
@@ -97,11 +76,6 @@ public class BlackjackTest {
 
      @Test
     public void drawCardDealerTest() {
-         Player player = new Player();
-         BlackjackPlayer blackjackPlayer = new BlackjackPlayer(player);
-         BlackjackDealer blackjackDealer = new BlackjackDealer();
-         Blackjack newGame = new Blackjack(blackjackPlayer, blackjackDealer);
-
          newGame.createDeck();
          newGame.shuffleDeck();
          newGame.setDealerPlayer();
@@ -115,11 +89,6 @@ public class BlackjackTest {
 
      @Test
     public void getScorePlayerTest() {
-         Player player = new Player();
-         BlackjackPlayer blackjackPlayer = new BlackjackPlayer(player);
-         BlackjackDealer blackjackDealer = new BlackjackDealer();
-         Blackjack newGame = new Blackjack(blackjackPlayer, blackjackDealer);
-
          newGame.createDeck();
          newGame.shuffleDeck();
          newGame.setHandPlayer();
@@ -136,11 +105,6 @@ public class BlackjackTest {
 
      @Test
     public void getScoreDealerTest() {
-         Player player = new Player();
-         BlackjackPlayer blackjackPlayer = new BlackjackPlayer(player);
-         BlackjackDealer blackjackDealer = new BlackjackDealer();
-         Blackjack newGame = new Blackjack(blackjackPlayer, blackjackDealer);
-
          newGame.createDeck();
          newGame.shuffleDeck();
          newGame.setDealerPlayer();
@@ -156,6 +120,44 @@ public class BlackjackTest {
      }
 
      @Test
+    public void bustPlayerTest() {
+         newGame.createDeck();
+         newGame.shuffleDeck();
+         newGame.setHandPlayer();
+         newGame.drawCardPlayer();
+         newGame.drawCardPlayer();
+
+         String result = "";
+         for (Card c: blackjackPlayer.getHand()) {
+             result += c.toString() + " ";
+         }
+
+         Integer total = blackjackPlayer.getScore();
+         LOGGER.info(result);
+         LOGGER.info("" + total);
+
+         Assert.assertTrue(newGame.bustPlayer());
+     }
+
+     @Test
+    public void bustDealerTest() {
+         newGame.createDeck();
+         newGame.shuffleDeck();
+         newGame.setDealerPlayer();
+         newGame.drawCardDealer();
+         newGame.drawCardDealer();
+
+         String result = "";
+         for (Card c: blackjackDealer.getHand()) {
+             result += c.toString() + " ";
+         }
+
+         Integer total = blackjackDealer.getScore();
+         LOGGER.info(result);
+         LOGGER.info("" + total);
+
+         Assert.assertTrue(newGame.bustDealer());
+     }
 }
 
 
