@@ -13,16 +13,6 @@ import static org.junit.Assert.*;
 public class BlackjackTest {
     @Test
     public void testHit() {
-        //Given
-        BlackjackPlayer playerOne = new BlackjackPlayer();
-        BlackjackDealer dealerOne = new BlackjackDealer();
-        Blackjack newGame = new Blackjack(playerOne, dealerOne);
 
-        //When
-        Integer expected = 1;
-        newGame.hit(playerOne);
-        Integer actual = playerOne.getHand().getSize();
-        //Then
-        Assert.assertEquals(expected, actual);
     }
 }
