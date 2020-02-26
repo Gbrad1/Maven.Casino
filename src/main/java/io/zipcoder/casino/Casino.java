@@ -1,7 +1,6 @@
 package io.zipcoder.casino;
 
 
-import io.zipcoder.casino.card.SicBoTable;
 import io.zipcoder.casino.dealer.BlackjackDealer;
 import io.zipcoder.casino.dealer.GoFishDealer;
 import io.zipcoder.casino.game.Blackjack;
@@ -153,9 +152,6 @@ public class Casino {
     public static void playSicBo(){
         Console consoleSicBo = new Console(System.in, System.out);
         SicBo sicBoGame = new SicBo(new SicBoPlayer(user));
-        SicBoTable sicBoTable = new SicBoTable();
-        sicBoGame.placeBet();
-        sicBoGame.play();
 
     }
 
