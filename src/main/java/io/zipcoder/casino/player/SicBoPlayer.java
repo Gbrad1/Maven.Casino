@@ -1,6 +1,7 @@
 package io.zipcoder.casino.player;
 
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class SicBoPlayer extends DicePlayer{
 
@@ -13,7 +14,11 @@ public class SicBoPlayer extends DicePlayer{
 
     @Override
     public int rollDice() {
-        Random random = new Random();
-        return 3* (random.nextInt(6) + 1);
+        int sum = 0;
+        ThreadLocalRandom random = ThreadLocalRandom.current();
+        for (int i = 0; i < 3; i++) {
+            sum += random.nextInt(6) + 1;
+        }
+        return sum;
     }
 }

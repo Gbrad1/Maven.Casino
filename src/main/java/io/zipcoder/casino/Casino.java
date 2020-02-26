@@ -1,6 +1,7 @@
 package io.zipcoder.casino;
 
 
+import io.zipcoder.casino.card.SicBoTable;
 import io.zipcoder.casino.dealer.BlackjackDealer;
 import io.zipcoder.casino.dealer.GoFishDealer;
 import io.zipcoder.casino.game.Blackjack;
@@ -54,7 +55,7 @@ public class Casino {
     public static void menu(){
         while (true) {
             Integer choice = console.getIntegerInput("Enter 1 to play Blackjack, 2 to play Go Fish," +
-                    " 3 to play Sic Bo, and 4 to play Craps.  " +
+                    " 3 to play Craps, and 4 to play SicBo.  " +
                     "If you want to return to login press 5 and if you want to create a new account press 6." +
                     "If you wish to save and exit press 7.  ");
             switch (choice) {
@@ -123,6 +124,11 @@ public class Casino {
     public static void playSicBo(){
         Console consoleSicBo = new Console(System.in, System.out);
         SicBo sicBoGame = new SicBo(new SicBoPlayer(user));
+        SicBoTable sicBoTable = new SicBoTable();
+        Integer bid = console.getIntegerInput("Enter a bid amount of 5, 10, or 15.");
+        Integer bet = console.getIntegerInput("Press 1 to bet on Big or 2 to bet on Small");
+        if (bet == 1) sicBoGame.placeBet();
+        else if (bet == 2) sicBoGame.placeBet();
 
     }
 

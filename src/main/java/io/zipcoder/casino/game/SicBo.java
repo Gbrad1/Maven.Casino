@@ -18,7 +18,6 @@ public class SicBo implements Gambling {
 
 
     public int placeBet() {
-        console.getIntegerInput("Place bet on Big or Small");
         return 0;
     }
 
