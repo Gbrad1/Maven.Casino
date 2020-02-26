@@ -5,9 +5,9 @@ public class Player {
     private int balance;
     private int age;
 
-    public Player(String name, int balance, int age){
+    public Player(String name, int age){
         this.name = name;
-        this.balance = balance;
+        this.balance = 500;
         this.age = age;
     }
 

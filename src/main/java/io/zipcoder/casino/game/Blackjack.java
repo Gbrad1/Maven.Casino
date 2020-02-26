@@ -25,4 +25,52 @@ public class Blackjack {
     public void shuffleDeck(){
         this.deck.shuffle();
     }
+
+    public void drawCardPlayer(){
+        player.hit(deck.popCard());
+    }
+
+    public void drawCardDealer(){
+        dealer.hit(deck.popCard());
+    }
+
+    public int getScorePlayer(){
+        return player.getScore();
+    }
+
+    public int getScoreDealer(){
+        return dealer.getScore();
+    }
+
+    public boolean bustPlayer(){
+        if (getScorePlayer() > 21){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean bustDealer(){
+        if (getScoreDealer() > 21){
+            return true;
+        }
+        return false;
+    }
+
+    public void setHandPlayer(){
+        player.getHand().add(deck.popCard());
+        player.getHand().add(deck.popCard());
+    }
+
+    public void setDealerPlayer(){
+        dealer.getHand().add(deck.popCard());
+        dealer.getHand().add(deck.popCard());
+    }
+
+    public String seeDealerCard(){
+        return dealer.getHand().get(1).toString();
+    }
+
+    public void play() {
+
+    }
 }
