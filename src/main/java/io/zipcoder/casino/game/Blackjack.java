@@ -5,10 +5,6 @@ import io.zipcoder.casino.dealer.BlackjackDealer;
 import io.zipcoder.casino.player.BlackjackPlayer;
 import io.zipcoder.casino.utilities.Console;
 
-import java.io.BufferedReader;
-
-import java.io.IOException;
-import java.io.InputStreamReader;
 
 public class Blackjack {
 
@@ -18,6 +14,63 @@ public class Blackjack {
     Console console = new Console(System.in, System.out);
 
     public Blackjack(BlackjackPlayer player, BlackjackDealer dealer){
+        this.player = player;
+        this.dealer = dealer;
+    }
+
+    public void createDeck(){
+        this.deck.createDeck();
+    }
+
+    public void shuffleDeck(){
+        this.deck.shuffle();
+    }
+
+    public void drawCardPlayer(){
+        player.hit(deck.popCard());
+    }
+
+    public void drawCardDealer(){
+        dealer.hit(deck.popCard());
+    }
+
+    public int getScorePlayer(){
+        return player.getScore();
+    }
+
+    public int getScoreDealer(){
+        return dealer.getScore();
+    }
+
+    public boolean bustPlayer(){
+        if (getScorePlayer() > 21){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean bustDealer(){
+        if (getScoreDealer() > 21){
+            return true;
+        }
+        return false;
+    }
+
+    public void setHandPlayer(){
+        player.getHand().add(deck.popCard());
+        player.getHand().add(deck.popCard());
+    }
+
+    public void setDealerPlayer(){
+        dealer.getHand().add(deck.popCard());
+        dealer.getHand().add(deck.popCard());
+    }
+
+    public String seeDealerCard(){
+        return dealer.getHand().get(1).toString();
+    }
+
+    public void play() {
 
     }
 }
