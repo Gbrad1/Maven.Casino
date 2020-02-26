@@ -30,11 +30,13 @@ public class Hand {
         hand.clear();
     }
 
-    public boolean contains(Card c){
+    public boolean contains(Card c) {
         return hand.contains(c);
     }
 
-    public int getSize() {
-        return hand.size();
+     public int getSize() {
+         return hand.size();
+        }
     }
-}
+
+

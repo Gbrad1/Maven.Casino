@@ -5,7 +5,8 @@ import io.zipcoder.casino.card.Hand;
 
 import java.util.ArrayList;
 
-public class BlackjackPlayer{
+
+public class BlackjackPlayer {
     private Hand hand = new Hand();
     private Player player;
 
@@ -15,7 +16,6 @@ public class BlackjackPlayer{
     public void hit(Card c){
         hand.add(c);
     }
-
 
     public Player getPlayer(){
         return this.player;
@@ -37,7 +37,9 @@ public class BlackjackPlayer{
         }
         int score = 0;
         for (int i = 0; i < getHand().size(); i++) {
-            if(getHand().get(i).getRank() > 10) {
+
+            if (getHand().get(i).getRank() > 10) {
+
                 score += 10;
             } else {
                 score += hand.getHand().get(i).getRank();

@@ -3,6 +3,8 @@ package io.zipcoder.casino.dealer;
 import io.zipcoder.casino.card.Card;
 import io.zipcoder.casino.card.Hand;
 
+
+
 import java.util.ArrayList;
 
 public class BlackjackDealer {
@@ -12,7 +14,6 @@ public class BlackjackDealer {
     public void hit(Card c) {
         hand.add(c);
     }
-
 
     public ArrayList<Card> getHand(){
         return hand.getHand();
@@ -44,5 +45,6 @@ public class BlackjackDealer {
             return true;
         }
             return false;
+
     }
 }

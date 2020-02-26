@@ -14,16 +14,20 @@ public class GoFishPlayer {
         this.player = newPlayer;
     }
 
+
     public void drawCard(Card c) {
         hand.add(c);
     }
+
 
     public ArrayList<Card> getPlayerHand() {
         return hand.getHand();
     }
 
+
     public Player getPlayer() {
         return player;
+
     }
 
 }
