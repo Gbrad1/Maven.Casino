@@ -1,13 +1,10 @@
 package io.zipcoder.casino.game;
-
 import io.zipcoder.casino.card.Card;
-import io.zipcoder.casino.card.Deck;
 import io.zipcoder.casino.dealer.BlackjackDealer;
 import io.zipcoder.casino.player.BlackjackPlayer;
 import io.zipcoder.casino.player.Player;
 import org.junit.Assert;
 import org.junit.Test;
-
 import java.util.logging.Logger;
 
 public class BlackjackTest {
@@ -176,9 +173,3 @@ public class BlackjackTest {
          LOGGER.info(str);
     }
 }
-
-
-
-
-
-
