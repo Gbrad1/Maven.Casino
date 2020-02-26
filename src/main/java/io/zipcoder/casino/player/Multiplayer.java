@@ -20,7 +20,14 @@ public class Multiplayer {
         long leftLimit = 1000;
         long rightLimit = 9999;
         long generateLong = 1000 + (long) (Math.random() * (rightLimit - leftLimit));
+        if (playerDatabase.containsKey(generateLong)){
+            generateId();
+        }
         return generateLong;
+    }
+
+    public void add(Long key, Player value){
+        playerDatabase.put(key, value);
     }
 
     public void loadPlayerDataBase(){
