@@ -1,6 +1,5 @@
 package io.zipcoder.casino.game;
 
-import io.zipcoder.casino.dice.Dice;
 import io.zipcoder.casino.player.Player;
 import io.zipcoder.casino.utilities.Console;
 
@@ -8,7 +7,6 @@ import io.zipcoder.casino.utilities.Console;
 public class Sicbo {
 
     Console console = new Console(System.in, System.out);
-    Dice dice = new Dice(3);
     Player player = new Player();
 
 
@@ -20,11 +18,11 @@ public class Sicbo {
     }
 
     public boolean inFlavorOfBig() {
-        return dice.tossAndSum() > 10;
+        return false;
     }
 
     public boolean inFlavorOfSmall() {
-        return dice.tossAndSum() <= 10;
+        return false;
     }
 
     public String getWinner() {
