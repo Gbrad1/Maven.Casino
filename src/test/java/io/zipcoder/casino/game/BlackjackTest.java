@@ -1,5 +1,6 @@
 package io.zipcoder.casino.game;
 
+import io.zipcoder.casino.card.Card;
 import io.zipcoder.casino.card.Deck;
 import org.junit.Assert;
 import org.junit.Test;
@@ -11,7 +12,7 @@ public class BlackjackTest {
 
 
         @Test
-        public void getDeckTest() {
+        public void createDeckTest() {
             Deck deck = new Deck();
             deck.createDeck();
 
@@ -19,6 +20,19 @@ public class BlackjackTest {
         }
 
         @Test
-        public void isBlackjackTests()
+        public void createShuffleTest() {
+            Deck deck = new Deck();
+            deck.shuffle();
+            LOGGER.info("\n" + deck.peekStack());
+            }
 
-    }
+
+
+        }
+
+
+
+
+
+
+
