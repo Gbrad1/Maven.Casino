@@ -126,7 +126,7 @@ public class Casino {
         SicBo sicBoGame = new SicBo(new SicBoPlayer(user));
         SicBoTable sicBoTable = new SicBoTable();
         Integer bid = console.getIntegerInput("Enter a bid amount of 5, 10, or 15.");
-        Integer bet = console.getIntegerInput("Press 1 to bet on Big or 2 to bet on Small");
+        Integer bet = console.getIntegerInput("Press 1 to bet on Big, 2 for Small, 3 for Even, 4 for Odds, and 5 for Any Triple");
         if (bet == 1) sicBoGame.placeBet();
         else if (bet == 2) sicBoGame.placeBet();
 
