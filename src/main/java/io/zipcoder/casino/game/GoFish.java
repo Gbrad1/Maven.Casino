@@ -6,9 +6,8 @@ import io.zipcoder.casino.dealer.GoFishDealer;
 import io.zipcoder.casino.player.GoFishPlayer;
 import io.zipcoder.casino.player.Player;
 import io.zipcoder.casino.utilities.Console;
-
-import java.sql.SQLOutput;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Random;
 
@@ -18,8 +17,6 @@ public class GoFish {
     private Deck deck = new Deck();
     private GoFishPlayer goFishPlayer;
     private GoFishDealer goFishDealer;
-    private Player player;
-    Random random = new Random();
     ArrayList<Card> cardsToRemove = new ArrayList<>();
     Console console = new Console(System.in, System.out);
 
@@ -105,6 +102,14 @@ public class GoFish {
         } goFishPlayer.getPlayerHand().removeAll(cardsToRemove);
     }
 
+    public void sortPlayerHand() {
+        Collections.sort(goFishPlayer.getPlayerHand());
+    }
+
+    public void sortDealerHand() {
+        Collections.sort(goFishDealer.getDealerHand());
+    }
+
 
     public void play() {
         System.out.println("██╗    ██╗███████╗██╗      ██████╗ ██████╗ ███╗   ███╗███████╗    ████████╗ ██████╗      ██████╗  ██████╗ ███████╗██╗███████╗██╗  ██╗\n" +
@@ -117,23 +122,33 @@ public class GoFish {
         Player player = new Player();
         GoFishPlayer goFishPlayer = new GoFishPlayer(player);
         GoFishDealer goFishDealer = new GoFishDealer();
-        GoFish currentGame = new GoFish(goFishPlayer, goFishDealer);
-        currentGame.createDeck();
-        currentGame.shuffleDeck();
+        createDeck();
+        shuffleDeck();
 
-        currentGame.setupPlayerHand();
-        currentGame.setupDealerHand();
+        setupPlayerHand();
+        setupDealerHand();
+        sortPlayerHand();
+        sortDealerHand();
         System.out.println("\n");
         System.out.println("Here is your starting hand.\n");
-        currentGame.printPlayerHand();
-
-        String request = console.getStringInput("What number would like to ask your opponent for?");
-        Integer requestAsInteger = parseInt(request);
-        if (goFishDealer.getDealerHand().contains(requestAsInteger)) {
-            currentGame.takeDealerCards(requestAsInteger);
-        } else {
-            goFishPlayer.drawCard(deck.popCard());
+        printPlayerHand();
+        playerTurn();
+    }
+        public void playerTurn() {
+            String request = console.getStringInput("What number would like to ask your opponent for?");
+            Integer requestAsInteger = parseInt(request);
+            if (goFishDealer.getDealerHand().contains(requestAsInteger)) {
+                takeDealerCards(requestAsInteger);
+                sortPlayerHand();
+                sortDealerHand();
+                printPlayerHand();
+            } else {
+                goFishPlayer.drawCard(drawCardPlayer());
+                System.out.println("Your opponent did not have that card.\n\"Go Fish!\" - evil NPC");
+                sortPlayerHand();
+                sortDealerHand();
+                printPlayerHand();
+            }
         }
 
     }
-}
