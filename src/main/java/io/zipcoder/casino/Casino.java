@@ -4,13 +4,15 @@ package io.zipcoder.casino;
 import io.zipcoder.casino.dealer.BlackjackDealer;
 import io.zipcoder.casino.game.Blackjack;
 import io.zipcoder.casino.player.BlackjackPlayer;
+import io.zipcoder.casino.player.Multiplayer;
 import io.zipcoder.casino.player.Player;
 import io.zipcoder.casino.utilities.Console;
 
 public class Casino {
 
-    static Player user;
-    Console console = new Console(System.in, System.out);
+    private static Player user;
+    private Multiplayer accounts = new Multiplayer();
+    private Console console = new Console(System.in, System.out);
 
     public static void intro(){
         Console consoleIntro = new Console(System.in, System.out);
@@ -20,6 +22,7 @@ public class Casino {
             System.out.println("You are too young!");
             System.exit(0);
         }
+
         user = new Player(name, age);
     }
     public static void main(String[] args) {
