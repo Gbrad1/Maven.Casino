@@ -206,6 +206,14 @@ public class Craps{
             setCurrentPoint(0);
         }else if((roll != currentPoint) && (roll >= 4 && roll <= 10)){
             updateComeBets(roll);
+        }else if(roll == 2 || roll == 3){
+            getWinnings(getDontCome());
+            setCome(0);
+        }else if(roll == 12){
+            setCome(0);
+        }else if(roll == 11){
+            getWinnings(getCome());
+            setDontCome(0);
         }
     }
 
