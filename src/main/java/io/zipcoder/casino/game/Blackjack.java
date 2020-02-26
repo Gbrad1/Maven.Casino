@@ -2,6 +2,7 @@ package io.zipcoder.casino.game;
 import io.zipcoder.casino.card.Deck;
 import io.zipcoder.casino.dealer.BlackjackDealer;
 import io.zipcoder.casino.player.BlackjackPlayer;
+import io.zipcoder.casino.player.Player;
 import io.zipcoder.casino.utilities.Console;
 
 
@@ -70,6 +71,17 @@ public class Blackjack {
     }
 
     public void play() {
+
+        Player player = new Player();
+        BlackjackPlayer blackjackPlayer = new BlackjackPlayer(player);
+        BlackjackDealer blackjackDealer = new BlackjackDealer();
+        Blackjack newGame = new Blackjack(blackjackPlayer, blackjackDealer);
+        Deck deck = new Deck();
+
+        System.out.println("Welcome to BlackJack!");
+
+
+
 
     }
 
