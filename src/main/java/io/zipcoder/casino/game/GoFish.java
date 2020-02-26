@@ -83,24 +83,20 @@ public class GoFish {
     }
 
     public void takeDealerCards(Integer cardRank) {
-        for (Card c : goFishPlayer.getPlayerHand()) {
+        for (Card c : goFishDealer.getDealerHand()) {
             if (c.getRank().equals(cardRank)) {
-                cardsToTransfer.add(c);
+                goFishPlayer.getPlayerHand().add(c);
+                goFishDealer.getDealerHand().remove(c);
             }
-        }
-        for (Card c : cardsToTransfer) {
-            goFishPlayer.getPlayerHand().add(c);
         }
     }
 
-    public void takePlayerCards(Card cardRank) {
-        for (Card c : goFishDealer.getDealerHand()) {
+    public void takePlayerCards(Integer cardRank) {
+        for (Card c : goFishPlayer.getPlayerHand()) {
             if (c.getRank().equals(cardRank)) {
-                cardsToTransfer.add(c);
+                goFishDealer.getDealerHand().add(c);
+                goFishPlayer.getPlayerHand().remove(c);
             }
-        }
-        for (Card c : cardsToTransfer) {
-            goFishDealer.getDealerHand().add(c);
         }
     }
 

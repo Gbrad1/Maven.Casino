@@ -245,5 +245,31 @@ public class GoFishTest {
 
         LOGGER.info("\n" + goFishDealerScore);
     }
-    
+
+    @Test
+    public void testTakingACardFromDealer() {
+        Deck deck = new Deck();
+        Player player = new Player();
+        GoFishDealer goFishDealer = new GoFishDealer();
+        GoFishPlayer goFishPlayer = new GoFishPlayer(player);
+        GoFish newGame = new GoFish(goFishPlayer, goFishDealer);
+
+        deck.createDeck();
+        for (int i = 0; i < 12; i++) {
+            goFishPlayer.drawCard(deck.popCard());
+        }
+        for (int i = 13; i < 26; i++) {
+            goFishDealer.drawCard(deck.popCard());
+        }
+        Integer expected = 9;
+        newGame.takeDealerCards(expected);
+        LOGGER.info("\n");
+        newGame.printDealerHand();
+        newGame.printPlayerHand();
+
+        Integer hand1 = goFishDealer.getDealerHand().size();
+        Integer hand2 = goFishDealer.getDealerHand().size();
+
+        Assert.assertEquals(hand1, hand2);
+    }
 }
