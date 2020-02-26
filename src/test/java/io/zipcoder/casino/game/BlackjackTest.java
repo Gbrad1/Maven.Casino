@@ -24,5 +24,5 @@ public class BlackjackTest {
     Assert.assertTrue(!deck.isEmpty());
     }
 
-    
+
 }
