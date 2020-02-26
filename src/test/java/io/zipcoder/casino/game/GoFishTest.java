@@ -272,4 +272,31 @@ public class GoFishTest {
 
         Assert.assertEquals(hand1, hand2);
     }
+
+    @Test
+    public void testTakingACardFromPlayer() {
+        Deck deck = new Deck();
+        Player player = new Player();
+        GoFishDealer goFishDealer = new GoFishDealer();
+        GoFishPlayer goFishPlayer = new GoFishPlayer(player);
+        GoFish newGame = new GoFish(goFishPlayer, goFishDealer);
+
+        deck.createDeck();
+        for (int i = 0; i < 12; i++) {
+            goFishPlayer.drawCard(deck.popCard());
+        }
+        for (int i = 13; i < 26; i++) {
+            goFishDealer.drawCard(deck.popCard());
+        }
+        Integer expected = 9;
+        newGame.takePlayerCards(expected);
+        LOGGER.info("\n");
+        newGame.printDealerHand();
+        newGame.printPlayerHand();
+
+        Integer hand1 = goFishDealer.getDealerHand().size();
+        Integer hand2 = goFishDealer.getDealerHand().size();
+
+        Assert.assertEquals(hand1, hand2);
+    }
 }

@@ -1,6 +1,7 @@
 package io.zipcoder.casino.card;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Hand {
     private ArrayList<Card> hand;
@@ -32,5 +33,9 @@ public class Hand {
 
     public boolean contains(Card c){
         return hand.contains(c);
+    }
+
+    public void sortHand() {
+        Collections.sort(hand);
     }
 }

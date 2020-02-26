@@ -7,7 +7,10 @@ import io.zipcoder.casino.player.GoFishPlayer;
 import io.zipcoder.casino.player.Player;
 import io.zipcoder.casino.utilities.Console;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Random;
 
 import static java.lang.Integer.parseInt;
 
@@ -16,7 +19,8 @@ public class GoFish {
     private GoFishPlayer goFishPlayer;
     private GoFishDealer goFishDealer;
     private Player player;
-    ArrayList<Card> cardsToTransfer = new ArrayList<>();
+    Random random = new Random();
+    ArrayList<Card> cardsToRemove = new ArrayList<>();
     Console console = new Console(System.in, System.out);
 
     public GoFish(GoFishPlayer newPlayer, GoFishDealer newDealer) {
@@ -83,21 +87,22 @@ public class GoFish {
     }
 
     public void takeDealerCards(Integer cardRank) {
-        for (Card c : goFishDealer.getDealerHand()) {
-            if (c.getRank().equals(cardRank)) {
-                goFishPlayer.getPlayerHand().add(c);
-                goFishDealer.getDealerHand().remove(c);
-            }
+            for (Card c : goFishDealer.getDealerHand()) {
+                if (c.getRank().equals(cardRank)) {
+                    goFishPlayer.getPlayerHand().add(c);
+                    cardsToRemove.add(c);
+                }
+            } goFishDealer.getDealerHand().removeAll(cardsToRemove);
         }
-    }
 
     public void takePlayerCards(Integer cardRank) {
+        Iterator iterator = goFishPlayer.getPlayerHand().iterator();
         for (Card c : goFishPlayer.getPlayerHand()) {
             if (c.getRank().equals(cardRank)) {
                 goFishDealer.getDealerHand().add(c);
-                goFishPlayer.getPlayerHand().remove(c);
+                cardsToRemove.add(c);
             }
-        }
+        } goFishPlayer.getPlayerHand().removeAll(cardsToRemove);
     }
 
 
@@ -124,10 +129,11 @@ public class GoFish {
 
         String request = console.getStringInput("What number would like to ask your opponent for?");
         Integer requestAsInteger = parseInt(request);
-        /*if (goFishDealer.getDealerHand().contains(requestAsInteger)) {
-            goFishDealer.getDealerHand().remove;
-            goFishPlayer.getPlayerHand().add()
-        }*/
+        if (goFishDealer.getDealerHand().contains(requestAsInteger)) {
+            currentGame.takeDealerCards(requestAsInteger);
+        } else {
+            goFishPlayer.drawCard(deck.popCard());
+        }
 
     }
 }
