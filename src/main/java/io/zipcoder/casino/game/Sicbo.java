@@ -1,38 +1,51 @@
 package io.zipcoder.casino.game;
 
 import io.zipcoder.casino.player.Player;
+import io.zipcoder.casino.player.SicBoPlayer;
 import io.zipcoder.casino.utilities.Console;
 
 
-public class Sicbo {
+public class Sicbo implements Gambling {
 
+    SicBoPlayer player;
     Console console = new Console(System.in, System.out);
-    Player player = new Player();
 
 
-    public Sicbo() {
+    public Sicbo(SicBoPlayer player) {
+        this.player = player;
     }
 
-    public int getBet() {
-        return console.getIntegerInput("Place bet on Big or Small");
+
+    public int placeBet() {
+        console.getIntegerInput("Place bet on Big or Small");
+        return placeBet();
     }
 
-    public boolean inFlavorOfBig() {
-        return false;
+
+    public void play() {
+        player.rollDice();
     }
 
-    public boolean inFlavorOfSmall() {
-        return false;
-    }
-
-    public String getWinner() {
+    @Override
+    public void getWinnings() {
         String bigWin = "Big Win";
         String smallWin = "Small Win";
 
-        if (inFlavorOfBig()) return bigWin;
-        else if (inFlavorOfSmall()) return smallWin;
-        return "No roll";
+        if (inFlavorOfBig()) {
+            String bigWin1 = bigWin;
+        } else if (inFlavorOfSmall()) {
+            placeBet();
+        }
+        return ;
+
     }
 
+    public boolean inFlavorOfBig() {
+        return player.rollDice() > 10;
+    }
+
+    public boolean inFlavorOfSmall() {
+        return player.rollDice() <= 10;
+    }
 }
 

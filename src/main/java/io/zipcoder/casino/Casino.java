@@ -3,8 +3,10 @@ package io.zipcoder.casino;
 
 import io.zipcoder.casino.dealer.BlackjackDealer;
 import io.zipcoder.casino.game.Blackjack;
+import io.zipcoder.casino.game.Sicbo;
 import io.zipcoder.casino.player.BlackjackPlayer;
 import io.zipcoder.casino.player.Player;
+import io.zipcoder.casino.player.SicBoPlayer;
 import io.zipcoder.casino.utilities.Console;
 
 public class Casino {
@@ -67,6 +69,8 @@ public class Casino {
 
     public void playSicBo(){
         Console consoleSicBo = new Console(System.in, System.out);
+        Sicbo sicboGame = new Sicbo(new SicBoPlayer(user));
+        Integer bid = consoleSicBo.getIntegerInput("Enter a bid amount of 5, 10, or 15");
 
     }
 

@@ -2,7 +2,17 @@ package io.zipcoder.casino.player;
 
 import java.util.Random;
 
-public class SicBoPlayer extends DicePlayer {
+public class SicBoPlayer extends DicePlayer{
+
+    private Integer score;
+    private Player player;
+
+    public SicBoPlayer(Player player) {
+    }
+
+    private void placeBet() {
+
+    }
 
 
     @Override
