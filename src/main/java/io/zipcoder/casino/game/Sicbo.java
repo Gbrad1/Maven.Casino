@@ -24,6 +24,7 @@ public class Sicbo implements Gambling {
 
     public void play() {
         player.rollDice();
+
     }
 
     @Override

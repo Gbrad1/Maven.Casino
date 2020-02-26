@@ -70,7 +70,6 @@ public class Casino {
     public void playSicBo(){
         Console consoleSicBo = new Console(System.in, System.out);
         Sicbo sicboGame = new Sicbo(new SicBoPlayer(user));
-        Integer bid = consoleSicBo.getIntegerInput("Enter a bid amount of 5, 10, or 15");
 
     }
 

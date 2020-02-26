@@ -10,11 +10,6 @@ public class SicBoPlayer extends DicePlayer{
     public SicBoPlayer(Player player) {
     }
 
-    private void placeBet() {
-
-    }
-
-
     @Override
     public int rollDice() {
         Random random = new Random();
