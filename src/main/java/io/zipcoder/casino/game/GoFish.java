@@ -7,6 +7,8 @@ import io.zipcoder.casino.player.GoFishPlayer;
 import io.zipcoder.casino.player.Player;
 import io.zipcoder.casino.utilities.Console;
 
+import java.sql.SQLOutput;
+
 public class GoFish {
     private Deck deck = new Deck();
     private GoFishPlayer goFishPlayer;
@@ -77,4 +79,10 @@ public class GoFish {
         return goFishDealer.getDealerScore();
     }
 
+    public void play() {
+        System.out.println("Welcome to GoFish!\n");
+        String decisionToPlay = console.getStringInput("Would you like to play GoFish or Exit?");
+
+
+    }
 }
