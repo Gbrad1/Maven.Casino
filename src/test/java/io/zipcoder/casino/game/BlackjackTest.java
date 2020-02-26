@@ -35,7 +35,7 @@ public class BlackjackTest {
 
         Card secondCard = newGame.getDeck().popCard();
         LOGGER.info("" + secondCard);
-        }
+    }
 
      @Test
     public void checkPlayerHandSizeTest() {
@@ -47,7 +47,7 @@ public class BlackjackTest {
         Integer actual = blackjackPlayer.getHand().size();
 
         Assert.assertEquals(expected, actual);
-     }
+    }
 
      @Test
     public void checkDealerHandSizeTest() {
@@ -59,7 +59,7 @@ public class BlackjackTest {
         Integer actual = blackjackDealer.getHand().size();
 
         Assert.assertEquals(expected, actual);
-     }
+    }
 
      @Test
     public void drawCardPlayerTest() {
@@ -72,7 +72,7 @@ public class BlackjackTest {
          Integer actual = blackjackPlayer.getHand().size();
 
          Assert.assertEquals(expected, actual);
-     }
+    }
 
      @Test
     public void drawCardDealerTest() {
@@ -85,7 +85,7 @@ public class BlackjackTest {
          Integer actual = blackjackDealer.getHand().size();
 
          Assert.assertEquals(expected, actual);
-     }
+    }
 
      @Test
     public void getScorePlayerTest() {
@@ -101,7 +101,7 @@ public class BlackjackTest {
          Integer actual = blackjackPlayer.getScore();
          LOGGER.info("" + actual);
          LOGGER.info(result);
-     }
+    }
 
      @Test
     public void getScoreDealerTest() {
@@ -117,7 +117,7 @@ public class BlackjackTest {
          Integer actual = blackjackDealer.getScore();
          LOGGER.info("" + actual);
          LOGGER.info(result);
-     }
+    }
 
      @Test
     public void bustPlayerTest() {
@@ -137,7 +137,7 @@ public class BlackjackTest {
          LOGGER.info("" + total);
 
          Assert.assertTrue(newGame.bustPlayer());
-     }
+    }
 
      @Test
     public void bustDealerTest() {
@@ -157,7 +157,24 @@ public class BlackjackTest {
          LOGGER.info("" + total);
 
          Assert.assertTrue(newGame.bustDealer());
-     }
+    }
+
+     @Test
+    public void seeDealerCardTest() {
+        newGame.createDeck();
+        newGame.shuffleDeck();
+        newGame.setDealerPlayer();
+
+         String result = "";
+         for (Card c: blackjackDealer.getHand()) {
+             result += c.toString() + " ";
+         }
+
+         String str = newGame.seeDealerCard();
+
+         LOGGER.info(result);
+         LOGGER.info(str);
+    }
 }
 
 
