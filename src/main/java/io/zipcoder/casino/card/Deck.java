@@ -30,7 +30,7 @@ public class Deck {
         }
     }
 
-    public Stack<Card> getDeck() {
+    public Stack<Card> getStack() {
         return deck;
     }
 
