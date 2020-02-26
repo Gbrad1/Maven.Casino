@@ -36,7 +36,7 @@ public class Casino {
         }
         Long ID = accounts.generateId();
         Player createdPlayer = new Player(name, age);
-        accounts.add(ID, createdPlayer);
+        //accounts.add(ID, createdPlayer);
         user = createdPlayer;
     }
 
