@@ -15,75 +15,72 @@ public class BlackjackTest {
     private static final Logger LOGGER = Logger.getLogger(BlackjackTest.class.getName());
 
 
-        @Test
-        public void createDeckTest() {
-            Deck deck = new Deck();
-            Player player = new Player();
-            BlackjackDealer blackjackDealer = new BlackjackDealer();
-            BlackjackPlayer blackjackPlayer = new BlackjackPlayer(player);
-            Blackjack newGame = new Blackjack(blackjackPlayer, blackjackDealer);
+    @Test
+    public void createDeckTest() {
+        Deck deck = new Deck();
+        Player player = new Player();
+        BlackjackDealer blackjackDealer = new BlackjackDealer();
+        BlackjackPlayer blackjackPlayer = new BlackjackPlayer(player);
+        Blackjack newGame = new Blackjack(blackjackPlayer, blackjackDealer);
 
-            newGame.createDeck();
+        newGame.createDeck();
 
-            Assert.assertTrue(!deck.isEmpty());
+        Assert.assertTrue(!deck.isEmpty());
 
-        }
+    }
 
-        @Test
-        public void createShuffleTest() {
-            Deck deck1 = new Deck();
-            deck1.createDeck();
-            deck1.shuffle();
-            Card firstCard = deck1.popCard();
-            LOGGER.info("" + firstCard);
+    @Test
+    public void createShuffleTest() {
+        Deck deck1 = new Deck();
+        deck1.createDeck();
+        deck1.shuffle();
+        Card firstCard = deck1.popCard();
+        LOGGER.info("" + firstCard);
 
-            Card secondCard = deck1.popCard();
-            LOGGER.info("" + secondCard);
+        Card secondCard = deck1.popCard();
+        LOGGER.info("" + secondCard);
 
-            }
+    }
 
-         @Test
-        public void checkPlayerHandSizeTest() {
+    @Test
+    public void checkPlayerHandSizeTest() {
 
-             Player player = new Player();
-             BlackjackPlayer blackjackPlayer = new BlackjackPlayer(player);
-             BlackjackDealer blackjackDealer = new BlackjackDealer();
-             Blackjack newGame = new Blackjack(blackjackPlayer, blackjackDealer);
+        Player player = new Player();
+        BlackjackPlayer blackjackPlayer = new BlackjackPlayer(player);
+        BlackjackDealer blackjackDealer = new BlackjackDealer();
+        Blackjack newGame = new Blackjack(blackjackPlayer, blackjackDealer);
 
-             newGame.createDeck();
-             newGame.shuffleDeck();
-             newGame.setHandPlayer();
+        newGame.createDeck();
+        newGame.shuffleDeck();
+        newGame.setHandPlayer();
 
-             Integer actual = blackjackPlayer.getHand().size();
+        Integer actual = blackjackPlayer.getHand().size();
 
-             Integer expected = 2;
-             Assert.assertEquals(expected, actual);
-         }
-         @Test
-         public void checkDealerHandSizeTest() {
+        Integer expected = 2;
+        Assert.assertEquals(expected, actual);
+    }
 
-             Player player = new Player();
-             BlackjackPlayer blackjackPlayer = new BlackjackPlayer(player);
-             BlackjackDealer blackjackDealer = new BlackjackDealer();
-             Blackjack newGame = new Blackjack(blackjackPlayer, blackjackDealer);
+    @Test
+    public void checkDealerHandSizeTest() {
 
-             newGame.createDeck();
-             newGame.shuffleDeck();
-             newGame.setDealerPlayer();
+        Player player = new Player();
+        BlackjackPlayer blackjackPlayer = new BlackjackPlayer(player);
+        BlackjackDealer blackjackDealer = new BlackjackDealer();
+        Blackjack newGame = new Blackjack(blackjackPlayer, blackjackDealer);
 
-             Integer actual = blackjackDealer.getHand().size();
+        newGame.createDeck();
+        newGame.shuffleDeck();
+        newGame.setDealerPlayer();
 
-             Integer expected = 2;
-             Assert.assertEquals(expected, actual);
+        Integer actual = blackjackDealer.getHand().size();
 
-             }
-          @Test
+        Integer expected = 2;
+        Assert.assertEquals(expected, actual);
 
+    }
 
-
-
-
-         }
+    @Test
+}
 
 
 
