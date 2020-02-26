@@ -20,6 +20,7 @@ public class Craps{
     private Integer field;
     private Integer currentPoint;
     private Boolean isPointOn;
+    private Boolean isCrapOut;
     private Console console;
 
     public Craps(Player user){
@@ -29,6 +30,7 @@ public class Craps{
         this.comeBets = new HashMap<>(6);
         this.dontComeBets = new HashMap<>(6);
         this.isPointOn = false;
+        this.isCrapOut = false;
         this.come = 0;
         this.dontCome = 0;
         this.field = 0;
@@ -41,7 +43,9 @@ public class Craps{
     }
 
     public void play(){
-
+        while (!isCrapOut){
+            playeTurn();
+        }
     }
 
     public void playeTurn(){
@@ -80,11 +84,15 @@ public class Craps{
             if(roll == 7 || roll == 11){
                 getWinnings(getPassLine());
                 setPassLine(0);
+                if(roll == 7){
+                    clearSeven();
+                }
             }else if(roll == 2 || roll == 3 || roll == 12){
                 setPassLine(0);
             }else {
                 setIsPointOn();
                 setCurrentPoint(roll);
+                playeTurn();
             }
 
         }else if(passLineDecision == 2){
@@ -130,16 +138,13 @@ public class Craps{
             setField(0);
         }
         if(roll != 7 && roll >= 4 || roll <= 10) {
-            dontComeBets.put(roll, getDontCome());
+            dontComeBets.replace(roll, getDontCome());
             getWinnings(comeBets.get(roll));
-            comeBets.put(roll, getCome());
+            comeBets.replace(roll, getCome());
             playeTurn();
         }else if(roll == 7){
-            comeBets.clear();
-            for (int i = 4; i <= 6; i++) {
-                dontComeBets.put(i, 0);
-                dontComeBets.put(i+4, 0);
-            }
+            clearSeven();
+            isCrapOut = true;
         }
     }
 
@@ -154,16 +159,20 @@ public class Craps{
     }
 
     public void clearSeven(){
-        comeBets.clear();
         for (int i = 4; i <= 6; i++) {
-
+            getWinnings(getDontComeBets(i));
+            getWinnings(getDontComeBets(i+4));
+            comeBets.replace(i, 0);
+            comeBets.replace(i+4, 0);
+            dontComeBets.replace(i, 0);
+            dontComeBets.replace(i+4, 0);
         }
     }
 
     public Integer getPassLineDecision(){
         Integer decision = console.getIntegerInput("1 - Pass Line\n" +
                 "2 - Don't Pass Line");
-        while (decision != 2 && decision != 3){
+        while (decision != 1 && decision != 2){
             decision = console.getIntegerInput("1 - Pass Line\n" +
                     "2 - Don't Pass Line");
         }
@@ -171,7 +180,7 @@ public class Craps{
     }
 
     public Boolean isField(Integer roll){
-        if(roll >= 2 && roll < 5 && roll >= 9){
+        if(roll >= 2 && roll < 5 || roll >= 9){
             return true;
         }
         return false;
