@@ -53,7 +53,7 @@ public class Casino {
             System.exit(0);
         }
         Long ID = accounts.generateId();
-        System.out.println("Your log in ID is " + ID + " please save this number!\n");
+        System.out.println("Your login ID is " + ID + " please save this number!\n");
         Player createdPlayer = new Player(name, age);
         accounts.add(ID, createdPlayer);
         user = createdPlayer;
