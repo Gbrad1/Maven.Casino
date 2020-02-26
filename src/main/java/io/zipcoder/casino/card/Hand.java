@@ -33,8 +33,10 @@ public class Hand {
     public boolean contains(Card c) {
         return hand.contains(c);
     }
+
      public int getSize() {
          return hand.size();
         }
     }
+
 
