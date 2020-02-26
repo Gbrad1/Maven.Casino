@@ -56,6 +56,7 @@ public class GoFish {
         }
     }
 
+
     public void printDealerHand() {
         int playerHandSize = goFishDealer.getDealerHand().size();
         for (int i = 0; i < playerHandSize; i++) {
@@ -98,4 +99,5 @@ public class GoFish {
         currentGame.setupDealerHand();
 
     }
+
 }
