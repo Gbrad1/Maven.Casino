@@ -3,7 +3,6 @@ package io.zipcoder.casino.game;
 import io.zipcoder.casino.card.Deck;
 import io.zipcoder.casino.dealer.BlackjackDealer;
 import io.zipcoder.casino.player.BlackjackPlayer;
-import io.zipcoder.casino.player.Player;
 import io.zipcoder.casino.utilities.Console;
 
 public class Blackjack {
@@ -17,5 +16,9 @@ public class Blackjack {
         this.dealerOne = dealer;
         this.cardDeck = new Deck();
         this.newConsole = new Console(System.in, System.out);
+    }
+
+    public void hit(BlackjackPlayer player) {
+        player.getHand().add(cardDeck.popCard());
     }
 }

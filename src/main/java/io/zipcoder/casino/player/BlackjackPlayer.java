@@ -1,13 +1,22 @@
 package io.zipcoder.casino.player;
 
-public class BlackjackPlayer extends CardPlayer{
-    @Override
-    public void drawCard() {
+import io.zipcoder.casino.card.Card;
+import io.zipcoder.casino.card.Hand;
 
+public class BlackjackPlayer extends CardPlayer{
+    private Hand hand;
+
+    public Hand getHand() {
+        return hand;
     }
 
     @Override
-    public void playerTurn() {
+    public void drawCard(Card card) {
+        hand.add(card);
+    }
 
+
+    @Override
+    public void playerTurn() {
     }
 }
