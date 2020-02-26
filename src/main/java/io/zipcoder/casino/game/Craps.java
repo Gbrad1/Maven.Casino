@@ -1,4 +1,4 @@
-package io.zipcoder.casino.Game;
+package io.zipcoder.casino.game;
 
 import io.zipcoder.casino.dice.Dice;
 import io.zipcoder.casino.player.Player;
@@ -147,10 +147,12 @@ public class Craps{
     }
 
     public void payField(Integer roll){
-        if(roll >= 2 && roll < 5 || roll >= 9){
+        if((roll >= 3 && roll < 5) || (roll >= 9 && roll < 12)){
             getWinnings(getField());
-            setField(0);
-        }else {
+        }else if(roll == 2 || roll == 12){
+            getWinnings(getField()*2);
+        }
+        else {
             setField(0);
         }
     }
@@ -160,7 +162,7 @@ public class Craps{
         while (bet < 0){
             bet = placeBet("How much plays the field? (Enter bet >= 0");
         }
-        setField(bet);
+        setField(bet + getField());
     }
 
     public void checkLineBet(Integer roll){

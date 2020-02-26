@@ -1,6 +1,5 @@
-package io.zipcoder.casino.Game;
+package io.zipcoder.casino.game;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import io.zipcoder.casino.player.Player;
 import org.junit.Before;
 import org.junit.Test;
@@ -157,6 +156,21 @@ public class CrapsTest {
     public void payFieldTest(){
         testCraps.setField(expectedBet);
 
-        Integer ac
+        Integer expectedField = 0;
+        testCraps.payField(8);
+        Integer actualField = testCraps.getField();
+
+        assertEquals(expectedField, actualField);
+    }
+
+    @Test
+    public void payFieldTest2(){
+        testCraps.setField(expectedBet);
+
+        Integer expectedField = expectedBet;
+        testCraps.payField(12);
+        Integer actualField = testCraps.getField();
+
+        assertEquals(expectedField, actualField);
     }
 }
