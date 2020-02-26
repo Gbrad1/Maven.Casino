@@ -7,6 +7,7 @@ import io.zipcoder.casino.player.BlackjackPlayer;
 import io.zipcoder.casino.player.Player;
 import org.junit.Assert;
 import org.junit.Test;
+
 import java.util.logging.Logger;
 
 public class BlackjackTest {
@@ -62,8 +63,6 @@ public class BlackjackTest {
 
 
         }
-
-
 
 
 
