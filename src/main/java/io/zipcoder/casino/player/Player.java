@@ -18,6 +18,14 @@ public class Player {
         this.balance = newBalance;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
     public int getBalance(){
         return this.balance;
     }
