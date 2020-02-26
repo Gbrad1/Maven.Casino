@@ -19,8 +19,26 @@ public class Casino {
     private static Multiplayer accounts = new Multiplayer();
     private static Console console = new Console(System.in, System.out);
 
+    public static void welcome(){
+        System.out.println("██╗    ██╗███████╗██╗      ██████╗ ██████╗ ███╗   ███╗███████╗    ████████╗ ██████╗     ███████╗██╗██████╗      ██████╗ ██████╗ ██████╗ ███████╗\n" +
+                "██║    ██║██╔════╝██║     ██╔════╝██╔═══██╗████╗ ████║██╔════╝    ╚══██╔══╝██╔═══██╗    ╚══███╔╝██║██╔══██╗    ██╔════╝██╔═══██╗██╔══██╗██╔════╝\n" +
+                "██║ █╗ ██║█████╗  ██║     ██║     ██║   ██║██╔████╔██║█████╗         ██║   ██║   ██║      ███╔╝ ██║██████╔╝    ██║     ██║   ██║██║  ██║█████╗  \n" +
+                "██║███╗██║██╔══╝  ██║     ██║     ██║   ██║██║╚██╔╝██║██╔══╝         ██║   ██║   ██║     ███╔╝  ██║██╔═══╝     ██║     ██║   ██║██║  ██║██╔══╝  \n" +
+                "╚███╔███╔╝███████╗███████╗╚██████╗╚██████╔╝██║ ╚═╝ ██║███████╗       ██║   ╚██████╔╝    ███████╗██║██║         ╚██████╗╚██████╔╝██████╔╝███████╗\n" +
+                " ╚══╝╚══╝ ╚══════╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝       ╚═╝    ╚═════╝     ╚══════╝╚═╝╚═╝          ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝\n" +
+                "                                                                                                                                                \n" +
+                " ██████╗ █████╗ ███████╗██╗███╗   ██╗ ██████╗ ██╗     ██╗██████╗  ██╗     █████╗ ███╗   ██╗██████╗      ██████╗ ██╗   ██╗███████╗██████╗ ██╗    \n" +
+                "██╔════╝██╔══██╗██╔════╝██║████╗  ██║██╔═══██╗██║    ██╔╝╚════██╗███║    ██╔══██╗████╗  ██║██╔══██╗    ██╔═══██╗██║   ██║██╔════╝██╔══██╗╚██╗   \n" +
+                "██║     ███████║███████╗██║██╔██╗ ██║██║   ██║██║    ██║  █████╔╝╚██║    ███████║██╔██╗ ██║██║  ██║    ██║   ██║██║   ██║█████╗  ██████╔╝ ██║   \n" +
+                "██║     ██╔══██║╚════██║██║██║╚██╗██║██║   ██║╚═╝    ██║ ██╔═══╝  ██║    ██╔══██║██║╚██╗██║██║  ██║    ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗ ██║   \n" +
+                "╚██████╗██║  ██║███████║██║██║ ╚████║╚██████╔╝██╗    ╚██╗███████╗ ██║    ██║  ██║██║ ╚████║██████╔╝    ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║██╔╝   \n" +
+                " ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝ ╚═╝    ╚═╝  ╚═╝╚═╝  ╚═══╝╚═════╝      ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝╚═╝    \n" +
+                "                                                                                                                                                ");
+    }
+
+
     public static void intro(){
-        Integer loginOrCreatePlayer = console.getIntegerInput("Enter 1 to create account or enter 2 to log in.");
+        Integer loginOrCreatePlayer = console.getIntegerInput("Enter: \n1 to create account\n2 to log in.");
         if (loginOrCreatePlayer == 1){
             createAccount();
         }
@@ -37,26 +55,38 @@ public class Casino {
             System.exit(0);
         }
         Long ID = accounts.generateId();
+        System.out.println("Your log in ID is " + ID + " please save this number!\n");
         Player createdPlayer = new Player(name, age);
-        //accounts.add(ID, createdPlayer);
+        accounts.add(ID, createdPlayer);
         user = createdPlayer;
     }
 
     public static void logIn(){
+        Long id = console.getLongInput("What is your login ID?");
+        if (accounts.containsID(id)){
+            user = accounts.loginPlayer(id);
+            System.out.println("Welcome back "+ user.getName() + "!\n");
+        }
+        else {
+            System.out.println("Wrong login ID.\n");
+            intro();
+        }
+
 
     }
 
     public static void main(String[] args) {
+        welcome();
         intro();
         menu();
     }
 
     public static void menu(){
         while (true) {
-            Integer choice = console.getIntegerInput("Enter 1 to play Blackjack, 2 to play Go Fish," +
-                    " 3 to play Sic Bo, and 4 to play Craps.  " +
-                    "If you want to return to login press 5 and if you want to create a new account press 6." +
-                    "If you wish to save and exit press 7.  ");
+            Integer choice = console.getIntegerInput("Enter: \n1 to play Blackjack\n2 to play Go Fish" +
+                    "\n3 to play Sic Bo\n4 to play Craps" +
+                    "\n5 to return to login\n6 to create a new account" +
+                    "\n7 to leave the casino");
             switch (choice) {
                 case 1:
                     playBlackjackIntro();
