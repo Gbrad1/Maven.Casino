@@ -5,7 +5,6 @@ import java.util.Stack;
 
 public class Deck {
     Stack<Card> deck;
-    ArrayList<Card> deckToShuffle;
 
     public Deck() {
         this.deck = new Stack<>();
@@ -31,7 +30,7 @@ public class Deck {
         }
     }
 
-    public Stack<Card> getDeck() {
+    public Stack<Card> getStack() {
         return deck;
     }
 
@@ -43,25 +42,8 @@ public class Deck {
         return deck.pop();
     }
 
-    public void printDeck() {
-        System.out.println(deck);
-        System.out.println(deckToShuffle);
-    }
-
-    public void stackToArray() {
-        deckToShuffle = new ArrayList(deck);
-    }
-
-    public ArrayList<Card> getTempArrayList() {
-        return deckToShuffle;
-    }
-
     public void shuffle() {
-        Collections.shuffle(deckToShuffle);
-    }
-
-    public void arrayListToStack() {
-        deck.addAll(deckToShuffle);
+        Collections.shuffle(deck);
     }
 
     public Card peekStack() {

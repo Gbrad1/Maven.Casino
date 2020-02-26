@@ -22,7 +22,7 @@ public class DeckTest {
         Integer expected = 52;
 
         deck.createDeck();
-        Integer actual = deck.getDeck().size();
+        Integer actual = deck.getStack().size();
 
         Assert.assertEquals(expected, actual);
         LOGGER.info("\n" + actual);
@@ -43,48 +43,16 @@ public class DeckTest {
         deck.createDeck();
 
         deck.popCard();
-        Integer actualDeckSize = deck.getDeck().size();
+        Integer actualDeckSize = deck.getStack().size();
         Integer remainingCards = 51;
         Assert.assertEquals(remainingCards, actualDeckSize);
     }
 
     @Test
-    public void testPrintDeck() {
+    public void test() {
         Deck deck = new Deck();
         deck.createDeck();
-        deck.printDeck();
-    }
-
-    @Test
-    public void testShuffleDeck() {
-        Deck deck = new Deck();
-        deck.createDeck();
-        deck.stackToArray();
         deck.shuffle();
-        deck.arrayListToStack();
-        deck.printDeck();
-    }
-
-    @Test
-    public void testStackToArray() {
-        Deck deck = new Deck();
-        deck.createDeck();
-        deck.stackToArray();
-
-        Integer actual = deck.getTempArrayList().size();
-        Integer expected = 52;
-
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testPrintShuffledStack() {
-        Deck deck = new Deck();
-        deck.createDeck();
-        deck.stackToArray();
-        deck.shuffle();
-        deck.arrayListToStack();
-
         LOGGER.info("\n" + deck.peekStack());
     }
 

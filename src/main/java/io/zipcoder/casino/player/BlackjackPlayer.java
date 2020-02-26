@@ -3,18 +3,58 @@ package io.zipcoder.casino.player;
 import io.zipcoder.casino.card.Card;
 import io.zipcoder.casino.card.Hand;
 
-public class BlackjackPlayer extends CardPlayer{
-    private Hand hand;
-    @Override
-    public void drawCard(Card card) {
-       hand.add(card);
+import java.util.ArrayList;
+
+public class BlackjackPlayer{
+    private Hand hand = new Hand();
+    private Player player;
+
+    public BlackjackPlayer(Player player){
+        this.player = player;
+    }
+    public void hit(Card c){
+        hand.add(c);
+    }
+
+    public Player getPlayer(){
+        return this.player;
+    }
+
+    public ArrayList<Card> getHand(){
+        return hand.getHand();
+    }
+
+    public int getScore(){
+        if (getHand().size() == 2 && (getHand().get(0).getRank() == 1 && getHand().get(1).getRank() == 1)){
+            return 12;
         }
-    public Hand getHand() {
-        return hand;
+        else if (getHand().size() == 2 && getHand().get(0).getRank() == 1){
+            return 11 + getHand().get(1).getRank();
+        }
+        else if (getHand().size() == 2 && getHand().get(1).getRank() == 1){
+            return 11 + getHand().get(0).getRank();
+        }
+        int score = 0;
+        for (int i = 0; i < getHand().size(); i++) {
+            score += hand.getHand().get(i).getRank();
+        }
+        return score;
     }
 
+    public boolean checkBlackjack(){
+        if (getScore() == 21 && hand.getHand().size() == 2){
+            return true;
+        }
+        return false;
+    }
     @Override
-    public void playerTurn() {
-
+    public String toString(){
+        String s = "You're cards are";
+        for (Card c : hand.getHand()) {
+            s += c.toString() + "  ";
+        }
+        s += "and your score is " + getScore();
+        return s;
     }
+
 }
