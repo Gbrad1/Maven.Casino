@@ -30,16 +30,13 @@ public class BlackjackTest {
             Card firstCard = deck1.popCard();
             LOGGER.info("" + firstCard);
 
-            Deck deck2 = new Deck();
-            deck1.createDeck();
-            deck1.shuffle();
             Card secondCard = deck1.popCard();
             LOGGER.info("" + secondCard);
 
             }
 
          @Test
-        public void checkHandSize() {
+        public void checkHandSizeTest() {
 
             Player player = new Player();
             BlackjackPlayer blackjackPlayer = new BlackjackPlayer(player);
@@ -49,8 +46,6 @@ public class BlackjackTest {
             newGame.createDeck();
             newGame.shuffleDeck();
             newGame.setHandPlayer();
-
-
 
             Integer actual = blackjackPlayer.getHand().size();
 

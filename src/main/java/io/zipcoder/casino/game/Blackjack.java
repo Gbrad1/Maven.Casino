@@ -71,18 +71,17 @@ public class Blackjack {
     }
 
     public void play() {
-
         Player player = new Player();
         BlackjackPlayer blackjackPlayer = new BlackjackPlayer(player);
         BlackjackDealer blackjackDealer = new BlackjackDealer();
         Blackjack newGame = new Blackjack(blackjackPlayer, blackjackDealer);
-        Deck deck = new Deck();
 
-        System.out.println("Welcome to BlackJack!");
+        newGame.createDeck();
+        newGame.shuffleDeck();
+        newGame.setHandPlayer();
+        newGame.setDealerPlayer();
 
-
-
-
+        System.out.println("Welcome to Blackjack!");
     }
 
 }
