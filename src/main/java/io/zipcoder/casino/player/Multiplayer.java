@@ -30,6 +30,14 @@ public class Multiplayer {
         playerDatabase.put(key, value);
     }
 
+    public boolean containsID(Long id){
+        return playerDatabase.containsKey(id);
+    }
+
+    public Player loginPlayer(Long id){
+        return playerDatabase.get(id);
+    }
+
     public void loadPlayerDataBase(){
         ObjectMapper objectMapper = new ObjectMapper();
         try {

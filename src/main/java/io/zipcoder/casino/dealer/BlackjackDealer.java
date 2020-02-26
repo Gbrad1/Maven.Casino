@@ -3,9 +3,12 @@ package io.zipcoder.casino.dealer;
 import io.zipcoder.casino.card.Card;
 import io.zipcoder.casino.card.Hand;
 
+
+
 import java.util.ArrayList;
 
 public class BlackjackDealer {
+
     private Hand hand = new Hand();
 
     public void hit(Card c) {
@@ -28,16 +31,20 @@ public class BlackjackDealer {
         }
         int score = 0;
         for (int i = 0; i < getHand().size(); i++) {
+            if(getHand().get(i).getRank() > 10) {
+                score += 10;
+            } else {
             score += hand.getHand().get(i).getRank();
+            }
         }
-        return score;
+            return score;
     }
 
-    public boolean checkBlackjack(){
+    public boolean checkBlackjack() {
         if (getScore() == 21 && hand.getHand().size() == 2){
             return true;
         }
-        return false;
-    }
+            return false;
 
+    }
 }

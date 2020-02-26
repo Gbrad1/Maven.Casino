@@ -31,11 +31,12 @@ public class Hand {
         hand.clear();
     }
 
-    public boolean contains(Card c){
+    public boolean contains(Card c) {
         return hand.contains(c);
     }
 
-    public void sortHand() {
-        Collections.sort(hand);
+    public int getSize() {
+        return hand.size();
     }
 }
+
