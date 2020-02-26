@@ -213,26 +213,6 @@ public class Craps{
         }
     }
 
-    public void notDecisionRollorSeven(Integer roll){
-        switch (roll){
-            case 7:
-                checkSeven(isCrapOut);
-                break;
-            case 11:
-                playeTurn();
-                break;
-            case 2:
-                playeTurn();
-                break;
-            case 3:
-                playeTurn();
-                break;
-            case 12:
-                play();
-                break;
-        }
-    }
-
     public void setPassLine(Integer bet){
         passLine = bet;
     }
