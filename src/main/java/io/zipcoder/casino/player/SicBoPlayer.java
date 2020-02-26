@@ -6,11 +6,15 @@ import java.util.concurrent.ThreadLocalRandom;
 public class SicBoPlayer extends DicePlayer{
 
     private Integer score;
-    private Player player;
+    private Player user;
 
-    public SicBoPlayer(Player player) {
+    public SicBoPlayer(Player user) {
+        this.user = user;
     }
 
+    public Player getPlayer() {
+        return user;
+    }
 
     @Override
     public int rollDice() {
