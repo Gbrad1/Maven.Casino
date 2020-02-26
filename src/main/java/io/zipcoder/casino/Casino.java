@@ -82,7 +82,7 @@ public class Casino {
     public static void menu(){
         while (true) {
             Integer choice = console.getIntegerInput("Enter: \n1 to play Blackjack\n2 to play Go Fish" +
-                    "\n3 to play Sic Bo\n4 to play Craps" +
+                    "\n3 to play Craps\n4 to play SicBo" +
                     "\n5 to return to login\n6 to create a new account" +
                     "\n7 to leave the casino");
             switch (choice) {
@@ -140,7 +140,6 @@ public class Casino {
     }
 
     public static void playGoFish(){
-        Console consoleGoFish = new Console(System.in, System.out);
         GoFish goFishGame = new GoFish(new GoFishPlayer(user), new GoFishDealer());
 
         //goFishGame.play();
@@ -149,13 +148,11 @@ public class Casino {
     }
 
     public static void playSicBo(){
-        Console consoleSicBo = new Console(System.in, System.out);
         menu();
 
     }
 
     public static void playCraps(){
-        Console consoleCraps = new Console(System.in, System.out);
         menu();
 
     }
