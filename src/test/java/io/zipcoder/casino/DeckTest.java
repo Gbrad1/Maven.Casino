@@ -22,7 +22,7 @@ public class DeckTest {
         Integer expected = 52;
 
         deck.createDeck();
-        Integer actual = deck.getDeck().size();
+        Integer actual = deck.getStack().size();
 
         Assert.assertEquals(expected, actual);
         LOGGER.info("\n" + actual);
@@ -43,7 +43,7 @@ public class DeckTest {
         deck.createDeck();
 
         deck.popCard();
-        Integer actualDeckSize = deck.getDeck().size();
+        Integer actualDeckSize = deck.getStack().size();
         Integer remainingCards = 51;
         Assert.assertEquals(remainingCards, actualDeckSize);
     }

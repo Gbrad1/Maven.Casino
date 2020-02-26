@@ -26,8 +26,31 @@ public class GoFish {
         deck.shuffle();
     }
 
-    public void drawCard() {
+    public void drawCardPlayer() {
         deck.popCard();
+    }
+
+    public void drawCardDealer() {
+        deck.popCard();
+    }
+
+    public void setupPlayerHand() {
+        for (int i = 0; i < 5; i++) {
+            goFishPlayer.drawCard(deck.popCard());
+        }
+    }
+
+    public void setupDealerHand() {
+        for (int i = 0; i < 5; i++) {
+            goFishDealer.drawCard(deck.popCard());
+        }
+    }
+
+    public void printPlayerHand() {
+        int playerHandSize = goFishPlayer.getPlayerHand().size();
+        for (int i = 0; i < playerHandSize; i++) {
+            System.out.println(goFishPlayer.getPlayerHand().get(i).toString());
+        }
     }
 
 }
