@@ -30,4 +30,12 @@ public class GoFishPlayer {
 
     }
 
+    public Integer addBookToPlayer() {
+        return playerScore++;
+    }
+
+    public Integer getPlayerScore() {
+        return playerScore;
+    }
+
 }

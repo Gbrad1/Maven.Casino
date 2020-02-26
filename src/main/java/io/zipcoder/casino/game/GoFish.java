@@ -7,6 +7,8 @@ import io.zipcoder.casino.player.GoFishPlayer;
 import io.zipcoder.casino.player.Player;
 import io.zipcoder.casino.utilities.Console;
 
+import java.sql.SQLOutput;
+
 public class GoFish {
     private Deck deck = new Deck();
     private GoFishPlayer goFishPlayer;
@@ -31,8 +33,8 @@ public class GoFish {
         return deck.popCard();
     }
 
-    public void drawCardDealer() {
-        deck.popCard();
+    public Card drawCardDealer() {
+        return deck.popCard();
     }
 
     public void setupPlayerHand() {
@@ -53,4 +55,48 @@ public class GoFish {
             System.out.println(goFishPlayer.getPlayerHand().get(i).toString());
         }
     }
+
+    public void printDealerHand() {
+        int playerHandSize = goFishDealer.getDealerHand().size();
+        for (int i = 0; i < playerHandSize; i++) {
+            System.out.println(goFishDealer.getDealerHand().get(i).toString());
+        }
+    }
+
+    public void addBookToPlayerScore() {
+        goFishPlayer.addBookToPlayer();
+    }
+
+    public void addBookToDealerScore() {
+        goFishDealer.addBookToDealer();
+    }
+
+    public Integer getPlayerScore() {
+        return goFishPlayer.getPlayerScore();
+    }
+
+    public Integer getDealerScore() {
+        return goFishDealer.getDealerScore();
+    }
+
+    public void play() {
+        System.out.println("██╗    ██╗███████╗██╗      ██████╗ ██████╗ ███╗   ███╗███████╗    ████████╗ ██████╗      ██████╗  ██████╗ ███████╗██╗███████╗██╗  ██╗\n" +
+                "██║    ██║██╔════╝██║     ██╔════╝██╔═══██╗████╗ ████║██╔════╝    ╚══██╔══╝██╔═══██╗    ██╔════╝ ██╔═══██╗██╔════╝██║██╔════╝██║  ██║\n" +
+                "██║ █╗ ██║█████╗  ██║     ██║     ██║   ██║██╔████╔██║█████╗         ██║   ██║   ██║    ██║  ███╗██║   ██║█████╗  ██║███████╗███████║\n" +
+                "██║███╗██║██╔══╝  ██║     ██║     ██║   ██║██║╚██╔╝██║██╔══╝         ██║   ██║   ██║    ██║   ██║██║   ██║██╔══╝  ██║╚════██║██╔══██║\n" +
+                "╚███╔███╔╝███████╗███████╗╚██████╗╚██████╔╝██║ ╚═╝ ██║███████╗       ██║   ╚██████╔╝    ╚██████╔╝╚██████╔╝██║     ██║███████║██║  ██║\n" +
+                " ╚══╝╚══╝ ╚══════╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝       ╚═╝    ╚═════╝      ╚═════╝  ╚═════╝ ╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝\n" +
+                "                                                                                                                                     ");
+        Player player = new Player();
+        GoFishPlayer goFishPlayer = new GoFishPlayer(player);
+        GoFishDealer goFishDealer = new GoFishDealer();
+        GoFish currentGame = new GoFish(goFishPlayer, goFishDealer);
+        currentGame.createDeck();
+        currentGame.shuffleDeck();
+
+        currentGame.setupPlayerHand();
+        currentGame.setupDealerHand();
+
+    }
+
 }
