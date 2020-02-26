@@ -4,8 +4,6 @@ import io.zipcoder.casino.player.Player;
 import io.zipcoder.casino.player.SicBoPlayer;
 import io.zipcoder.casino.utilities.Console;
 
-import java.sql.SQLOutput;
-
 
 public class SicBo implements Gambling {
 
@@ -21,36 +19,26 @@ public class SicBo implements Gambling {
 
     public int placeBet() {
         console.getIntegerInput("Place bet on Big or Small");
-        return placeBet();
+        return 0;
     }
 
 
     public void play() {
 
 
-
-
     }
+
 
     @Override
     public void getWinnings() {
-        String bigWin = "Big Win";
-        String smallWin = "Small Win";
-
-        if (inFlavorOfBig()) {
-            String bigWin1 = bigWin;
-        } else if (inFlavorOfSmall()) {
-            placeBet();
-        }
-        return ;
 
     }
 
-    public boolean inFlavorOfBig() {
+    public boolean bigWin() {
         return player.rollDice() > 10;
     }
 
-    public boolean inFlavorOfSmall() {
+    public boolean smallWin() {
         return player.rollDice() <= 10;
     }
 }
