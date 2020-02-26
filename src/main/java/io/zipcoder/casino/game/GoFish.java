@@ -31,8 +31,8 @@ public class GoFish {
         return deck.popCard();
     }
 
-    public void drawCardDealer() {
-        deck.popCard();
+    public Card drawCardDealer() {
+        return deck.popCard();
     }
 
     public void setupPlayerHand() {
@@ -51,6 +51,13 @@ public class GoFish {
         int playerHandSize = goFishPlayer.getPlayerHand().size();
         for (int i = 0; i < playerHandSize; i++) {
             System.out.println(goFishPlayer.getPlayerHand().get(i).toString());
+        }
+    }
+
+    public void printDealerHand() {
+        int playerHandSize = goFishDealer.getDealerHand().size();
+        for (int i = 0; i < playerHandSize; i++) {
+            System.out.println(goFishDealer.getDealerHand().get(i).toString());
         }
     }
 
