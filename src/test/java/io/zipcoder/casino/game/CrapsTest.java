@@ -74,7 +74,7 @@ public class CrapsTest {
     }
 
     @Test
-    public void setGetComeBetTest(){
+    public void setGetComeTest(){
         testCraps.setCome(expectedBet);
 
         Integer actualBet = testCraps.getCome();
@@ -172,5 +172,19 @@ public class CrapsTest {
         Integer actualField = testCraps.getField();
 
         assertEquals(expectedField, actualField);
+    }
+
+    @Test
+    public void clearSevenTest(){
+        testCraps.setComeBets(4, expectedBet);
+        testCraps.setDontComeBets(10, expectedBet);
+
+        Integer expectedComeBets = 0;
+        testCraps.clearSeven();
+        Integer actual4Come = testCraps.getComeBets(4);
+        Integer actual10DontCome = testCraps.getDontComeBets(10);
+
+        assertEquals(expectedComeBets, actual4Come);
+        assertEquals(expectedComeBets, actual10DontCome);
     }
 }
