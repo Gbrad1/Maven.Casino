@@ -7,13 +7,16 @@ import io.zipcoder.casino.player.GoFishPlayer;
 import io.zipcoder.casino.player.Player;
 import io.zipcoder.casino.utilities.Console;
 
-import java.sql.SQLOutput;
+import java.util.ArrayList;
+
+import static java.lang.Integer.parseInt;
 
 public class GoFish {
     private Deck deck = new Deck();
     private GoFishPlayer goFishPlayer;
     private GoFishDealer goFishDealer;
     private Player player;
+    ArrayList<Card> cardsToTransfer = new ArrayList<>();
     Console console = new Console(System.in, System.out);
 
     public GoFish(GoFishPlayer newPlayer, GoFishDealer newDealer) {
@@ -79,6 +82,29 @@ public class GoFish {
         return goFishDealer.getDealerScore();
     }
 
+    public void takeDealerCards(Integer cardRank) {
+        for (Card c : goFishPlayer.getPlayerHand()) {
+            if (c.getRank().equals(cardRank)) {
+                cardsToTransfer.add(c);
+            }
+        }
+        for (Card c : cardsToTransfer) {
+            goFishPlayer.getPlayerHand().add(c);
+        }
+    }
+
+    public void takePlayerCards(Card cardRank) {
+        for (Card c : goFishDealer.getDealerHand()) {
+            if (c.getRank().equals(cardRank)) {
+                cardsToTransfer.add(c);
+            }
+        }
+        for (Card c : cardsToTransfer) {
+            goFishDealer.getDealerHand().add(c);
+        }
+    }
+
+
     public void play() {
         System.out.println("██╗    ██╗███████╗██╗      ██████╗ ██████╗ ███╗   ███╗███████╗    ████████╗ ██████╗      ██████╗  ██████╗ ███████╗██╗███████╗██╗  ██╗\n" +
                 "██║    ██║██╔════╝██║     ██╔════╝██╔═══██╗████╗ ████║██╔════╝    ╚══██╔══╝██╔═══██╗    ██╔════╝ ██╔═══██╗██╔════╝██║██╔════╝██║  ██║\n" +
@@ -96,6 +122,16 @@ public class GoFish {
 
         currentGame.setupPlayerHand();
         currentGame.setupDealerHand();
+        System.out.println("\n");
+        System.out.println("Here is your starting hand.\n");
+        currentGame.printPlayerHand();
+
+        String request = console.getStringInput("What number would like to ask your opponent for?");
+        Integer requestAsInteger = parseInt(request);
+        /*if (goFishDealer.getDealerHand().contains(requestAsInteger)) {
+            goFishDealer.getDealerHand().remove;
+            goFishPlayer.getPlayerHand().add()
+        }*/
 
     }
 }

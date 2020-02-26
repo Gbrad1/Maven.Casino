@@ -8,6 +8,7 @@ import io.zipcoder.casino.player.Player;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 public class GoFishTest {
@@ -244,5 +245,5 @@ public class GoFishTest {
 
         LOGGER.info("\n" + goFishDealerScore);
     }
-
+    
 }
