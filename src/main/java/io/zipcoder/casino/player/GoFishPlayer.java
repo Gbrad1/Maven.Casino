@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class GoFishPlayer {
     private Player player;
-    private Integer score = 0;
+    private Integer playerScore = 0;
     private Hand hand = new Hand();
 
     public GoFishPlayer(Player newPlayer) {
@@ -24,6 +24,14 @@ public class GoFishPlayer {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public Integer addBookToPlayer() {
+        return playerScore++;
+    }
+
+    public Integer getPlayerScore() {
+        return playerScore;
     }
 
 }

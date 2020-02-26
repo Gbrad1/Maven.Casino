@@ -61,4 +61,20 @@ public class GoFish {
         }
     }
 
+    public void addBookToPlayerScore() {
+        goFishPlayer.addBookToPlayer();
+    }
+
+    public void addBookToDealerScore() {
+        goFishDealer.addBookToDealer();
+    }
+
+    public Integer getPlayerScore() {
+        return goFishPlayer.getPlayerScore();
+    }
+
+    public Integer getDealerScore() {
+        return goFishDealer.getDealerScore();
+    }
+
 }

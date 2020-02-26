@@ -6,7 +6,7 @@ import io.zipcoder.casino.card.Hand;
 import java.util.ArrayList;
 
 public class GoFishDealer {
-    private Integer score = 0;
+    private Integer dealerScore = 0;
     private Hand hand = new Hand();
 
     public GoFishDealer() {
@@ -19,6 +19,14 @@ public class GoFishDealer {
 
     public ArrayList<Card> getDealerHand() {
         return hand.getHand();
+    }
+
+    public Integer addBookToDealer() {
+        return dealerScore++;
+    }
+
+    public Integer getDealerScore() {
+        return dealerScore;
     }
 
 }
