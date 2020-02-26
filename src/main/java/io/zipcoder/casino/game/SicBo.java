@@ -1,6 +1,5 @@
 package io.zipcoder.casino.game;
 
-import io.zipcoder.casino.player.Player;
 import io.zipcoder.casino.player.SicBoPlayer;
 import io.zipcoder.casino.utilities.Console;
 
@@ -10,7 +9,7 @@ public class SicBo implements Gambling {
     private SicBoPlayer user;
     private Console console = new Console(System.in, System.out);
     private Integer input;
-    private Integer bet;
+    private Integer bid;
 
 
     public SicBo(SicBoPlayer user) {
@@ -19,14 +18,15 @@ public class SicBo implements Gambling {
 
 
     public int placeBet() {
-        bet = console.getIntegerInput("Enter a bet amount");
-        while (bet > user.getPlayer().getBalance()) {
-            bet = console.getIntegerInput("You do not have enough in your balance. Please try again!");
+        bid = console.getIntegerInput("Enter a bet amount");
+        while (bid > user.getPlayer().getBalance()) {
+            bid = console.getIntegerInput("You do not have enough in your balance. Please try again!");
         }
-        return bet;
+        return bid;
     }
 
     public void play() {
+
         input = console.getIntegerInput("What would you like to bet on? \n1: Big\n2: Small\n3: Even\n4: Odds\n5: Any Triple");
 
 
@@ -58,6 +58,14 @@ public class SicBo implements Gambling {
     @Override
     public void getWinnings() {
 
+    }
+
+    enum Bets {
+        BIG,
+        SMALL,
+        EVEN,
+        ODD,
+        ANYTRIPLE;
     }
 
 
