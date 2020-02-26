@@ -10,7 +10,7 @@ public class GoFish {
     Console console = new Console(System.in, System.out);
 
     public GoFish() {
-
+        
     }
 
 }
