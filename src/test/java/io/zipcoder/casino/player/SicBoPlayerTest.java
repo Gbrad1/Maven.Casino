@@ -1,25 +1,23 @@
 package io.zipcoder.casino.player;
 
-import io.zipcoder.casino.game.SicBo;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.concurrent.ThreadLocalRandom;
+
 
 public class SicBoPlayerTest {
 
     SicBoPlayer user = new SicBoPlayer();
-    SicBo sicboGame = new SicBo(user);
     ArrayList<Integer> triple = new ArrayList<>();
-    ThreadLocalRandom random = ThreadLocalRandom.current();
 
-    @Test
-    public void getPlayerTest() {
-        Player expected = new Player();
-        Player actual = user.getPlayer();
-        Assert.assertEquals(expected, actual);
+
+    @Before
+    public void setUp() {
+        triple.clear();
     }
+
 
     @Test
     public void rollDiceTest() {
@@ -28,24 +26,26 @@ public class SicBoPlayerTest {
     }
 
     @Test
+    public void isTripleNotEqualTest() {
+        triple.add(3);
+        triple.add(5);
+        triple.add(6);
+        Assert.assertFalse(user.isTriple(triple));
+    }
+
+    @Test
     public void isTripleEqualTest() {
-        for (int i = 0; i < 3; i++) {
-            int num = random.nextInt(6) + 1;
-            triple.add(num);
-        }
-        user.rollDice();
-        boolean expected = triple.get(0) == triple.get(1) && triple.get(1) == triple.get(2);
-        Assert.assertEquals(expected,user.isTriple());
+        triple.add(3);
+        triple.add(3);
+        triple.add(3);
+        Assert.assertTrue(user.isTriple(triple));
     }
 
 
     @Test
     public void clearTripleTest() {
-        for (int i = 0; i < 3; i++) {
-            int num = random.nextInt(6) + 1;
-            triple.add(num);
-        }
-        triple.clear();
-        Assert.assertTrue(triple.isEmpty());
+        user.addTriple(4);
+        user.clearTriple();
+        Assert.assertTrue(user.getTriple().isEmpty());
     }
 }

@@ -139,7 +139,7 @@ public class SicBo implements Gambling {
         System.out.println("You bet on ANY TRIPLE with $" + bid + "!");
         newRoll();
 
-        if (user.isTriple()) {
+        if (user.isTriple(user.getTriple())) {
             user.getPlayer().setBalance(user.getPlayer().getBalance() + bid);
             System.out.println("You Win!");
 
