@@ -1,5 +1,4 @@
 package io.zipcoder.casino.game;
-
 import io.zipcoder.casino.card.Card;
 import io.zipcoder.casino.card.Deck;
 import io.zipcoder.casino.dealer.BlackjackDealer;
@@ -11,29 +10,25 @@ import java.util.ArrayList;
 
 
 public class Blackjack {
+
     private Deck deck = new Deck();
     private BlackjackPlayer player;
     private BlackjackDealer dealer;
-    private Integer bet;
-    private Boolean stay;
-    private Boolean hit;
     Console console = new Console(System.in, System.out);
+    private Integer bet;
     private boolean stillPlaying;
     Integer input;
+    Integer makeDecision;
 
     public Blackjack(BlackjackPlayer player, BlackjackDealer dealer) {
         this.player = player;
         this.dealer = dealer;
         this.bet = 0;
-        this.hit = hit;
-        this.stay = stay;
-        this.deck = deck;
         deck.createDeck();
         deck.shuffle();
         setHandPlayer();
         setDealerPlayer();
         this.stillPlaying = true;
-
     }
 
     public Deck getDeck() {
@@ -62,7 +57,6 @@ public class Blackjack {
 
     public int getScoreDealer() {
         return dealer.getScore();
-
     }
 
     public boolean bustPlayer() {
@@ -81,21 +75,11 @@ public class Blackjack {
 
     public void getWager() {
         if (player.getPlayer().getBalance() == 0) {
-            // exit();
+            //exit();
         }
         bet = console.getIntegerInput("How much do you want to wager?");
         while (bet > player.getPlayer().getBalance() || bet < 1) {
             bet = console.getIntegerInput("Enter a valid wager.");
-        }
-    }
-
-    public void getWager(String prompt) {
-        if (player.getPlayer().getBalance() == 0) {
-            //exit();
-        }
-        bet = console.getIntegerInput(prompt);
-        while (bet > player.getPlayer().getBalance() || bet < 0) {
-            bet = console.getIntegerInput(prompt);
         }
     }
 
@@ -125,7 +109,7 @@ public class Blackjack {
         return dealer.getHand().get(1).toString();
     }
 
-    public Boolean checkBlackJack() {
+    public Boolean checkBlackjack() {
         if (this.dealer.checkBlackjack() && this.player.checkBlackjack()) {
             console.println("You both got Blackjack. Push!\n");
             stillPlaying = false;
@@ -139,7 +123,6 @@ public class Blackjack {
         }
         if (!this.dealer.checkBlackjack() && this.player.checkBlackjack()) {
             console.println("You got Blackjack! You won!\n");
-            getWinnings(bet * 2);
             stillPlaying = false;
             return true;
         }
@@ -147,30 +130,45 @@ public class Blackjack {
     }
 
     public void play() {
+        console.println("Welcome to Blackjack.\n");
+
         while (stillPlaying) {
-            console.println("Welcome to Blackjack.");
-            input = console.getIntegerInput("Would you like to player or exit? \n1: Play a hand \n2: Exit the game");
+            input = console.getIntegerInput("Would you like to play or exit? \n1: Play a hand \n2: Exit the game\n");
             while (input != 1 && input != 2) {
-                input = console.getIntegerInput("Would you like to player or exit? \n1: Play a hand \n2: Exit the game");
+                input = console.getIntegerInput("Would you like to play or exit? \n1: Play a hand \n2: Exit the game\n");
             }
             if (input == 1) {
+
             }
             if (input == 2) {
                 break;
             }
+
             getWager();
             placeBet();
 
-            console.println(player.toString() + "\n");
             console.println(dealer.dealerShowCard() + "\n");
-            if (checkBlackJack()) {
+            console.println(player.toString() + "\n");
+            if (checkBlackjack()) {
                 break;
+            }
+
+            makeDecision = console.getIntegerInput("What would you like to do? \n1: Hit \n2: Stay");
+            while (player.getScore() < 21) {
+                if (makeDecision == 1) {
+                    drawCardPlayer();
+                    console.println(player.toString() + "\n");
+                    if (player.getScore() < 21) {
+                        makeDecision = console.getIntegerInput("What would you like to do? \n1: Hit \n2: Stay");
+                    } if (player.getScore() > 21) {
+                        console.println("You busted!");
+                        break;
+                    }
+                }
+            }
+            if (makeDecision == 2) {
+
             }
         }
     }
 }
-
-
-
-
-
