@@ -20,6 +20,7 @@ public class Craps{
     private Integer dontCome;
     private Integer field;
     private Integer currentPoint;
+    private Boolean isStillPlaying;
     private Boolean isOnLine;
     private Boolean isPointOn;
     private Boolean isCrapOut;
@@ -31,6 +32,7 @@ public class Craps{
         this.comeBets = new HashMap<>(6);
         this.dontComeBets = new HashMap<>(6);
         this.table = new CrapsTable();
+        this.isStillPlaying = true;
         this.isOnLine = false;
         this.isPointOn = false;
         this.isCrapOut = false;
@@ -51,7 +53,7 @@ public class Craps{
     }
 
     public void play(){
-        while (!isCrapOut){
+        while (isStillPlaying){
             playeTurn();
         }
     }
@@ -72,7 +74,6 @@ public class Craps{
         while(bet > crapsPlayer.getPlayer().getBalance() || bet < 1){
             bet = console.getIntegerInput("Enter a valid wager");
         }
-        this.bet = bet;
     }
 
     public void getWager(String prompt){
@@ -83,7 +84,6 @@ public class Craps{
         while(bet > crapsPlayer.getPlayer().getBalance() || bet < 0){
             bet = console.getIntegerInput(prompt);
         }
-        this.bet = bet;
     }
 
     public void placeBet(){
@@ -95,7 +95,7 @@ public class Craps{
     }
 
     public void exit(){
-
+        isStillPlaying = !isStillPlaying;
     }
 
     public void comeOutRoll(){
@@ -115,6 +115,8 @@ public class Craps{
             placeBet();
             setDontPassLine(bet);
             updateTable();
+        }else if(passLineDecision == 3){
+            exit();
         }
         makeFieldBet();
         roll = crapsPlayer.rollDice();
@@ -164,10 +166,10 @@ public class Craps{
 
     public Integer getPassLineDecision(){
         Integer decision = console.getIntegerInput("1 - Pass Line\n" +
-                "2 - Don't Pass Line");
-        while (decision != 1 && decision != 2){
+                "2 - Don't Pass Line\n" + "3 - Exit");
+        while (decision < 1 || decision > 3){
             decision = console.getIntegerInput("1 - Pass Line\n" +
-                    "2 - Don't Pass Line");
+                    "2 - Don't Pass Line\n" + "3 - Exit");
         }
         return decision;
     }
@@ -196,8 +198,6 @@ public class Craps{
             getWinnings(come);
             setIsPointOn();
             setCurrentPoint(0);
-            setIsCrapOut();
-
         }else {
             playeTurn();
         }
@@ -222,6 +222,7 @@ public class Craps{
     public void checkLineBetPointOn(Integer roll){
         if(roll == 7){
             updatePassLine("dont");
+            setIsCrapOut();
             checkSeven(isCrapOut);
         }else if (roll == currentPoint){
             updatePassLine("pass");
