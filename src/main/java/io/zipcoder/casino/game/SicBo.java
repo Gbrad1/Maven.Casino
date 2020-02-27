@@ -18,15 +18,18 @@ public class SicBo implements Gambling {
     }
 
 
+
     public int placeBet() {
         bid = console.getIntegerInput("Enter a bet amount");
-        while (bid > user.getPlayer().getBalance()) {
-            bid = console.getIntegerInput("You do not have enough in your balance. Please try again!");
+        while (bid > user.getPlayer().getBalance() && bid > 0) {
+            bid = console.getIntegerInput("Please enter the right amount!");
         }
         return bid;
     }
 
     public void play() {
+
+
         SicBoTable sicBoTable = new SicBoTable();
         Integer input = console.getIntegerInput("\nWhat would you like to bet on?" +
                 "\n1: SMALL\n2: BIG\n3: EVEN\n4: ODD\n5: ANY TRIPLE\n" +
@@ -77,7 +80,7 @@ public class SicBo implements Gambling {
 
         } else {
             user.getPlayer().setBalance(user.getPlayer().getBalance() - bid);
-            System.out.println("You lost... " + bid);
+            System.out.println("You lost... ");
         }
         play();
     }
@@ -93,7 +96,7 @@ public class SicBo implements Gambling {
 
         } else {
             user.getPlayer().setBalance(user.getPlayer().getBalance() - bid);
-            System.out.println("You lost... " + bid);
+            System.out.println("You lost... ");
         }
         play();
     }
@@ -109,7 +112,7 @@ public class SicBo implements Gambling {
 
         } else {
             user.getPlayer().setBalance(user.getPlayer().getBalance() - bid);
-            System.out.println("You lost... " + bid);
+            System.out.println("You lost... ");
         }
         play();
     }
@@ -125,13 +128,14 @@ public class SicBo implements Gambling {
 
         } else {
             user.getPlayer().setBalance(user.getPlayer().getBalance() - bid);
-            System.out.println("You lost... " + bid);
+            System.out.println("You lost... ");
         }
         play();
     }
 
     public void betTriple() {
         System.out.println("You bet on ANY TRIPLE with $" + bid + "!");
+        Integer roll = newRoll();
 
         if (user.isTriple()) {
             user.getPlayer().setBalance(user.getPlayer().getBalance() + bid);
@@ -139,7 +143,9 @@ public class SicBo implements Gambling {
 
         } else {
             user.getPlayer().setBalance(user.getPlayer().getBalance() - bid);
+            System.out.println("You lost... ");
         }
+        user.clearTriple();
         play();
     }
 

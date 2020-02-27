@@ -7,7 +7,7 @@ public class SicBoPlayerTest {
 
 
     @Test
-    public void getPlayer() {
+    public void getPlayerTest() {
         SicBoPlayer sicBoPlayer = new SicBoPlayer();
         Player expected = new Player();
         Player actual = sicBoPlayer.getPlayer();
@@ -15,8 +15,15 @@ public class SicBoPlayerTest {
     }
 
     @Test
-    public void rollDice() {
+    public void rollDiceTest() {
         SicBoPlayer sicBoPlayer = new SicBoPlayer();
         Assert.assertTrue(sicBoPlayer.rollDice() >= 3 && sicBoPlayer.rollDice() <= 18);
+    }
+
+    @Test
+    public void isTripleTest() {
+        SicBoPlayer sicBoPlayer = new SicBoPlayer();
+
+        //Assert.assertEquals();
     }
 }
