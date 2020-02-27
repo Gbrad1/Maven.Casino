@@ -55,10 +55,6 @@ public class GoFish {
             System.out.println(goFishPlayer.getPlayerHand().get(i).toString());
         }
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> 43ebb870dc096875ef696a2ee99d8ff5fc33a05f
 
     public void printDealerHand() {
         int playerHandSize = goFishDealer.getDealerHand().size();

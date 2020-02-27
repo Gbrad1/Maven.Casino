@@ -8,9 +8,6 @@ import io.zipcoder.casino.utilities.Console;
 
 import java.util.ArrayList;
 
-import java.util.Scanner;
-
-
 
 public class Blackjack {
 
@@ -22,7 +19,7 @@ public class Blackjack {
     public Blackjack(BlackjackPlayer player, BlackjackDealer dealer){
         this.player = player;
         this.dealer = dealer;
-    }
+        }
 
     public Deck getDeck() {
         return deck;
