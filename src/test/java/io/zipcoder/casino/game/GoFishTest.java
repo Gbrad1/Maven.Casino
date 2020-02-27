@@ -1,14 +1,12 @@
 package io.zipcoder.casino.game;
 
+import org.junit.Test;
 import io.zipcoder.casino.card.Card;
 import io.zipcoder.casino.card.Deck;
 import io.zipcoder.casino.dealer.GoFishDealer;
 import io.zipcoder.casino.player.GoFishPlayer;
 import io.zipcoder.casino.player.Player;
 import org.junit.Assert;
-import org.junit.Test;
-
-import java.util.ArrayList;
 import java.util.logging.Logger;
 
 public class GoFishTest {
@@ -186,69 +184,25 @@ public class GoFishTest {
         Assert.assertFalse(goFishPlayer.getPlayerHand().contains(goFishDealer.getDealerHand()));
     }
 
-    @Test
-    public void checkStartingScoreTest() {
-        Player player = new Player();
-        GoFishDealer goFishDealer = new GoFishDealer();
-        GoFishPlayer goFishPlayer = new GoFishPlayer(player);
-        GoFish newGame = new GoFish(goFishPlayer, goFishDealer);
-
-        newGame.createDeck();
-        newGame.shuffleDeck();
-        newGame.setupPlayerHand();
-        newGame.setupDealerHand();
-
-        Integer goFishPlayerScore = newGame.getPlayerScore();
-        Integer goFishDealerScore = newGame.getDealerScore();
-
-        Assert.assertEquals(goFishPlayerScore, goFishDealerScore);
-
-        LOGGER.info("\n" + goFishPlayerScore + "\n" + goFishDealerScore);
-    }
-
-    @Test
-    public void addBookToPlayerScoreTest() {
-        Player player = new Player();
-        GoFishDealer goFishDealer = new GoFishDealer();
-        GoFishPlayer goFishPlayer = new GoFishPlayer(player);
-        GoFish newGame = new GoFish(goFishPlayer, goFishDealer);
-
-        newGame.createDeck();
-        newGame.shuffleDeck();
-        newGame.setupPlayerHand();
-        newGame.setupDealerHand();
-
-        newGame.addBookToPlayerScore();
-
-        Integer goFishPlayerScore = newGame.getPlayerScore();
-        Integer expected = 1;
-
-        Assert.assertEquals(expected, goFishPlayerScore);
-
-        LOGGER.info("\n" + goFishPlayerScore);
-    }
-
-    @Test
-    public void addBookToDealerScoreTest() {
-        Player player = new Player();
-        GoFishDealer goFishDealer = new GoFishDealer();
-        GoFishPlayer goFishPlayer = new GoFishPlayer(player);
-        GoFish newGame = new GoFish(goFishPlayer, goFishDealer);
-
-        newGame.createDeck();
-        newGame.shuffleDeck();
-        newGame.setupPlayerHand();
-        newGame.setupDealerHand();
-
-        newGame.addBookToDealerScore();
-
-        Integer goFishDealerScore = newGame.getDealerScore();
-        Integer expected = 1;
-
-        Assert.assertEquals(expected, goFishDealerScore);
-
-        LOGGER.info("\n" + goFishDealerScore);
-    }
+//    @Test
+//    public void checkStartingScoreTest() {
+//        Player player = new Player();
+//        GoFishDealer goFishDealer = new GoFishDealer();
+//        GoFishPlayer goFishPlayer = new GoFishPlayer(player);
+//        GoFish newGame = new GoFish(goFishPlayer, goFishDealer);
+//
+//        newGame.createDeck();
+//        newGame.shuffleDeck();
+//        newGame.setupPlayerHand();
+//        newGame.setupDealerHand();
+//
+//        Integer goFishPlayerScore = newGame.getPlayerScore();
+//        Integer goFishDealerScore = newGame.getDealerScore();
+//
+//        Assert.assertEquals(goFishPlayerScore, goFishDealerScore);
+//
+//        LOGGER.info("\n" + goFishPlayerScore + "\n" + goFishDealerScore);
+//    }
 
     @Test
     public void testTakingACardFromDealer() {
