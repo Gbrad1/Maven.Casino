@@ -59,10 +59,16 @@ public class Craps{
     }
 
     public void playeTurn(){
-        if(!isPointOn){
-            comeOutRoll();
-        }else {
-            decisionRoll();
+        while (true) {
+            playeTurn();
+            if (!isStillPlaying) {
+                break;
+            }
+            if (!isPointOn) {
+                comeOutRoll();
+            } else {
+                decisionRoll();
+            }
         }
     }
 
