@@ -27,27 +27,35 @@ public class SicBo implements Gambling {
     }
 
     public void play() {
-        input = console.getIntegerInput("What would you like to bet on?" +
-                                    "\n1: SMALL\n2: BIG\n3: EVEN\n4: ODD\n5: ANY TRIPLE\n6: EXIT");
+        input = console.getIntegerInput("\nWhat would you like to bet on?" +
+                                                "\n1: SMALL\n2: BIG\n3: EVEN\n4: ODD\n5: ANY TRIPLE\n" +
+                                                "6: EXIT BACK TO MAIN MENU");
+
+
 
         switch (input)
         {
             case 1:
+                placeBet();
                 betSmall();
                 break;
             case 2:
+                placeBet();
                 betBig();
                 break;
             case 3:
+                placeBet();
                 betEven();
                 break;
             case 4:
+                placeBet();
                 betOdd();
                 break;
             case 5:
+                placeBet();
                 break;
             case 6:
-                Casino.saveAndExit();
+                Casino.menu();
                 break;
         }
     }
@@ -62,13 +70,14 @@ public class SicBo implements Gambling {
         System.out.println("The roll is " + roll + "!");
 
         if (roll <= 10) {
-            user.getPlayer().setBalance(user.getPlayer().getBalance() + (bid * 2));
+            user.getPlayer().setBalance(user.getPlayer().getBalance() + bid);
             System.out.println("You Win!");
 
         } else {
             user.getPlayer().setBalance(user.getPlayer().getBalance() - bid);
-            System.out.println("You lost... please try again!");
+            System.out.println("You lost... " + bid);
         }
+        play();
     }
 
     public void betBig() {
@@ -77,13 +86,14 @@ public class SicBo implements Gambling {
         System.out.println("The roll is " + roll + "!");
 
         if (roll > 10) {
-            user.getPlayer().setBalance(user.getPlayer().getBalance() + (bid * 2));
+            user.getPlayer().setBalance(user.getPlayer().getBalance() + bid);
             System.out.println("You Win!");
 
         } else {
             user.getPlayer().setBalance(user.getPlayer().getBalance() - bid);
-            System.out.println("You lost... please try again!");
+            System.out.println("You lost... " + bid);
         }
+        play();
     }
 
     public void betEven() {
@@ -92,13 +102,14 @@ public class SicBo implements Gambling {
         System.out.println("The roll is " + roll + "!");
 
         if (roll % 2 == 0) {
-            user.getPlayer().setBalance(user.getPlayer().getBalance() + (bid * 2));
+            user.getPlayer().setBalance(user.getPlayer().getBalance() + bid);
             System.out.println("You Win!");
 
         } else {
             user.getPlayer().setBalance(user.getPlayer().getBalance() - bid);
-            System.out.println("You lost... please try again!");
+            System.out.println("You lost... " + bid);
         }
+        play();
     }
 
     public void betOdd() {
@@ -107,13 +118,14 @@ public class SicBo implements Gambling {
         System.out.println("The roll is " + roll + "!");
 
         if (roll % 2 != 0) {
-            user.getPlayer().setBalance(user.getPlayer().getBalance() + (bid * 2));
+            user.getPlayer().setBalance(user.getPlayer().getBalance() + bid);
             System.out.println("You Win!");
 
         } else {
             user.getPlayer().setBalance(user.getPlayer().getBalance() - bid);
-            System.out.println("You lost... please try again!");
+            System.out.println("You lost... " + bid);
         }
+        play();
     }
 
     @Override
