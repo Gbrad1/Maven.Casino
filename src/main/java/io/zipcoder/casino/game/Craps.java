@@ -134,8 +134,8 @@ public class Craps{
 
     public void decisionRoll(){
         updateTable();
-        Integer decision = getDecision();
-        while (decision != 4) {
+        while (true) {
+            Integer decision = getDecision();
             if (decision == 1) {
                 getWager();
                 placeBet();
@@ -148,6 +148,8 @@ public class Craps{
                 updateTable();
             }else if (decision == 3){
                 makeFieldBet();
+            }else {
+                break;
             }
         }
         roll = crapsPlayer.rollDice();
