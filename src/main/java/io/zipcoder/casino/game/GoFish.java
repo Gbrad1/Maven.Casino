@@ -124,16 +124,10 @@ public class GoFish {
     }
 
     public boolean checkWinCondition () {
-        if ((goFishPlayer.getPlayerScore() + goFishDealer.getDealerScore()) == 13) {}
-        return true;
-    }
-
-    public void determineWinner() {
-        if (goFishPlayer.getPlayerScore() > goFishDealer.getDealerScore()) {
-            System.out.println("You beat the dealer!");
-        } else {
-            System.out.println("You have been defeated.");
+        if ((goFishPlayer.getPlayerScore() + goFishDealer.getDealerScore()) == 13) {
+            return true;
         }
+        return false;
     }
 
     public void playerTurn() {
@@ -170,7 +164,7 @@ public class GoFish {
     }
 
     public void dealerTurn () {
-        System.out.println("=========================================\n");
+        System.out.println("====================================\n");
         Integer dealerPick = dealerChoiceToRequestFromPlayer();
         if (checkPlayerHand(dealerPick)) {
             takePlayerCards(dealerPick);
@@ -220,8 +214,13 @@ public class GoFish {
             System.out.println("====================================");
             System.out.println("Dealer Score: " + goFishDealer.getDealerScore() + "\nPlayer Score: " + goFishPlayer.getPlayerScore());
             System.out.println("====================================");
-            if (deck.isEmpty()) {
-                determineWinner();
+            if (deck.isEmpty() || checkWinCondition()) {
+                if (goFishPlayer.getPlayerScore() > goFishDealer.getDealerScore()) {
+                    System.out.println("You won!");
+                    break;
+                } else
+                    System.out.println("YOU LOSE");
+                    break;
             }
 
         }
