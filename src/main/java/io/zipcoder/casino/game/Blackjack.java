@@ -10,15 +10,21 @@ import java.util.ArrayList;
 
 
 public class Blackjack {
-
     private Deck deck = new Deck();
     private BlackjackPlayer player;
     private BlackjackDealer dealer;
+    private Integer bet;
+    private Boolean stay;
+    private Boolean hit;
+    private
     Console console = new Console(System.in, System.out);
 
     public Blackjack(BlackjackPlayer player, BlackjackDealer dealer){
         this.player = player;
         this.dealer = dealer;
+        this.bet = 0;
+        this.hit = hit;
+        this.stay = stay;
         }
 
     public Deck getDeck() {
