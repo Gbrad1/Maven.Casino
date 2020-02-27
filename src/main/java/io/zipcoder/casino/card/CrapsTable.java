@@ -67,17 +67,17 @@ public class CrapsTable{
                 four, five, six, eight, nine, ten);
         crapsTable.append(insertString);
         //l5
-        insertString = String.format("|   | BAR  |  _  |  _  |  _  |  _  |  _  |  __  |\n",
-                4, 5, 6, 8, 9, 10);
+        insertString = String.format("|   | BAR  |  _  |  _  |  _  |  _  |  _  |  __  |\n");
         crapsTable.append(insertString);
         //l6
-        insertString = String.format("| P |  12  | |%d| | |%d| | |%d| | |%d| | |%d| | |%d| |\n");
+        insertString = String.format("| P |  12  | |%d| | |%d| | |%d| | |%d| | |%d| | |%d| |\n",
+                4, 5, 6, 8, 9, 10);
         crapsTable.append(insertString);
         //l7
         insertString = String.format("| A |      |  -  |  -  |  -  |  -  |  -  |  --  |\n");
         crapsTable.append(insertString);
         //l8
-        insertString = String.format("| S |   %d  |  %d  |  %d  |  %d  |  %d  |  %d  |   %d  |\n",
+        insertString = String.format("| S |%5d | %3d | %3d | %3d | %3d | %3d |%5d |\n",
                 dontCome,box.get(4),box.get(5),box.get(6),box.get(8),box.get(9),box.get(10));
         crapsTable.append(insertString);
         //l9

@@ -26,12 +26,12 @@ public class Craps{
     private Boolean isCrapOut;
     private Console console;
 
-    public Craps(CrapsPlayer crapPlayer){
+    public Craps(CrapsPlayer crapPlayer, CrapsTable table){
         this.console = new Console(System.in, System.out);
         this.crapsPlayer = crapPlayer;
         this.comeBets = new HashMap<>(6);
         this.dontComeBets = new HashMap<>(6);
-        this.table = new CrapsTable();
+        this.table = table;
         this.isStillPlaying = true;
         this.isOnLine = false;
         this.isPointOn = false;
@@ -44,6 +44,7 @@ public class Craps{
         this.come = 0;
         this.dontCome = 0;
         this.field = 0;
+        this.currentPoint = 0;
         for (int i = 4; i <= 6; i++) {
             comeBets.put(i, 0);
             comeBets.put(i+4, 0);
@@ -53,9 +54,7 @@ public class Craps{
     }
 
     public void play(){
-        while (isStillPlaying){
-            playeTurn();
-        }
+        playeTurn();
     }
 
     public void playeTurn(){
