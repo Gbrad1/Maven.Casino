@@ -27,6 +27,7 @@ public class SicBo implements Gambling {
         return bid;
     }
 
+
     public void play() {
 
         SicBoTable sicBoTable = new SicBoTable();
@@ -40,40 +41,47 @@ public class SicBo implements Gambling {
             {
                 case 1:
                     placeBet();
+                    System.out.println("You bet on SMALL with $" + bid + "!");
                     betSmall();
                     break;
                 case 2:
                     placeBet();
+                    System.out.println("You bet on BIG with $" + bid + "!");
                     betBig();
                     break;
                 case 3:
                     placeBet();
+                    System.out.println("You bet on EVEN with $" + bid + "!");
                     betEven();
                     break;
                 case 4:
                     placeBet();
+                    System.out.println("You bet on ODD with $" + bid + "!");
                     betOdd();
                     break;
                 case 5:
                     placeBet();
+                    System.out.println("You bet on ANY TRIPLE with $" + bid + "!");
                     betTriple();
                     break;
                 case 6:
                     Casino.menu();
                     break;
             }
+            play();
         }
         System.out.println("Please enter a value menu option!");
         play();
     }
 
-    public Integer newRoll() {
+
+    public Integer getRoll() {
         return user.rollDice();
     }
 
+
     public void betSmall() {
-        System.out.println("You bet on SMALL with $" + bid + "!");
-        Integer roll = newRoll();
+        Integer roll = getRoll();
         System.out.println("The roll is " + roll + "!");
 
         if (roll <= 10) {
@@ -84,12 +92,12 @@ public class SicBo implements Gambling {
             user.getPlayer().setBalance(user.getPlayer().getBalance() - bid);
             System.out.println("You lost... ");
         }
-        play();
+
     }
 
+
     public void betBig() {
-        System.out.println("You bet on BIG with $" + bid + "!");
-        Integer roll = newRoll();
+        Integer roll = getRoll();
         System.out.println("The roll is " + roll + "!");
 
         if (roll > 10) {
@@ -100,12 +108,12 @@ public class SicBo implements Gambling {
             user.getPlayer().setBalance(user.getPlayer().getBalance() - bid);
             System.out.println("You lost... ");
         }
-        play();
+
     }
 
+
     public void betEven() {
-        System.out.println("You bet on EVEN with $" + bid + "!");
-        Integer roll = newRoll();
+        Integer roll = getRoll();
         System.out.println("The roll is " + roll + "!");
 
         if (roll % 2 == 0) {
@@ -116,12 +124,12 @@ public class SicBo implements Gambling {
             user.getPlayer().setBalance(user.getPlayer().getBalance() - bid);
             System.out.println("You lost... ");
         }
-        play();
+
     }
 
+
     public void betOdd() {
-        System.out.println("You bet on ODD with $" + bid + "!");
-        Integer roll = newRoll();
+        Integer roll = getRoll();
         System.out.println("The roll is " + roll + "!");
 
         if (roll % 2 != 0) {
@@ -132,12 +140,12 @@ public class SicBo implements Gambling {
             user.getPlayer().setBalance(user.getPlayer().getBalance() - bid);
             System.out.println("You lost... ");
         }
-        play();
     }
 
+
     public void betTriple() {
-        System.out.println("You bet on ANY TRIPLE with $" + bid + "!");
-        newRoll();
+
+        getRoll();
 
         if (user.isTriple(user.getTriple())) {
             user.getPlayer().setBalance(user.getPlayer().getBalance() + bid);
@@ -148,15 +156,12 @@ public class SicBo implements Gambling {
             System.out.println("You lost... ");
         }
         user.clearTriple();
-        play();
     }
 
     @Override
     public void getWinnings() {
 
     }
-
-
 
 }
 

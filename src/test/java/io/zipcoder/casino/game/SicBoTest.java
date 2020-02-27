@@ -22,7 +22,7 @@ public class SicBoTest {
     }
 
     @Test
-    public void newRollTest() {
+    public void getRollTest() {
 
     }
 
