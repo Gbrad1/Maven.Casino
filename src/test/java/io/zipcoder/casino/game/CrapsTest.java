@@ -327,6 +327,26 @@ public class CrapsTest {
     }
 
     @Test
+    public void checkLineBetPointOn2or3(){
+        testCraps.setComeBets(5,10);
+        testCraps.setDontComeBets(5, 20);
+        testCraps.setPassLine(30);
+        testCraps.setDontPassLine(50);
+
+        testCraps.setCurrentPoint(5);
+        testCraps.checkLineBetPointOn(5);
+        Integer expectedZero = 0;
+        Integer expectedWin = 570;
+        Integer actual5DontCome = testCraps.getDontComeBets(5);
+        Integer actualBalance = testPlayer.getPlayer().getBalance();
+
+        assertEquals(expectedWin, actualBalance);
+        assertEquals(expectedZero, actual5DontCome);
+        assertEquals(expectedZero, testCraps.getDontPassLine());
+
+    }
+
+    @Test
     public void isBrokeTest(){
         Boolean expectedBoolean = false;
 
@@ -347,8 +367,9 @@ public class CrapsTest {
 
     @Test
     public void exitTest(){
-        Boolean expected = true;
+        Boolean expected = false;
 
+        testCraps.exit();
         Boolean actual = testCraps.getIsStillPlaying();
 
         assertEquals(expected, actual);

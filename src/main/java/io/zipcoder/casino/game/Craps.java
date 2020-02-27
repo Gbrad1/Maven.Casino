@@ -63,7 +63,9 @@ public class Craps{
         while (true) {
             if (!isStillPlaying || (isBroke() && !isPointOn)) {
                 returnBets(isPointOn);
-                console.println("Thank You for playig :D");
+                console.println("You were refunded : " + refund + ".\n" +
+                        "Your balance is : " + crapsPlayer.getPlayer().getBalance()+ ".\n" +
+                        "Thank You for playing :D");
                 break;
             }
             if (!isPointOn) {
