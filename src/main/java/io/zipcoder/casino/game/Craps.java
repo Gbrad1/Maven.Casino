@@ -62,7 +62,7 @@ public class Craps{
         }
         bet = console.getIntegerInput("Enter how much to wager");
         while(bet > crapsPlayer.getPlayer().getBalance() || bet < 1){
-            bet = console.getIntegerInput("Enter how much to wager");
+            bet = console.getIntegerInput("Enter a valid wager");
         }
         this.bet = bet;
     }
