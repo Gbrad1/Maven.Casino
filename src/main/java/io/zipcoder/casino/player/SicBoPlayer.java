@@ -1,12 +1,11 @@
 package io.zipcoder.casino.player;
 
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class SicBoPlayer extends DicePlayer{
 
-    private Integer score;
     private Player user;
+    Integer[] triple = new Integer[3];
 
     public SicBoPlayer(Player user) {
         this.user = user;
@@ -22,8 +21,6 @@ public class SicBoPlayer extends DicePlayer{
 
     @Override
     public int rollDice() {
-        Integer[] triple = new Integer[3];
-        boolean isTriple = false;
         int sum = 0;
         ThreadLocalRandom random = ThreadLocalRandom.current();
 
@@ -33,6 +30,13 @@ public class SicBoPlayer extends DicePlayer{
             sum += num;
         }
         return sum;
+    }
+
+    public boolean isTriple() {
+        System.out.println("Dice 1 is " + triple[0] +
+                            " Dice 2 is " + triple[1] + "Dice 3 is " + triple[2]);
+
+        return triple[0].equals(triple[1]) && triple[1].equals(triple[2]);
     }
 
 

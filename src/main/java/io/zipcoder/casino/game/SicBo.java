@@ -54,6 +54,7 @@ public class SicBo implements Gambling {
                 break;
             case 5:
                 placeBet();
+                betTriple();
                 break;
             case 6:
                 Casino.menu();
@@ -125,6 +126,19 @@ public class SicBo implements Gambling {
         } else {
             user.getPlayer().setBalance(user.getPlayer().getBalance() - bid);
             System.out.println("You lost... " + bid);
+        }
+        play();
+    }
+
+    public void betTriple() {
+        System.out.println("You bet on ANY TRIPLE with $" + bid + "!");
+
+        if (user.isTriple()) {
+            user.getPlayer().setBalance(user.getPlayer().getBalance() + bid);
+            System.out.println("You Win!");
+
+        } else {
+            user.getPlayer().setBalance(user.getPlayer().getBalance() - bid);
         }
         play();
     }
