@@ -184,26 +184,6 @@ public class GoFishTest {
         Assert.assertFalse(goFishPlayer.getPlayerHand().contains(goFishDealer.getDealerHand()));
     }
 
-//    @Test
-//    public void checkStartingScoreTest() {
-//        Player player = new Player();
-//        GoFishDealer goFishDealer = new GoFishDealer();
-//        GoFishPlayer goFishPlayer = new GoFishPlayer(player);
-//        GoFish newGame = new GoFish(goFishPlayer, goFishDealer);
-//
-//        newGame.createDeck();
-//        newGame.shuffleDeck();
-//        newGame.setupPlayerHand();
-//        newGame.setupDealerHand();
-//
-//        Integer goFishPlayerScore = newGame.getPlayerScore();
-//        Integer goFishDealerScore = newGame.getDealerScore();
-//
-//        Assert.assertEquals(goFishPlayerScore, goFishDealerScore);
-//
-//        LOGGER.info("\n" + goFishPlayerScore + "\n" + goFishDealerScore);
-//    }
-
     @Test
     public void testTakingACardFromDealer() {
         Deck deck = new Deck();
