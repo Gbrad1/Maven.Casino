@@ -50,4 +50,20 @@ public class BlackjackDealer {
             return false;
 
     }
+
+    @Override
+    public String toString(){
+        String s = "Your cards are ";
+        for (Card c : hand.getHand()) {
+            s += c.toString() + "  ";
+        }
+        s += "and your score is " + getScore();
+        return s;
+    }
+
+    public String dealerShowCard() {
+        String s = "Dealer is showing: ";
+        s += hand.getHand().get(1);
+        return s;
+    }
 }
