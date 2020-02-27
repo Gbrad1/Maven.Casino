@@ -26,8 +26,6 @@ public class Blackjack {
         this.bet = 0;
         deck.createDeck();
         deck.shuffle();
-        setHandPlayer();
-        setDealerPlayer();
         this.stillPlaying = true;
     }
 
@@ -134,6 +132,8 @@ public class Blackjack {
         console.println("Welcome to Blackjack.\n");
 
         while (stillPlaying) {
+            setHandPlayer();
+            setDealerPlayer();
             input = console.getIntegerInput("Would you like to play or exit? \n1: Play a hand \n2: Exit the game\n");
             while (input != 1 && input != 2) {
                 input = console.getIntegerInput("Would you like to play or exit? \n1: Play a hand \n2: Exit the game\n");
@@ -164,6 +164,8 @@ public class Blackjack {
                     }
                     if (player.getScore() > 21) {
                         console.println("You busted!");
+                        player.getHand().clear();
+                        dealer.getHand().clear();
                         break;
                     }
                 }
@@ -172,17 +174,23 @@ public class Blackjack {
                     console.println(dealer.toString());
                     while (dealer.getScore() < 17){
                         drawCardDealer();
-                        dealer.toString();
+                        console.println(dealer.toString());
                     }
                     if (dealer.getScore() > player.getScore()) {
                         console.println("Dealer wins!");
+                        player.getHand().clear();
+                        dealer.getHand().clear();
                         break;
                     } else if (dealer.getScore() < player.getScore()) {
                         console.println("You win!");
                         getWinnings(bet);
+                        player.getHand().clear();
+                        dealer.getHand().clear();
                         break;
                     } else {
                         console.println("You pushed!");
+                        player.getHand().clear();
+                        dealer.getHand().clear();
                         break;
                     }
                 }
