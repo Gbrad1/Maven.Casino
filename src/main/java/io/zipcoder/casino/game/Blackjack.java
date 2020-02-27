@@ -161,14 +161,31 @@ public class Blackjack {
                     console.println(player.toString() + "\n");
                     if (player.getScore() < 21) {
                         makeDecision = console.getIntegerInput("What would you like to do? \n1: Hit \n2: Stay");
-                    } if (player.getScore() > 21) {
+                    }
+                    if (player.getScore() > 21) {
                         console.println("You busted!");
                         break;
                     }
                 }
-            }
-            if (makeDecision == 2) {
 
+                if (makeDecision == 2) {
+                    console.println(dealer.toString());
+                    while (dealer.getScore() < 17){
+                        drawCardDealer();
+                        dealer.toString();
+                    }
+                    if (dealer.getScore() > player.getScore()) {
+                        console.println("Dealer wins!");
+                        break;
+                    } else if (dealer.getScore() < player.getScore()) {
+                        console.println("You win!");
+                        getWinnings(bet);
+                        break;
+                    } else {
+                        console.println("You pushed!");
+                        break;
+                    }
+                }
             }
         }
     }
