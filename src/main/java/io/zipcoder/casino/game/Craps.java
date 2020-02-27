@@ -60,6 +60,7 @@ public class Craps{
     public void playeTurn(){
         while (true) {
             if (!isStillPlaying) {
+                console.println("Thank You for playig :D");
                 break;
             }
             if (!isPointOn) {
@@ -71,22 +72,24 @@ public class Craps{
     }
 
     public void getWager(){
-        if(crapsPlayer.getPlayer().getBalance() == 0){
-            exit();
-        }
-        bet = console.getIntegerInput("Enter how much to wager");
-        while(bet > crapsPlayer.getPlayer().getBalance() || bet < 1){
-            bet = console.getIntegerInput("Enter a valid wager");
+        if(isBroke()){
+            bet = 0;
+            console.println("You're out of funds. Please roll");
+        }else {
+            while (bet >= crapsPlayer.getPlayer().getBalance() || bet < 1) {
+                bet = console.getIntegerInput("Enter a wager");
+            }
         }
     }
 
     public void getWager(String prompt){
-        if(crapsPlayer.getPlayer().getBalance() == 0){
-            exit();
-        }
-         bet = console.getIntegerInput(prompt);
-        while(bet > crapsPlayer.getPlayer().getBalance() || bet < 0){
-            bet = console.getIntegerInput(prompt);
+        if(isBroke()){
+            bet = 0;
+            console.println("You're out of funds. Please roll");
+        }else {
+            while (bet >= crapsPlayer.getPlayer().getBalance() || bet < 0) {
+                bet = console.getIntegerInput(prompt);
+            }
         }
     }
 
@@ -100,7 +103,7 @@ public class Craps{
 
     public void exit(){
         isStillPlaying = !isStillPlaying;
-        clearTable();
+        returnBets();
     }
 
     public void comeOutRoll(){
@@ -114,12 +117,10 @@ public class Craps{
             getWager();
             placeBet();
             setPassLine(bet);
-            updateTable();
         }else if(passLineDecision == 2){
             getWager();
             placeBet();
             setDontPassLine(bet);
-            updateTable();
         }else if(passLineDecision == 3){
             exit();
         }
@@ -131,6 +132,8 @@ public class Craps{
             setIsPointOn();
             setCurrentPoint(roll);
             playeTurn();
+        }else {
+            console.println("Thank You for playing :D");
         }
     }
 
@@ -142,12 +145,10 @@ public class Craps{
                 getWager();
                 placeBet();
                 setCome(bet);
-                updateTable();
             } else if (decision == 2) {
                 getWager();
                 placeBet();
                 setDontCome(bet);
-                updateTable();
             }else if (decision == 3){
                 makeFieldBet();
             }else {
@@ -202,6 +203,7 @@ public class Craps{
     public void checkSeven(Boolean crapOut){
         clearComeBets();
         if(crapOut){
+            setField(0);
             setDontCome(0);
             getWinnings(come*2);
             setCome(0);
@@ -261,8 +263,8 @@ public class Craps{
 
     public void clearComeBets(){
         for (int i = 4; i <= 6; i++) {
-            getWinnings(getDontComeBets(i));
-            getWinnings(getDontComeBets(i+4));
+            getWinnings(getDontComeBets(i)*2);
+            getWinnings(getDontComeBets(i+4)*2);
             comeBets.replace(i, 0);
             comeBets.replace(i+4, 0);
             dontComeBets.replace(i, 0);
@@ -378,14 +380,28 @@ public class Craps{
         isOnLine = !isOnLine;
     }
 
-    public void clearTable(){
-        if(!isPointOn){
-            getWinnings(passLine);
+    public Boolean isBroke(){
+        if(crapsPlayer.getPlayer().getBalance() == 0){
+            return true;
+        }else{
+            return false;
         }
+    }
+
+    public void returnBets(){
+        getWinnings(passLine);
         getWinnings(dontPassLine);
+        getWinnings(field);
         getWinnings(come);
         getWinnings(dontCome);
-        clearComeBets();
+        for (int i = 4; i <= 6; i++) {
+            getWinnings(getDontComeBets(i));
+            getWinnings(getDontComeBets(i+4));
+            comeBets.replace(i, 0);
+            comeBets.replace(i+4, 0);
+            dontComeBets.replace(i, 0);
+            dontComeBets.replace(i+4, 0);
+        }
     }
 
     public void updateTable(){
