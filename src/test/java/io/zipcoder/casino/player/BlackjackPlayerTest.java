@@ -47,7 +47,44 @@ public class BlackjackPlayerTest {
         Assert.assertEquals(expected, actual);
     }
 
-    @
+    @Test
+    public void getScore12Test() {
+        Card c1 = new Card("Hearts", 1);
+        Card c2 = new Card("Diamonds", 1);
+        blackjackPlayer.hit(c1);
+        blackjackPlayer.hit(c2);
+
+        Integer expected = 12;
+        Integer actual = blackjackPlayer.getScore();
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getScore14WithAceAsSecondCardTest() {
+        Card c1 = new Card("Hearts", 3);
+        Card c2 = new Card("Diamonds", 1);
+        blackjackPlayer.hit(c1);
+        blackjackPlayer.hit(c2);
+
+        Integer expected = 14;
+        Integer actual = blackjackPlayer.getScore();
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getScore14WithAceAsFirstCardTest() {
+        Card c1 = new Card("Hearts", 1);
+        Card c2 = new Card("Diamonds", 3);
+        blackjackPlayer.hit(c1);
+        blackjackPlayer.hit(c2);
+
+        Integer expected = 14;
+        Integer actual = blackjackPlayer.getScore();
+
+        Assert.assertEquals(expected, actual);
+    }
 
 }
 
