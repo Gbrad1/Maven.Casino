@@ -23,6 +23,9 @@ public class BlackjackDealer {
         if (getHand().size() == 2 && (getHand().get(0).getRank() == 1 && getHand().get(1).getRank() == 1)){
             return 12;
         }
+        else if (getHand().size() == 2 && getHand().get(0).getRank() == 1 && getHand().get(1).getRank() > 10) {
+            return 21;
+        }
         else if (getHand().size() == 2 && getHand().get(0).getRank() == 1){
             return 11 + getHand().get(1).getRank();
         }
