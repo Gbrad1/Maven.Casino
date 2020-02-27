@@ -19,6 +19,7 @@ public class Blackjack {
     private Boolean hit;
     Console console = new Console(System.in, System.out);
     private boolean stillPlaying;
+    Integer input;
 
     public Blackjack(BlackjackPlayer player, BlackjackDealer dealer) {
         this.player = player;
@@ -32,6 +33,7 @@ public class Blackjack {
         setHandPlayer();
         setDealerPlayer();
         this.stillPlaying = true;
+
     }
 
     public Deck getDeck() {
@@ -124,8 +126,17 @@ public class Blackjack {
     }
 
     public void play() {
-        while(stillPlaying) {
-            console.println("Welcome to Blackjak.");
+        while (stillPlaying) {
+            console.println("Welcome to Blackjack.");
+            input = console.getIntegerInput("Would you like to player or exit? \n1: Play a hand \n2: Exit the game");
+            while (input != 1 && input != 2) {
+                input = console.getIntegerInput("Would you like to player or exit? \n1: Play a hand \n2: Exit the game");
+            }
+            if (input == 1) {
+            }
+            if (input == 2) {
+                break;
+            }
             getWager();
             placeBet();
 
@@ -134,20 +145,7 @@ public class Blackjack {
         }
 
 
-        }
-
-
-
-    public void checkFirstHand() {
-        if (this.dealer.checkBlackjack() && this.player.checkBlackjack()) {
-            exit();
-        }
-        if (this.dealer.checkBlackjack() && !this.player.checkBlackjack()) {
-            exit();
-        }
-        if (!this.dealer.checkBlackjack() && this.player.checkBlackjack()) {
-                exit();
-
-            }
-        }
     }
+
+
+}
