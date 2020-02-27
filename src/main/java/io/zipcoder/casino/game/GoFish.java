@@ -4,7 +4,6 @@ import io.zipcoder.casino.card.Card;
 import io.zipcoder.casino.card.Deck;
 import io.zipcoder.casino.dealer.GoFishDealer;
 import io.zipcoder.casino.player.GoFishPlayer;
-import io.zipcoder.casino.player.Player;
 import io.zipcoder.casino.utilities.Console;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -124,6 +123,19 @@ public class GoFish {
         Collections.sort(goFishDealer.getDealerHand());
     }
 
+    public boolean checkWinCondition () {
+        if ((goFishPlayer.getPlayerScore() + goFishDealer.getDealerScore()) == 13) {}
+        return true;
+    }
+
+    public void determineWinner() {
+        if (goFishPlayer.getPlayerScore() > goFishDealer.getDealerScore()) {
+            System.out.println("You beat the dealer!");
+        } else {
+            System.out.println("You have been defeated.");
+        }
+    }
+
     public void playerTurn() {
         String request = console.getStringInput("What number would like to ask your opponent for?");
         Integer requestAsInteger = parseInt(request);
@@ -139,8 +151,10 @@ public class GoFish {
             sortDealerHand();
             goFishPlayer.addBook();
             printPlayerHand();
-        } else {
-            goFishPlayer.drawCard(drawCardPlayer());
+        } else if (!checkDealerHand(requestAsInteger)) {
+            if (!deck.isEmpty()){
+                goFishPlayer.drawCard(drawCardPlayer());
+            }
             System.out.println("\n\"Go Fish!\" - evil NPC\n");
             System.out.println("You draw a card and add it to you hand.");
             sortPlayerHand();
@@ -166,8 +180,10 @@ public class GoFish {
             sortDealerHand();
             goFishDealer.addBook();
             printPlayerHand();
-        } else {
-            goFishDealer.drawCard(drawCardDealer());
+        } else if (!checkPlayerHand(dealerPick)){
+            if (!deck.isEmpty()){
+                goFishDealer.drawCard(drawCardDealer());
+            }
             System.out.println("Your opponent did not guess correctly.");
             sortPlayerHand();
             sortDealerHand();
@@ -189,11 +205,11 @@ public class GoFish {
 
         createDeck();
         shuffleDeck();
-
         setupPlayerHand();
         setupDealerHand();
         sortPlayerHand();
         sortDealerHand();
+        System.out.println("Hello! please use the following for face cards.\nJack(11)\nQueen(12)\nKing(13)");
         System.out.println("\n");
         System.out.println("Here is your starting hand.\n");
         printPlayerHand();
@@ -204,6 +220,10 @@ public class GoFish {
             System.out.println("====================================");
             System.out.println("Dealer Score: " + goFishDealer.getDealerScore() + "\nPlayer Score: " + goFishPlayer.getPlayerScore());
             System.out.println("====================================");
+            if (deck.isEmpty()) {
+                determineWinner();
+            }
+
         }
     }
 }
