@@ -1,5 +1,4 @@
 package io.zipcoder.casino.game;
-
 import io.zipcoder.casino.card.Card;
 import io.zipcoder.casino.card.Deck;
 import io.zipcoder.casino.dealer.BlackjackDealer;
@@ -8,7 +7,6 @@ import io.zipcoder.casino.player.Player;
 import io.zipcoder.casino.utilities.Console;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 
 public class Blackjack {
@@ -20,6 +18,7 @@ public class Blackjack {
     private Integer bet;
     private boolean stillPlaying;
     Integer input;
+    Integer makeDecision;
 
     public Blackjack(BlackjackPlayer player, BlackjackDealer dealer) {
         this.player = player;
@@ -149,13 +148,28 @@ public class Blackjack {
             getWager();
             placeBet();
 
-            console.println(player.toString() + "\n");
             console.println(dealer.dealerShowCard() + "\n");
+            console.println(player.toString() + "\n");
             if (checkBlackjack()) {
                 break;
             }
 
-            
+            makeDecision = console.getIntegerInput("What would you like to do? \n1: Hit \n2: Stay");
+            while (player.getScore() < 21) {
+                if (makeDecision == 1) {
+                    drawCardPlayer();
+                    console.println(player.toString() + "\n");
+                    if (player.getScore() < 21) {
+                        makeDecision = console.getIntegerInput("What would you like to do? \n1: Hit \n2: Stay");
+                    } if (player.getScore() > 21) {
+                        console.println("You busted!");
+                        break;
+                    }
+                }
+            }
+            if (makeDecision == 2) {
+
+            }
         }
     }
 }
