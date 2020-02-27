@@ -17,8 +17,8 @@ public class Blackjack {
     private Integer bet;
     private Boolean stay;
     private Boolean hit;
-    private
     Console console = new Console(System.in, System.out);
+    private boolean stillPlaying;
 
     public Blackjack(BlackjackPlayer player, BlackjackDealer dealer) {
         this.player = player;
@@ -26,6 +26,12 @@ public class Blackjack {
         this.bet = 0;
         this.hit = hit;
         this.stay = stay;
+        this.deck = deck;
+        deck.createDeck();
+        deck.shuffle();
+        setHandPlayer();
+        setDealerPlayer();
+        this.stillPlaying = true;
     }
 
     public Deck getDeck() {
@@ -118,18 +124,30 @@ public class Blackjack {
     }
 
     public void play() {
-        Player player = new Player();
-        BlackjackPlayer blackjackPlayer = new BlackjackPlayer(player);
-        BlackjackDealer blackjackDealer = new BlackjackDealer();
-        Blackjack newGame = new Blackjack(blackjackPlayer, blackjackDealer);
+        while(stillPlaying) {
+            console.println("Welcome to Blackjak.");
+            getWager();
+            placeBet();
 
-        newGame.createDeck();
-        newGame.shuffleDeck();
-        newGame.setHandPlayer();
-        newGame.setDealerPlayer();
+            player.toString();
+            player.getHand().toString();
+        }
 
-        System.out.println("Welcome to Blackjack");
+
+        }
+
+
+
+    public void checkFirstHand() {
+        if (this.dealer.checkBlackjack() && this.player.checkBlackjack()) {
+            exit();
+        }
+        if (this.dealer.checkBlackjack() && !this.player.checkBlackjack()) {
+            exit();
+        }
+        if (!this.dealer.checkBlackjack() && this.player.checkBlackjack()) {
+                exit();
+
+            }
+        }
     }
-
-
-}
