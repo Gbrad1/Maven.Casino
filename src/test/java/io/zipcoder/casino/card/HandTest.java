@@ -29,23 +29,4 @@ public class HandTest {
         hand.setHand(expected);
         Assert.assertEquals(expected, hand.getHand());
     }
-
-    @Test
-    public void sortHandTest() {
-        Hand hand = new Hand();
-        Player player = new Player();
-        GoFishPlayer goFishPlayer = new GoFishPlayer(player);
-        GoFishDealer goFishDealer = new GoFishDealer();
-        GoFish currentGame = new GoFish(goFishPlayer, goFishDealer);
-
-        currentGame.createDeck();
-        currentGame.shuffleDeck();
-        currentGame.setupPlayerHand();
-        hand.setHand(goFishPlayer.getPlayerHand());
-        hand.sortHand();
-        currentGame.printPlayerHand();
-
-        goFishPlayer.getPlayerHand().get(0);
-        goFishPlayer.getPlayerHand().get(1);
-    }
 }
