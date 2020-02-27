@@ -140,7 +140,7 @@ public class BlackjackPlayerTest {
 
     @Test
     public void checkForBlackjackWithJackTest() {
-        Card c1 = new Card("Hearts", 1);
+        Card c1 = new Card("Clubs", 1);
         Card c2 = new Card("Diamonds", 11);
         blackjackPlayer.hit(c1);
         blackjackPlayer.hit(c2);
@@ -166,8 +166,8 @@ public class BlackjackPlayerTest {
 
     @Test
     public void checkForBlackjackWithKingTest() {
-        Card c1 = new Card("Hearts", 1);
-        Card c2 = new Card("Diamonds", 13);
+        Card c1 = new Card("Spades", 1);
+        Card c2 = new Card("Clubs", 13);
         blackjackPlayer.hit(c1);
         blackjackPlayer.hit(c2);
 
@@ -177,6 +177,13 @@ public class BlackjackPlayerTest {
         Assert.assertEquals(expected, actual);
     }
 
+    @Test
+    public void checkForBlackjackUsingMethodTest() {
+        Card c1 = new Card("Spades", 1);
+        Card c2 = new Card("Clubs", 13);
+        blackjackPlayer.hit(c1);
+        blackjackPlayer.hit(c2);
+
+        Assert.assertTrue(blackjackPlayer.checkBlackjack());
+    }
 }
-
-
