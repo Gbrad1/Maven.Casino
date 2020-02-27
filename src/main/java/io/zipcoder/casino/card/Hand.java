@@ -1,6 +1,7 @@
 package io.zipcoder.casino.card;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Hand {
     private ArrayList<Card> hand;
@@ -34,9 +35,8 @@ public class Hand {
         return hand.contains(c);
     }
 
-     public int getSize() {
-         return hand.size();
-        }
+    public int getSize() {
+        return hand.size();
     }
-
+}
 
