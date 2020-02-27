@@ -46,6 +46,10 @@ public class Casino {
         else if (loginOrCreatePlayer == 2){
             logIn();
         }
+        else {
+            System.out.println("\nPlease Enter 1 or 2.\n");
+            intro();
+        }
     }
 
     public static void createAccount(){
