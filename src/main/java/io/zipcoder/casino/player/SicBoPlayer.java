@@ -44,11 +44,9 @@ public class SicBoPlayer extends DicePlayer{
         return triple.get(0) == triple.get(1) && triple.get(1) == triple.get(2);
     }
 
+
+
     public void clearTriple() {
         triple.clear();
     }
-
-
-
-
 }

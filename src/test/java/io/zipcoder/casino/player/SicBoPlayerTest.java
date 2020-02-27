@@ -1,16 +1,21 @@
 package io.zipcoder.casino.player;
 
+import io.zipcoder.casino.game.SicBo;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 public class SicBoPlayerTest {
+
+    SicBoPlayer user = new SicBoPlayer();
+    SicBo sicboGame = new SicBo(user);
 
 
     @Test
     public void getPlayerTest() {
-        SicBoPlayer sicBoPlayer = new SicBoPlayer();
         Player expected = new Player();
-        Player actual = sicBoPlayer.getPlayer();
+        Player actual = user.getPlayer();
         Assert.assertEquals(expected, actual);
     }
 
@@ -21,9 +26,22 @@ public class SicBoPlayerTest {
     }
 
     @Test
-    public void isTripleTest() {
-        SicBoPlayer sicBoPlayer = new SicBoPlayer();
+    public void isTripleEqualTest() {
+        user.rollDice();
+        Assert.assertFalse(user.isTriple());
+    }
 
-        //Assert.assertEquals();
+    @Test
+    public void isTripleNotEqualTest() {
+        user.rollDice();
+        Assert.assertTrue(user.isTriple());
+    }
+
+    @Test
+    public void clearTripleTest() {
+        user.rollDice();
+        user.isTriple();
+        user.clearTriple();
+
     }
 }

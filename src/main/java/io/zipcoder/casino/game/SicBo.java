@@ -19,7 +19,6 @@ public class SicBo implements Gambling {
     }
 
 
-
     public int placeBet() {
         bid = console.getIntegerInput("Enter a bet amount");
         while (bid > user.getPlayer().getBalance() && bid > 0) {
@@ -138,7 +137,7 @@ public class SicBo implements Gambling {
 
     public void betTriple() {
         System.out.println("You bet on ANY TRIPLE with $" + bid + "!");
-        Integer roll = newRoll();
+        newRoll();
 
         if (user.isTriple()) {
             user.getPlayer().setBalance(user.getPlayer().getBalance() + bid);

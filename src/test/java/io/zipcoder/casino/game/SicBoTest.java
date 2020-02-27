@@ -12,36 +12,39 @@ public class SicBoTest {
 
 
     @Test
-    public void placeBet() {
+    public void placeBetTest() {
         Console console = new Console(System.in, System.out);
         Assert.assertTrue(sicBoGame.placeBet() > 0 && sicBoGame.placeBet() <= user.getPlayer().getBalance());
     }
 
     @Test
-    public void play() {
+    public void playTest() {
     }
 
     @Test
-    public void newRoll() {
+    public void newRollTest() {
+
     }
 
     @Test
-    public void betSmall() {
+    public void betSmallTest() {
     }
 
     @Test
-    public void betBig() {
+    public void betBigTest() {
     }
 
     @Test
-    public void betEven() {
+    public void betEvenTest() {
     }
 
     @Test
-    public void betOdd() {
+    public void betOddTest() {
     }
 
     @Test
-    public void betTriple() {
+    public void betTripleTest() {
     }
+
+
 }
