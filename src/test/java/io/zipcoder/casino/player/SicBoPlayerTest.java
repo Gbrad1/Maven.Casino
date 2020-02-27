@@ -5,12 +5,14 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class SicBoPlayerTest {
 
     SicBoPlayer user = new SicBoPlayer();
     SicBo sicboGame = new SicBo(user);
-
+    ArrayList<Integer> triple = new ArrayList<>();
+    ThreadLocalRandom random = ThreadLocalRandom.current();
 
     @Test
     public void getPlayerTest() {
@@ -27,21 +29,23 @@ public class SicBoPlayerTest {
 
     @Test
     public void isTripleEqualTest() {
+        for (int i = 0; i < 3; i++) {
+            int num = random.nextInt(6) + 1;
+            triple.add(num);
+        }
         user.rollDice();
-        Assert.assertFalse(user.isTriple());
+        boolean expected = triple.get(0) == triple.get(1) && triple.get(1) == triple.get(2);
+        Assert.assertEquals(expected,user.isTriple());
     }
 
-    @Test
-    public void isTripleNotEqualTest() {
-        user.rollDice();
-        Assert.assertTrue(user.isTriple());
-    }
 
     @Test
     public void clearTripleTest() {
-        user.rollDice();
-        user.isTriple();
-        user.clearTriple();
-
+        for (int i = 0; i < 3; i++) {
+            int num = random.nextInt(6) + 1;
+            triple.add(num);
+        }
+        triple.clear();
+        Assert.assertTrue(triple.isEmpty());
     }
 }
