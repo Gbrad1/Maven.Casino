@@ -7,10 +7,9 @@ import io.zipcoder.casino.player.Player;
 import io.zipcoder.casino.utilities.Console;
 
 import java.util.ArrayList;
-<<<<<<< HEAD
-=======
+
 import java.util.Scanner;
->>>>>>> 43ebb870dc096875ef696a2ee99d8ff5fc33a05f
+
 
 
 public class Blackjack {
@@ -100,7 +99,4 @@ public class Blackjack {
         System.out.println("Welcome to Blackjack");
     }
 
-    public ArrayList<Card> getHandPlayer() {
-        return player.getHand();
-    }
 }
