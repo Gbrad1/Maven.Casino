@@ -1,6 +1,7 @@
 package io.zipcoder.casino.game;
 
 import io.zipcoder.casino.Casino;
+import io.zipcoder.casino.card.SicBoTable;
 import io.zipcoder.casino.player.SicBoPlayer;
 import io.zipcoder.casino.utilities.Console;
 
@@ -9,7 +10,6 @@ public class SicBo implements Gambling {
 
     private SicBoPlayer user;
     private Console console = new Console(System.in, System.out);
-    private Integer input;
     private Integer bid;
 
 
@@ -27,9 +27,10 @@ public class SicBo implements Gambling {
     }
 
     public void play() {
-        input = console.getIntegerInput("\nWhat would you like to bet on?" +
-                                                "\n1: SMALL\n2: BIG\n3: EVEN\n4: ODD\n5: ANY TRIPLE\n" +
-                                                "6: EXIT BACK TO MAIN MENU");
+        SicBoTable sicBoTable = new SicBoTable();
+        Integer input = console.getIntegerInput("\nWhat would you like to bet on?" +
+                "\n1: SMALL\n2: BIG\n3: EVEN\n4: ODD\n5: ANY TRIPLE\n" +
+                "6: EXIT BACK TO MAIN MENU");
 
 
 

@@ -12,17 +12,30 @@ public class SicBoPlayer extends DicePlayer{
         this.user = user;
     }
 
+    public SicBoPlayer() {
+
+    }
+
     public Player getPlayer() {
         return user;
     }
 
     @Override
     public int rollDice() {
+        Integer[] triple = new Integer[3];
+        boolean isTriple = false;
         int sum = 0;
         ThreadLocalRandom random = ThreadLocalRandom.current();
+
         for (int i = 0; i < 3; i++) {
-            sum += random.nextInt(6) + 1;
+            Integer num = random.nextInt(6) + 1;
+            triple[i] = num;
+            sum += num;
         }
         return sum;
     }
+
+
+
+
 }
