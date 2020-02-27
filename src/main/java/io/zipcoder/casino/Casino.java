@@ -1,18 +1,18 @@
 package io.zipcoder.casino;
 
 
+import io.zipcoder.casino.card.CrapsTable;
 import io.zipcoder.casino.card.SicBoTable;
 import io.zipcoder.casino.dealer.BlackjackDealer;
 import io.zipcoder.casino.dealer.GoFishDealer;
 import io.zipcoder.casino.game.Blackjack;
+import io.zipcoder.casino.game.Craps;
 import io.zipcoder.casino.game.SicBo;
 import io.zipcoder.casino.game.GoFish;
-import io.zipcoder.casino.player.BlackjackPlayer;
-import io.zipcoder.casino.player.GoFishPlayer;
-import io.zipcoder.casino.player.Multiplayer;
-import io.zipcoder.casino.player.Player;
-import io.zipcoder.casino.player.SicBoPlayer;
+import io.zipcoder.casino.player.*;
 import io.zipcoder.casino.utilities.Console;
+
+import java.lang.annotation.Target;
 
 public class Casino {
 
@@ -25,7 +25,7 @@ public class Casino {
                 "██║    ██║██╔════╝██║     ██╔════╝██╔═══██╗████╗ ████║██╔════╝    ╚══██╔══╝██╔═══██╗    ╚══███╔╝██║██╔══██╗    ██╔════╝██╔═══██╗██╔══██╗██╔════╝\n" +
                 "██║ █╗ ██║█████╗  ██║     ██║     ██║   ██║██╔████╔██║█████╗         ██║   ██║   ██║      ███╔╝ ██║██████╔╝    ██║     ██║   ██║██║  ██║█████╗  \n" +
                 "██║███╗██║██╔══╝  ██║     ██║     ██║   ██║██║╚██╔╝██║██╔══╝         ██║   ██║   ██║     ███╔╝  ██║██╔═══╝     ██║     ██║   ██║██║  ██║██╔══╝  \n" +
-                "╚███╔███╔╝███████╗███████╗╚██████╗╚██████╔╝██║ ╚═╝ ██║███████╗       ██║   ╚██████╔╝    ███████╗██║██║         ╚██████╗╚██████╔╝██████╔╝███████╗\n" +
+                "╚██22█╔███╔╝███████╗███████╗╚██████╗╚██████╔╝██║ ╚═╝ ██║███████╗       ██║   ╚██████╔╝    ███████╗██║██║         ╚██████╗╚██████╔╝██████╔╝███████╗\n" +
                 " ╚══╝╚══╝ ╚══════╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝       ╚═╝    ╚═════╝     ╚══════╝╚═╝╚═╝          ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝\n" +
                 "                                                                                                                                                \n" +
                 " ██████╗ █████╗ ███████╗██╗███╗   ██╗ ██████╗ ██╗     ██╗██████╗  ██╗     █████╗ ███╗   ██╗██████╗      ██████╗ ██╗   ██╗███████╗██████╗ ██╗    \n" +
@@ -90,7 +90,7 @@ public class Casino {
                     "\n7 to leave the casino");
             switch (choice) {
                 case 1:
-                    playBlackjackIntro();
+                    playBlackjack();
                     break;
                 case 2:
                     playGoFish();
@@ -120,22 +120,21 @@ public class Casino {
     }
 
 
-    public static void playBlackjackIntro(){
-        Integer bid = console.getIntegerInput("Enter a bid amount of 5, 10, or 15.");
-        if (bid == 5){
-            playBlackjack(5);
-        }
-        else if (bid == 10){
-            playBlackjack(10);
-        }
-        else if (bid == 15){
-            playBlackjack(15);
-        }
-    }
+//    public static void playBlackjackIntro(){
+//        Integer bid = console.getIntegerInput("Enter a bid amount of 5, 10, or 15.");
+//        if (bid == 5){
+//            playBlackjack(5);
+//        }
+//        else if (bid == 10){
+//            playBlackjack(10);
+//        }
+//        else if (bid == 15){
+//            playBlackjack(15);
+//        }
+//    }
 
-    public static void playBlackjack(int bid){
+    public static void playBlackjack(){
         Blackjack bjGame = new Blackjack(new BlackjackPlayer(user), new BlackjackDealer());
-        // store bid as "bid"
 
         bjGame.play();
 
@@ -158,6 +157,9 @@ public class Casino {
     }
 
     public static void playCraps(){
+        CrapsTable table = new CrapsTable();
+        Craps crapsTable = new Craps(new CrapsPlayer(user), table);
+        crapsTable.play();
         menu();
 
     }
