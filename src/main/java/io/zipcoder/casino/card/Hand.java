@@ -34,7 +34,7 @@ public class Hand {
         return hand.contains(c);
     }
 
-     public int getSize() {
+    public int getSize() {
          return hand.size();
         }
     }
