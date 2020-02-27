@@ -56,7 +56,7 @@ public class BlackjackPlayer {
     }
     @Override
     public String toString(){
-        String s = "You're cards are";
+        String s = "Your cards are";
         for (Card c : hand.getHand()) {
             s += c.toString() + "  ";
         }

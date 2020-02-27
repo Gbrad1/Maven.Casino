@@ -30,7 +30,4 @@ public class Player {
         return this.balance;
     }
 
-
-
-
 }
