@@ -85,26 +85,44 @@ public class GoFish {
         return goFishDealer.getDealerScore();
     }
 
+    public boolean checkPlayerHand(Integer a) {
+        for (Card c : goFishPlayer.getPlayerHand()) {
+            if (c.getRank().equals(a)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean checkDealerHand(Integer a) {
+        for (Card c : goFishDealer.getDealerHand()) {
+            if (c.getRank().equals(a)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void takeDealerCards(Integer cardRank) {
-        Iterator iterator = goFishDealer.getDealerHand().iterator();
         for (Card c : goFishDealer.getDealerHand()) {
             if (c.getRank().equals(cardRank)) {
-                goFishDealer.getDealerHand().removeAll(cardsToRemove);
+                cardsToRemove.add(c);
                 goFishPlayer.getPlayerHand().add(c);
             }
         }
         goFishDealer.getDealerHand().removeAll(cardsToRemove);
+        cardsToRemove.clear();
     }
 
     public void takePlayerCards(Integer cardRank) {
-        Iterator iterator = goFishPlayer.getPlayerHand().iterator();
         for (Card c : goFishPlayer.getPlayerHand()) {
             if (c.getRank().equals(cardRank)) {
-                goFishPlayer.getPlayerHand().removeAll(cardsToRemove);
+                cardsToRemove.add(c);
                 goFishDealer.getDealerHand().add(c);
             }
         }
         goFishPlayer.getPlayerHand().removeAll(cardsToRemove);
+        cardsToRemove.clear();
     }
 
     public void sortPlayerHand() {
@@ -118,7 +136,9 @@ public class GoFish {
     public void playerTurn() {
         String request = console.getStringInput("What number would like to ask your opponent for?");
         Integer requestAsInteger = parseInt(request);
-        if (goFishDealer.getDealerHand().contains(requestAsInteger)) {
+
+        if (checkDealerHand(requestAsInteger)) {
+            System.out.println("Nice guess!");
             takeDealerCards(requestAsInteger);
             sortPlayerHand();
             sortDealerHand();
@@ -134,17 +154,17 @@ public class GoFish {
     }
 
     public Integer dealerChoiceToRequestFromPlayer() {
-        int dealerHandSize = goFishDealer.getDealerHand().size();
-        int random = (randomNumber.nextInt(dealerHandSize) + 1);
-        return random;
+        Random random = new Random();
+        return goFishDealer.getDealerHand().get(random.nextInt(goFishDealer.getDealerHand().size())).getRank();
     }
 
     public void dealerTurn () {
         System.out.println("=========================================\n");
         Integer dealerPick = dealerChoiceToRequestFromPlayer();
-        if (goFishPlayer.getPlayerHand().contains(dealerPick)) {
+        if (checkPlayerHand(dealerPick)) {
             takePlayerCards(dealerPick);
-            System.out.println("The rascal NPC stole from you. Your new hand is below.");
+            System.out.println("Picked " + dealerPick);
+            System.out.println("The rascal NPC stole from you. Your new hand is below.\n");
             sortPlayerHand();
             sortDealerHand();
             printPlayerHand();
@@ -154,8 +174,8 @@ public class GoFish {
             sortPlayerHand();
             sortDealerHand();
         }
-        Card toPrint = goFishDealer.getDealerHand().get(dealerPick);
-        System.out.println("Your opponent chose: " + toPrint + "\n");
+        //Card toPrint = goFishDealer.getDealerHand().get(dealerPick);
+        System.out.println("\nYour opponent chose: " + "toPrint" + "\n");
         System.out.println("=========================================\n");
     }
 

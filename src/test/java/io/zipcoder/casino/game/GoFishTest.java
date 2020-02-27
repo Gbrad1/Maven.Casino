@@ -26,12 +26,16 @@ public class GoFishTest {
 
     @Test
     public void drawCardTest() {
-        Deck deck = new Deck();
-        deck.createDeck();
-        deck.shuffle();
-        Card drawnCard = deck.popCard();
-        Integer actual = deck.getStack().size();
-        Integer expected = 51;
+        Player player = new Player();
+        GoFishDealer goFishDealer = new GoFishDealer();
+        GoFishPlayer goFishPlayer = new GoFishPlayer(player);
+        GoFish currentGame = new GoFish(goFishPlayer, goFishDealer);
+        currentGame.createDeck();
+        currentGame.shuffleDeck();
+        Card drawnCard = currentGame.drawCardPlayer();
+        goFishPlayer.getPlayerHand().add(drawnCard);
+        Integer actual = goFishPlayer.getPlayerHand().size();
+        Integer expected = 1;
 
         Assert.assertEquals(expected, actual);
         LOGGER.info("\n" + drawnCard);
@@ -290,7 +294,6 @@ public class GoFishTest {
         }
         Integer expected = 9;
         newGame.takePlayerCards(expected);
-        LOGGER.info("\n");
         newGame.printDealerHand();
         newGame.printPlayerHand();
 
@@ -299,4 +302,5 @@ public class GoFishTest {
 
         Assert.assertEquals(hand1, hand2);
     }
+
 }
