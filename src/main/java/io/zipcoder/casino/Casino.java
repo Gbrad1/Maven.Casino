@@ -46,6 +46,10 @@ public class Casino {
         else if (loginOrCreatePlayer == 2){
             logIn();
         }
+        else {
+            System.out.println("\nPlease Enter 1 or 2.\n");
+            intro();
+        }
     }
 
     public static void createAccount(){
@@ -119,20 +123,6 @@ public class Casino {
         System.exit(0);
     }
 
-
-//    public static void playBlackjackIntro(){
-//        Integer bid = console.getIntegerInput("Enter a bid amount of 5, 10, or 15.");
-//        if (bid == 5){
-//            playBlackjack(5);
-//        }
-//        else if (bid == 10){
-//            playBlackjack(10);
-//        }
-//        else if (bid == 15){
-//            playBlackjack(15);
-//        }
-//    }
-
     public static void playBlackjack(){
         Blackjack bjGame = new Blackjack(new BlackjackPlayer(user), new BlackjackDealer());
 
@@ -151,8 +141,6 @@ public class Casino {
     public static void playSicBo(){
         Console consoleSicBo = new Console(System.in, System.out);
         SicBo sicBoGame = new SicBo(new SicBoPlayer(user));
-        SicBoTable sicBoTable = new SicBoTable();
-        sicBoGame.placeBet();
         sicBoGame.play();
     }
 
