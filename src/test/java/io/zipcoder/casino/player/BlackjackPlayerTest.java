@@ -61,9 +61,35 @@ public class BlackjackPlayerTest {
     }
 
     @Test
-    public void getScore14WithAceAsSecondCardTest() {
-        Card c1 = new Card("Hearts", 3);
+    public void getScore16WithAceAsSecondCardTest() {
+        Card c1 = new Card("Hearts", 5);
         Card c2 = new Card("Diamonds", 1);
+        blackjackPlayer.hit(c1);
+        blackjackPlayer.hit(c2);
+
+        Integer expected = 16;
+        Integer actual = blackjackPlayer.getScore();
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getScore16WithAceAsFirstCardTest() {
+        Card c1 = new Card("Hearts", 1);
+        Card c2 = new Card("Diamonds", 5);
+        blackjackPlayer.hit(c1);
+        blackjackPlayer.hit(c2);
+
+        Integer expected = 16;
+        Integer actual = blackjackPlayer.getScore();
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getScoreWithJackTest() {
+        Card c1 = new Card("Hearts", 11);
+        Card c2 = new Card("Diamonds", 4);
         blackjackPlayer.hit(c1);
         blackjackPlayer.hit(c2);
 
@@ -74,13 +100,39 @@ public class BlackjackPlayerTest {
     }
 
     @Test
-    public void getScore14WithAceAsFirstCardTest() {
-        Card c1 = new Card("Hearts", 1);
-        Card c2 = new Card("Diamonds", 3);
+    public void getScoreWithQueenTest() {
+        Card c1 = new Card("Hearts", 12);
+        Card c2 = new Card("Diamonds", 4);
         blackjackPlayer.hit(c1);
         blackjackPlayer.hit(c2);
 
         Integer expected = 14;
+        Integer actual = blackjackPlayer.getScore();
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getScoreWithKingTest() {
+        Card c1 = new Card("Hearts", 13);
+        Card c2 = new Card("Diamonds", 4);
+        blackjackPlayer.hit(c1);
+        blackjackPlayer.hit(c2);
+
+        Integer expected = 14;
+        Integer actual = blackjackPlayer.getScore();
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getScoreWithNonFaceNonAceTest() {
+        Card c1 = new Card("Hearts", 5);
+        Card c2 = new Card("Diamonds", 4);
+        blackjackPlayer.hit(c1);
+        blackjackPlayer.hit(c2);
+
+        Integer expected = 9;
         Integer actual = blackjackPlayer.getScore();
 
         Assert.assertEquals(expected, actual);
