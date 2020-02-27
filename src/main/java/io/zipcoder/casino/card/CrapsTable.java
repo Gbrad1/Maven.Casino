@@ -105,7 +105,7 @@ public class CrapsTable{
         insertString = String.format("|   |___________________________________________|\n");
         crapsTable.append(insertString);
         //l120
-        insertString = String.format("| YOUR BALANCE:%5d  ROLL:%3d  YOUR BET:%5d |\n",balance, roll, pass);
+        insertString = String.format("| YOUR BALANCE:%5d  ROLL:%4d  YOUR BET:%5d |\n",balance, roll, pass);
         crapsTable.append(insertString);
         //l21
         insertString = String.format("|_______________________________________________|\n");

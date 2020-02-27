@@ -100,6 +100,7 @@ public class Craps{
 
     public void exit(){
         isStillPlaying = !isStillPlaying;
+        clearTable();
     }
 
     public void comeOutRoll(){
@@ -122,20 +123,21 @@ public class Craps{
         }else if(passLineDecision == 3){
             exit();
         }
-        makeFieldBet();
-        roll = crapsPlayer.rollDice();
-        payField(roll);
-        checkLineBetComeOut(roll);
-        setIsPointOn();
-        setCurrentPoint(roll);
-
-        playeTurn();
+        if(isStillPlaying) {
+            makeFieldBet();
+            roll = crapsPlayer.rollDice();
+            payField(roll);
+            checkLineBetComeOut(roll);
+            setIsPointOn();
+            setCurrentPoint(roll);
+            playeTurn();
+        }
     }
 
     public void decisionRoll(){
         updateTable();
-        Integer decision = getDecision();
-        while (decision != 4) {
+        while (true) {
+            Integer decision = getDecision();
             if (decision == 1) {
                 getWager();
                 placeBet();
@@ -148,6 +150,8 @@ public class Craps{
                 updateTable();
             }else if (decision == 3){
                 makeFieldBet();
+            }else {
+                break;
             }
         }
         roll = crapsPlayer.rollDice();
@@ -199,7 +203,8 @@ public class Craps{
         clearComeBets();
         if(crapOut){
             setDontCome(0);
-            getWinnings(come);
+            getWinnings(come*2);
+            setCome(0);
             setIsPointOn();
             setCurrentPoint(0);
         }else {
@@ -371,6 +376,16 @@ public class Craps{
 
     public void setIsOnLine(){
         isOnLine = !isOnLine;
+    }
+
+    public void clearTable(){
+        if(!isPointOn){
+            getWinnings(passLine);
+        }
+        getWinnings(dontPassLine);
+        getWinnings(come);
+        getWinnings(dontCome);
+        clearComeBets();
     }
 
     public void updateTable(){
