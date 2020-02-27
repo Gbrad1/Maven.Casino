@@ -26,15 +26,16 @@ public class SicBo implements Gambling {
     }
 
     public void play() {
-        input = console.getIntegerInput("What would you like to bet on? \n1: Big\n2: Small\n3: Even\n4: Odds\n5: Any Triple");
-
+        input = console.getIntegerInput("What would you like to bet on? " +
+                                        "\n1: SMALL\n2: BIG\n3: EVEN\n4: ODD\n5: ANY TRIPLE");
 
         switch (input)
         {
             case 1:
-                if (user.rollDice() > 10) placeBet();
+                betSmall();
                 break;
             case 2:
+                betBig();
                 break;
             case 3:
                 break;
@@ -45,14 +46,37 @@ public class SicBo implements Gambling {
         }
     }
 
-
-    public boolean bigWin() {
-        return user.rollDice() > 10;
+    public Integer newRoll() {
+        return user.rollDice();
     }
 
-    public boolean smallWin() {
-        return user.rollDice() <= 10;
+    public void betSmall() {
+        System.out.println("You bet on SMALL with $" + bid + "!");
+        Integer roll = newRoll();
+        System.out.println("The roll is " + roll + "!");
+        if (roll <= 10) {
+            user.getPlayer().setBalance(user.getPlayer().getBalance() + (bid * 2));
+            System.out.println("You Win!");
+        } else {
+            user.getPlayer().setBalance(user.getPlayer().getBalance() - bid);
+            System.out.println("You lost... please try again!");
+        }
     }
+
+    public void betBig() {
+        System.out.println("You bet on BIG with $" + bid + "!");
+        Integer roll = newRoll();
+        System.out.println("The roll is " + roll + "!");
+        if (roll > 10) {
+            user.getPlayer().setBalance(user.getPlayer().getBalance() + (bid * 2));
+            System.out.println("You Win!");
+        } else {
+            user.getPlayer().setBalance(user.getPlayer().getBalance() - bid);
+            System.out.println("You lost... please try again!");
+        }
+    }
+
+
 
     @Override
     public void getWinnings() {
