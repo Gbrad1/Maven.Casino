@@ -8,7 +8,6 @@ public class Deck {
 
     public Deck() {
         this.deck = new Stack<>();
-        createDeck();
     }
 
     public void createDeck() {
