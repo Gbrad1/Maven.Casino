@@ -60,7 +60,6 @@ public class Craps{
 
     public void playeTurn(){
         while (true) {
-            playeTurn();
             if (!isStillPlaying) {
                 break;
             }
