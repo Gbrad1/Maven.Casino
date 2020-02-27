@@ -11,6 +11,12 @@ import java.util.logging.Logger;
 
 public class GoFishTest {
 
+    Deck deck = new Deck();
+    Player player = new Player();
+    GoFishDealer goFishDealer = new GoFishDealer();
+    GoFishPlayer goFishPlayer = new GoFishPlayer(player);
+    GoFish currentGame = new GoFish(goFishPlayer, goFishDealer);
+
     private static final Logger LOGGER = Logger.getLogger(GoFishTest.class.getName());
 
     @Test
@@ -24,10 +30,6 @@ public class GoFishTest {
 
     @Test
     public void drawCardTest() {
-        Player player = new Player();
-        GoFishDealer goFishDealer = new GoFishDealer();
-        GoFishPlayer goFishPlayer = new GoFishPlayer(player);
-        GoFish currentGame = new GoFish(goFishPlayer, goFishDealer);
         currentGame.createDeck();
         currentGame.shuffleDeck();
         Card drawnCard = currentGame.drawCardPlayer();
@@ -41,15 +43,11 @@ public class GoFishTest {
 
     @Test
     public void setupPlayerHand() {
-        Player player = new Player();
-        GoFishDealer goFishDealer = new GoFishDealer();
-        GoFishPlayer goFishPlayer = new GoFishPlayer(player);
-        GoFish newGame = new GoFish(goFishPlayer, goFishDealer);
-        newGame.createDeck();
-        newGame.shuffleDeck();
+        currentGame.createDeck();
+        currentGame.shuffleDeck();
 
-        newGame.setupPlayerHand();
-        newGame.setupDealerHand();
+        currentGame.setupPlayerHand();
+        currentGame.setupDealerHand();
 
         Integer goFishPlayerHandSize = goFishPlayer.getPlayerHand().size();
         Integer goFishDealerHandSize = goFishDealer.getDealerHand().size();
@@ -61,35 +59,25 @@ public class GoFishTest {
 
     @Test
     public void printPlayerHandTest() {
-        Player player = new Player();
-        GoFishDealer goFishDealer = new GoFishDealer();
-        GoFishPlayer goFishPlayer = new GoFishPlayer(player);
-        GoFish newGame = new GoFish(goFishPlayer, goFishDealer);
+        currentGame.createDeck();
+        currentGame.shuffleDeck();
 
-        newGame.createDeck();
-        newGame.shuffleDeck();
+        currentGame.setupPlayerHand();
+        currentGame.setupDealerHand();
 
-        newGame.setupPlayerHand();
-        newGame.setupDealerHand();
-
-        newGame.printPlayerHand();
+        currentGame.printPlayerHand();
     }
 
     @Test
     public void drawCardPlayerTest() {
-        Player player = new Player();
-        GoFishDealer goFishDealer = new GoFishDealer();
-        GoFishPlayer goFishPlayer = new GoFishPlayer(player);
-        GoFish newGame = new GoFish(goFishPlayer, goFishDealer);
+        currentGame.createDeck();
+        currentGame.shuffleDeck();
+        currentGame.setupPlayerHand();
 
-        newGame.createDeck();
-        newGame.shuffleDeck();
-        newGame.setupPlayerHand();
-
-        Card card = newGame.drawCardPlayer();
+        Card card = currentGame.drawCardPlayer();
         goFishPlayer.drawCard(card);
 
-        newGame.printPlayerHand();
+        currentGame.printPlayerHand();
 
         Integer actual = goFishPlayer.getPlayerHand().size();
         Integer expected = 6;
@@ -99,19 +87,14 @@ public class GoFishTest {
 
     @Test
     public void drawCardDealerTest() {
-        Player player = new Player();
-        GoFishDealer goFishDealer = new GoFishDealer();
-        GoFishPlayer goFishPlayer = new GoFishPlayer(player);
-        GoFish newGame = new GoFish(goFishPlayer, goFishDealer);
+        currentGame.createDeck();
+        currentGame.shuffleDeck();
+        currentGame.setupDealerHand();
 
-        newGame.createDeck();
-        newGame.shuffleDeck();
-        newGame.setupDealerHand();
-
-        Card card = newGame.drawCardDealer();
+        Card card = currentGame.drawCardDealer();
         goFishDealer.drawCard(card);
 
-        newGame.printDealerHand();
+        currentGame.printDealerHand();
 
         Integer actual = goFishDealer.getDealerHand().size();
         Integer expected = 6;
@@ -121,21 +104,16 @@ public class GoFishTest {
 
     @Test
     public void drawMoreThanOneCardForPlayerTest() {
-        Player player = new Player();
-        GoFishDealer goFishDealer = new GoFishDealer();
-        GoFishPlayer goFishPlayer = new GoFishPlayer(player);
-        GoFish newGame = new GoFish(goFishPlayer, goFishDealer);
+        currentGame.createDeck();
+        currentGame.shuffleDeck();
+        currentGame.setupPlayerHand();
 
-        newGame.createDeck();
-        newGame.shuffleDeck();
-        newGame.setupPlayerHand();
-
-        Card c = newGame.drawCardPlayer();
-        Card c2 = newGame.drawCardPlayer();
+        Card c = currentGame.drawCardPlayer();
+        Card c2 = currentGame.drawCardPlayer();
         goFishPlayer.drawCard(c);
         goFishPlayer.drawCard(c2);
 
-        newGame.printPlayerHand();
+        currentGame.printPlayerHand();
 
         Integer actual = goFishPlayer.getPlayerHand().size();
         Integer expected = 7;
@@ -145,16 +123,11 @@ public class GoFishTest {
 
     @Test
     public void setupHandForDealerTest() {
-        Player player = new Player();
-        GoFishDealer goFishDealer = new GoFishDealer();
-        GoFishPlayer goFishPlayer = new GoFishPlayer(player);
-        GoFish newGame = new GoFish(goFishPlayer, goFishDealer);
+        currentGame.createDeck();
+        currentGame.shuffleDeck();
+        currentGame.setupDealerHand();
 
-        newGame.createDeck();
-        newGame.shuffleDeck();
-        newGame.setupDealerHand();
-
-        newGame.printDealerHand();
+        currentGame.printDealerHand();
 
         Integer actual = goFishDealer.getDealerHand().size();
         Integer expected = 5;
@@ -164,21 +137,16 @@ public class GoFishTest {
 
     @Test
     public void compareHandsTest() {
-        Player player = new Player();
-        GoFishDealer goFishDealer = new GoFishDealer();
-        GoFishPlayer goFishPlayer = new GoFishPlayer(player);
-        GoFish newGame = new GoFish(goFishPlayer, goFishDealer);
-
-        newGame.createDeck();
-        newGame.shuffleDeck();
-        newGame.setupPlayerHand();
-        newGame.setupDealerHand();
+        currentGame.createDeck();
+        currentGame.shuffleDeck();
+        currentGame.setupPlayerHand();
+        currentGame.setupDealerHand();
 
         Integer playerHandSize = goFishPlayer.getPlayerHand().size();
         Integer dealerHandSize = goFishDealer.getDealerHand().size();
 
-        newGame.printPlayerHand();
-        newGame.printDealerHand();
+        currentGame.printPlayerHand();
+        currentGame.printDealerHand();
 
         Assert.assertEquals(playerHandSize, dealerHandSize);
         Assert.assertFalse(goFishPlayer.getPlayerHand().contains(goFishDealer.getDealerHand()));
@@ -186,12 +154,6 @@ public class GoFishTest {
 
     @Test
     public void testTakingACardFromDealer() {
-        Deck deck = new Deck();
-        Player player = new Player();
-        GoFishDealer goFishDealer = new GoFishDealer();
-        GoFishPlayer goFishPlayer = new GoFishPlayer(player);
-        GoFish newGame = new GoFish(goFishPlayer, goFishDealer);
-
         deck.createDeck();
         for (int i = 0; i < 12; i++) {
             goFishPlayer.drawCard(deck.popCard());
@@ -200,10 +162,10 @@ public class GoFishTest {
             goFishDealer.drawCard(deck.popCard());
         }
         Integer expected = 9;
-        newGame.takeDealerCards(expected);
+        currentGame.takeDealerCards(expected);
         LOGGER.info("\n");
-        newGame.printDealerHand();
-        newGame.printPlayerHand();
+        currentGame.printDealerHand();
+        currentGame.printPlayerHand();
 
         Integer hand1 = goFishDealer.getDealerHand().size();
         Integer hand2 = goFishDealer.getDealerHand().size();
@@ -213,12 +175,6 @@ public class GoFishTest {
 
     @Test
     public void testTakingACardFromPlayer() {
-        Deck deck = new Deck();
-        Player player = new Player();
-        GoFishDealer goFishDealer = new GoFishDealer();
-        GoFishPlayer goFishPlayer = new GoFishPlayer(player);
-        GoFish newGame = new GoFish(goFishPlayer, goFishDealer);
-
         deck.createDeck();
         for (int i = 0; i < 12; i++) {
             goFishPlayer.drawCard(deck.popCard());
@@ -227,9 +183,9 @@ public class GoFishTest {
             goFishDealer.drawCard(deck.popCard());
         }
         Integer expected = 9;
-        newGame.takePlayerCards(expected);
-        newGame.printDealerHand();
-        newGame.printPlayerHand();
+        currentGame.takePlayerCards(expected);
+        currentGame.printDealerHand();
+        currentGame.printPlayerHand();
 
         Integer hand1 = goFishDealer.getDealerHand().size();
         Integer hand2 = goFishDealer.getDealerHand().size();
@@ -237,4 +193,21 @@ public class GoFishTest {
         Assert.assertEquals(hand1, hand2);
     }
 
+    @Test
+    public void checkPlayerHandTest() {
+        currentGame.createDeck();
+        currentGame.setupPlayerHand();
+        currentGame.setupDealerHand();
+        Integer toTest = currentGame.dealerChoiceToRequestFromPlayer();
+        Assert.assertTrue(currentGame.checkPlayerHand(toTest) || !currentGame.checkPlayerHand(toTest));
+    }
+
+    @Test
+    public void checkDealerHandTest() {
+        currentGame.createDeck();
+        currentGame.setupPlayerHand();
+        currentGame.setupDealerHand();
+        Integer toTest = 5;
+        Assert.assertTrue(currentGame.checkDealerHand(toTest) || !currentGame.checkDealerHand(toTest));
+    }
 }
