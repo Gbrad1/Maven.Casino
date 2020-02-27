@@ -5,6 +5,7 @@ import io.zipcoder.casino.game.SicBo;
 public class SicBoTable {
 
     public SicBoTable() {
+        System.out.println("");
         System.out.println("|----------------------------------------------|");
         System.out.println("|                     SicBo                    |");
         System.out.println("|----------------------------------------------|");
