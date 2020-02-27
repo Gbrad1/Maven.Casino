@@ -75,7 +75,7 @@ public class Blackjack {
         if (player.getPlayer().getBalance() == 0) {
             //exit();
         }
-        bet = console.getIntegerInput("How much do you want to wager?");
+        bet = console.getIntegerInput("How much do you want to wager? You currently have $" + player.getPlayer().getBalance() + " dollars.");
         while (bet > player.getPlayer().getBalance() || bet < 1) {
             bet = console.getIntegerInput("Enter a valid wager.");
         }
