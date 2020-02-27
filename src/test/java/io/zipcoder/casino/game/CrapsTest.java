@@ -163,7 +163,7 @@ public class CrapsTest {
         testCraps.setDontPassLine(expectedBet);
         testCraps.updatePassLine("12");
 
-        Integer expectedBalance = 500;
+        Integer expectedBalance = 520;
         Integer actualBalance = testPlayer.getPlayer().getBalance();
 
         assertEquals(expectedBalance, actualBalance);
@@ -257,15 +257,33 @@ public class CrapsTest {
         testCraps.setComeBets(4,10);
         testCraps.setDontComeBets(5, 10);
 
-        Integer expectedBalance = 550;
-        testCraps.returnBets();
+        Boolean pointOn = true;
+        Integer expectedBalance = 540;
+        testCraps.returnBets(pointOn);
         Integer actualBalance = testPlayer.getPlayer().getBalance();
 
         assertEquals(expectedBalance, actualBalance);
     }
 
     @Test
-    public void checkLineBetPointOn(){
+    public void returnBetsTest2(){
+        testCraps.setCome(10);
+        testCraps.setDontCome(10);
+        testCraps.setPassLine(10);
+        testCraps.setDontPassLine(10);
+        testCraps.setComeBets(4,10);
+        testCraps.setDontComeBets(5, 10);
+
+        Boolean pointOn = false;
+        Integer expectedBalance = 530;
+        testCraps.returnBets(pointOn);
+        Integer actualBalance = testPlayer.getPlayer().getBalance();
+
+        assertEquals(expectedBalance, actualBalance);
+    }
+
+    @Test
+    public void checkLineBetPointOn7(){
         testCraps.setField(10);
         testCraps.setCome(10);
         testCraps.setDontCome(10);
@@ -286,5 +304,53 @@ public class CrapsTest {
         assertEquals(expectedBet, testCraps.getComeBets(5));
         assertEquals(expectedCrapOut, testCraps.getIsCrapOut());
         assertEquals(expectedBalance, actualBalance);
+    }
+
+    @Test
+    public void checkLineBetPointOnWin(){
+        testCraps.setComeBets(5,10);
+        testCraps.setDontComeBets(5, 20);
+        testCraps.setPassLine(30);
+        testCraps.setDontPassLine(50);
+
+        testCraps.setCurrentPoint(5);
+        testCraps.checkLineBetPointOn(5);
+        Integer expectedZero = 0;
+        Integer expectedWin = 570;
+        Integer actual5DontCome = testCraps.getDontComeBets(5);
+        Integer actualBalance = testPlayer.getPlayer().getBalance();
+
+        assertEquals(expectedWin, actualBalance);
+        assertEquals(expectedZero, actual5DontCome);
+        assertEquals(expectedZero, testCraps.getDontPassLine());
+
+    }
+
+    @Test
+    public void isBrokeTest(){
+        Boolean expectedBoolean = false;
+
+        Boolean actualBoolean = testCraps.isBroke();
+
+        assertEquals(expectedBoolean, actualBoolean);
+    }
+
+    @Test
+    public void isBrokeTest2(){
+        Boolean expectedBoolean = true;
+        testPlayer.getPlayer().setBalance(0);
+
+        Boolean actualBoolean = testCraps.isBroke();
+
+        assertEquals(expectedBoolean, actualBoolean);
+    }
+
+    @Test
+    public void exitTest(){
+        Boolean expected = true;
+
+        Boolean actual = testCraps.getIsStillPlaying();
+
+        assertEquals(expected, actual);
     }
 }
