@@ -5,8 +5,44 @@ import java.util.Map;
 public class CrapsTable{
 
     public String printTable(Integer balance, Integer pass, Integer dontPass, Integer field, Integer come, Integer dontCome,
-                             Map<Integer, Integer> box, Map<Integer, Integer> behindBox) {
-        //line1
+                             Map<Integer, Integer> box, Map<Integer, Integer> behindBox, Integer roll, Integer point) {
+        String four = " ";
+        String five = " ";
+        String six  = " ";
+        String eight = " ";
+        String nine = " ";
+        String ten = " ";
+
+        switch (point){
+            case 4:
+                four = "x";
+                break;
+            case 5:
+                five = "x";
+                break;
+            case 6:
+                six = "x";
+                break;
+            case 8:
+                eight = "x";
+                break;
+            case 9:
+                nine = "x";
+                break;
+            case 10:
+                ten = "x";
+                break;
+            case 0:
+                four = " ";
+                five = " ";
+                six  = " ";
+                eight = " ";
+                nine = " ";
+                ten = " ";
+                break;
+
+        }
+
         //l1
         StringBuilder crapsTable = new StringBuilder();
         String insertString = " ";
@@ -27,17 +63,18 @@ public class CrapsTable{
         }
         crapsTable.append("|\n");
         //l4
-        insertString = String.format("|   | COME |  _  |  _  |  _  |  _  |  _  |  __  |\n");
+        insertString = String.format("|   | COME |  %s  |  %s  |  %s  |  %s  |  %s  |   %s  |\n",
+                four, five, six, eight, nine, ten);
         crapsTable.append(insertString);
         //l5
-        insertString = String.format("|   | BAR  | |%d| | |%d| | |%d| | |%d| | |%d| | |%d| |\n",
+        insertString = String.format("|   | BAR  |  _  |  _  |  _  |  _  |  _  |  __  |\n",
                 4, 5, 6, 8, 9, 10);
         crapsTable.append(insertString);
         //l6
-        insertString = String.format("| P |  12  |  -  |  -  |  -  |  -  |  -  |  --  |\n");
+        insertString = String.format("| P |  12  | |%d| | |%d| | |%d| | |%d| | |%d| | |%d| |\n");
         crapsTable.append(insertString);
         //l7
-        insertString = String.format("| A |      |     |     |     |     |     |      |\n");
+        insertString = String.format("| A |      |  -  |  -  |  -  |  -  |  -  |  --  |\n");
         crapsTable.append(insertString);
         //l8
         insertString = String.format("| S |   %d  |  %d  |  %d  |  %d  |  %d  |  %d  |   %d  |\n",
@@ -68,13 +105,13 @@ public class CrapsTable{
         insertString = String.format("|   |___________________________________________|\n");
         crapsTable.append(insertString);
         //l120
-        insertString = String.format("|     P A S S  L I N E           YOUR BET:%5d |\n",pass);
+        insertString = String.format("| YOUR BALANCE:%5d  ROLL:%3d  YOUR BET:%5d |\n",balance, roll, pass);
         crapsTable.append(insertString);
         //l21
         insertString = String.format("|_______________________________________________|\n");
         crapsTable.append(insertString);
 
 
-        return null;
+        return crapsTable.toString();
     }
 }

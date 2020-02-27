@@ -1,5 +1,6 @@
 package io.zipcoder.casino.game;
 
+import io.zipcoder.casino.card.CrapsTable;
 import io.zipcoder.casino.player.CrapsPlayer;
 import io.zipcoder.casino.utilities.Console;
 
@@ -10,6 +11,8 @@ public class Craps{
     private CrapsPlayer crapsPlayer;
     private Map<Integer, Integer> comeBets;
     private Map<Integer, Integer> dontComeBets;
+    private CrapsTable table;
+    private Integer roll;
     private Integer bet;
     private Integer passLine;
     private Integer dontPassLine;
@@ -17,6 +20,7 @@ public class Craps{
     private Integer dontCome;
     private Integer field;
     private Integer currentPoint;
+    private Boolean isOnLine;
     private Boolean isPointOn;
     private Boolean isCrapOut;
     private Console console;
@@ -26,8 +30,12 @@ public class Craps{
         this.crapsPlayer = crapPlayer;
         this.comeBets = new HashMap<>(6);
         this.dontComeBets = new HashMap<>(6);
+        this.table = new CrapsTable();
+        this.isOnLine = false;
         this.isPointOn = false;
         this.isCrapOut = false;
+        this.passLine = 0;
+        this.dontPassLine = 0;
         this.bet = 0;
         this.passLine = 0;
         this.dontPassLine = 0;
@@ -91,16 +99,22 @@ public class Craps{
     }
 
     public void comeOutRoll(){
-        Integer passLineDecision = getPassLineDecision();
-        Integer roll;
+        Integer passLineDecision = 0;
+        updateTable();
+        if(!isOnLine) {
+            passLineDecision = getPassLineDecision();
+            setIsOnLine();
+        }
         if(passLineDecision == 1){
             getWager();
             placeBet();
             setPassLine(bet);
+            updateTable();
         }else if(passLineDecision == 2){
             getWager();
             placeBet();
             setDontPassLine(bet);
+            updateTable();
         }
         makeFieldBet();
         roll = crapsPlayer.rollDice();
@@ -108,22 +122,29 @@ public class Craps{
         checkLineBetComeOut(roll);
         setIsPointOn();
         setCurrentPoint(roll);
+
         playeTurn();
     }
 
     public void decisionRoll(){
+        updateTable();
         Integer decision = getDecision();
-        if(decision == 1){
-            getWager();
-            placeBet();
-            setCome(bet);
-        }else if(decision == 2){
-            getWager();
-            placeBet();
-            setDontCome(bet);
+        while (decision != 4) {
+            if (decision == 1) {
+                getWager();
+                placeBet();
+                setCome(bet);
+                updateTable();
+            } else if (decision == 2) {
+                getWager();
+                placeBet();
+                setDontCome(bet);
+                updateTable();
+            }else if (decision == 3){
+                makeFieldBet();
+            }
         }
-        makeFieldBet();
-        Integer roll = crapsPlayer.rollDice();
+        roll = crapsPlayer.rollDice();
         payField(roll);
         checkLineBetPointOn(roll);
         playeTurn();
@@ -131,10 +152,12 @@ public class Craps{
 
     public Integer getDecision(){
         Integer decision = console.getIntegerInput("1 - Place Come bet\n" +
-                "2 - Place Don't Come bet\n" + "3 - Roll dice");
+                "2 - Place Don't Come bet\n" + "3 - Wager field bet\n" +
+                "4 - Roll dice");
         while(decision > 4 || decision < 1){
             decision = console.getIntegerInput("1 - Place Come bet\n" +
-                    "2 - Place Don't Come bet\n" + "3 - Roll dice");
+                    "2 - Place Don't Come bet\n" + "3 - Wager field bet\n" +
+                    "4 - Roll dice");
         }
         return decision;
     }
@@ -161,18 +184,20 @@ public class Craps{
     }
 
     public void makeFieldBet(){
-        getWager("How much plays the field? (Enter bet >= 0");
+        getWager("How much plays the field? (Enter bet >= 0)");
         placeBet();
-        setField(bet + getField());
+        setField(bet + field);
     }
 
     public void checkSeven(Boolean crapOut){
         clearComeBets();
         if(crapOut){
+            setDontCome(0);
+            getWinnings(come);
             setIsPointOn();
             setCurrentPoint(0);
             setIsCrapOut();
-            exit();
+
         }else {
             playeTurn();
         }
@@ -197,7 +222,6 @@ public class Craps{
     public void checkLineBetPointOn(Integer roll){
         if(roll == 7){
             updatePassLine("dont");
-            setIsCrapOut();
             checkSeven(isCrapOut);
         }else if (roll == currentPoint){
             updatePassLine("pass");
@@ -219,8 +243,10 @@ public class Craps{
 
     public void updateComeBets(Integer roll){
         dontComeBets.replace(roll, getDontCome());
+        setDontCome(0);
         getWinnings(comeBets.get(roll));
         comeBets.replace(roll, getCome());
+        come = 0;
     }
 
     public void clearComeBets(){
@@ -236,11 +262,15 @@ public class Craps{
 
     public void updatePassLine(String decision){
         if(decision.equalsIgnoreCase("pass")){
-            getWinnings(getPassLine());
-            setDontPassLine(0);
-        }else if(decision.equalsIgnoreCase("dont")){
-            getWinnings(getDontPassLine());
+            getWinnings(getPassLine()*2);
             setPassLine(0);
+            setDontPassLine(0);
+            setIsOnLine();
+        }else if(decision.equalsIgnoreCase("dont")){
+            getWinnings(getDontPassLine()*2);
+            setPassLine(0);
+            setDontPassLine(0);
+            setIsOnLine();
         }else if(decision.equalsIgnoreCase("12")){
             setPassLine(0);
         }
@@ -332,5 +362,14 @@ public class Craps{
 
     public Integer getBet(){
         return this.bet;
+    }
+
+    public void setIsOnLine(){
+        isOnLine = !isOnLine;
+    }
+
+    public void updateTable(){
+        console.print(table.printTable(crapsPlayer.getPlayer().getBalance(), passLine,
+                dontPassLine, field, come, dontCome, comeBets, dontComeBets, roll, currentPoint));
     }
 }
