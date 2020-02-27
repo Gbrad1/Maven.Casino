@@ -4,16 +4,19 @@ import io.zipcoder.casino.card.Card;
 import io.zipcoder.casino.card.Deck;
 import io.zipcoder.casino.dealer.GoFishDealer;
 import io.zipcoder.casino.player.GoFishPlayer;
-import io.zipcoder.casino.player.Player;
 import io.zipcoder.casino.utilities.Console;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
 
-import java.sql.SQLOutput;
+import static java.lang.Integer.parseInt;
 
 public class GoFish {
+
     private Deck deck = new Deck();
     private GoFishPlayer goFishPlayer;
     private GoFishDealer goFishDealer;
-    private Player player;
+    ArrayList<Card> cardsToRemove = new ArrayList<>();
     Console console = new Console(System.in, System.out);
 
     public GoFish(GoFishPlayer newPlayer, GoFishDealer newDealer) {
@@ -64,23 +67,128 @@ public class GoFish {
         }
     }
 
-    public void addBookToPlayerScore() {
-        goFishPlayer.addBookToPlayer();
+//    public Integer getPlayerScore() {
+//        return goFishPlayer.getPlayerScore();
+//    }
+//
+//    public Integer getDealerScore() {
+//        return goFishDealer.getDealerScore();
+//    }
+
+    public boolean checkPlayerHand(Integer a) {
+        for (Card c : goFishPlayer.getPlayerHand()) {
+            if (c.getRank().equals(a)) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    public void addBookToDealerScore() {
-        goFishDealer.addBookToDealer();
+    public boolean checkDealerHand(Integer a) {
+        for (Card c : goFishDealer.getDealerHand()) {
+            if (c.getRank().equals(a)) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    public Integer getPlayerScore() {
-        return goFishPlayer.getPlayerScore();
+    public void takeDealerCards(Integer cardRank) {
+        for (Card c : goFishDealer.getDealerHand()) {
+            if (c.getRank().equals(cardRank)) {
+                cardsToRemove.add(c);
+                goFishPlayer.getPlayerHand().add(c);
+            }
+        }
+        goFishDealer.getDealerHand().removeAll(cardsToRemove);
+        cardsToRemove.clear();
     }
 
-    public Integer getDealerScore() {
-        return goFishDealer.getDealerScore();
+    public void takePlayerCards(Integer cardRank) {
+        for (Card c : goFishPlayer.getPlayerHand()) {
+            if (c.getRank().equals(cardRank)) {
+                cardsToRemove.add(c);
+                goFishDealer.getDealerHand().add(c);
+            }
+        }
+        goFishPlayer.getPlayerHand().removeAll(cardsToRemove);
+        cardsToRemove.clear();
     }
+
+    public void sortPlayerHand() {
+        Collections.sort(goFishPlayer.getPlayerHand());
+    }
+
+    public void sortDealerHand() {
+        Collections.sort(goFishDealer.getDealerHand());
+    }
+
+    public boolean checkWinCondition () {
+        if ((goFishPlayer.getPlayerScore() + goFishDealer.getDealerScore()) == 13) {
+            return true;
+        }
+        return false;
+    }
+
+    public void playerTurn() {
+        String request = console.getStringInput("What number would like to ask your opponent for?");
+        Integer requestAsInteger = parseInt(request);
+        while (!checkPlayerHand(requestAsInteger)) {
+            System.out.println("You do not own that card.");
+            request = console.getStringInput("What number would like to ask your opponent for?");
+            requestAsInteger = parseInt(request);
+        }
+        if (checkDealerHand(requestAsInteger)) {
+            System.out.println("Nice guess!");
+            takeDealerCards(requestAsInteger);
+            sortPlayerHand();
+            sortDealerHand();
+            goFishPlayer.addBook();
+            printPlayerHand();
+        } else if (!checkDealerHand(requestAsInteger)) {
+            if (!deck.isEmpty()){
+                goFishPlayer.drawCard(drawCardPlayer());
+            }
+            System.out.println("\n\"Go Fish!\" - evil NPC\n");
+            System.out.println("You draw a card and add it to you hand.");
+            sortPlayerHand();
+            sortDealerHand();
+            goFishPlayer.addBook();
+            printPlayerHand();
+        }
+    }
+
+    public Integer dealerChoiceToRequestFromPlayer() {
+        Random random = new Random();
+        return goFishDealer.getDealerHand().get(random.nextInt(goFishDealer.getDealerHand().size())).getRank();
+    }
+
+    public void dealerTurn () {
+        System.out.println("====================================\n");
+        Integer dealerPick = dealerChoiceToRequestFromPlayer();
+        if (checkPlayerHand(dealerPick)) {
+            takePlayerCards(dealerPick);
+            System.out.println("Picked " + dealerPick);
+            System.out.println("The rascal NPC stole from you. Your new hand is below.\n");
+            sortPlayerHand();
+            sortDealerHand();
+            goFishDealer.addBook();
+            printPlayerHand();
+        } else if (!checkPlayerHand(dealerPick)){
+            if (!deck.isEmpty()){
+                goFishDealer.drawCard(drawCardDealer());
+            }
+            System.out.println("Your opponent did not guess correctly.");
+            sortPlayerHand();
+            sortDealerHand();
+            goFishDealer.addBook();
+        }
+        //Card toPrint = goFishDealer.getDealerHand().get(dealerPick);
+    }
+
 
     public void play() {
+        boolean playStatus = true;
         System.out.println("██╗    ██╗███████╗██╗      ██████╗ ██████╗ ███╗   ███╗███████╗    ████████╗ ██████╗      ██████╗  ██████╗ ███████╗██╗███████╗██╗  ██╗\n" +
                 "██║    ██║██╔════╝██║     ██╔════╝██╔═══██╗████╗ ████║██╔════╝    ╚══██╔══╝██╔═══██╗    ██╔════╝ ██╔═══██╗██╔════╝██║██╔════╝██║  ██║\n" +
                 "██║ █╗ ██║█████╗  ██║     ██║     ██║   ██║██╔████╔██║█████╗         ██║   ██║   ██║    ██║  ███╗██║   ██║█████╗  ██║███████╗███████║\n" +
@@ -88,16 +196,33 @@ public class GoFish {
                 "╚███╔███╔╝███████╗███████╗╚██████╗╚██████╔╝██║ ╚═╝ ██║███████╗       ██║   ╚██████╔╝    ╚██████╔╝╚██████╔╝██║     ██║███████║██║  ██║\n" +
                 " ╚══╝╚══╝ ╚══════╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝       ╚═╝    ╚═════╝      ╚═════╝  ╚═════╝ ╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝\n" +
                 "                                                                                                                                     ");
-        Player player = new Player();
-        GoFishPlayer goFishPlayer = new GoFishPlayer(player);
-        GoFishDealer goFishDealer = new GoFishDealer();
-        GoFish currentGame = new GoFish(goFishPlayer, goFishDealer);
-        currentGame.createDeck();
-        currentGame.shuffleDeck();
 
-        currentGame.setupPlayerHand();
-        currentGame.setupDealerHand();
+        createDeck();
+        shuffleDeck();
+        setupPlayerHand();
+        setupDealerHand();
+        sortPlayerHand();
+        sortDealerHand();
+        System.out.println("Hello! please use the following for face cards.\nJack(11)\nQueen(12)\nKing(13)");
+        System.out.println("\n");
+        System.out.println("Here is your starting hand.\n");
+        printPlayerHand();
 
+        while(playStatus) {
+            playerTurn();
+            dealerTurn();
+            System.out.println("====================================");
+            System.out.println("Dealer Score: " + goFishDealer.getDealerScore() + "\nPlayer Score: " + goFishPlayer.getPlayerScore());
+            System.out.println("====================================");
+            if (deck.isEmpty() || checkWinCondition()) {
+                if (goFishPlayer.getPlayerScore() > goFishDealer.getDealerScore()) {
+                    System.out.println("You won!");
+                    break;
+                } else
+                    System.out.println("YOU LOSE");
+                    break;
+            }
+
+        }
     }
-
 }
