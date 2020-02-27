@@ -48,7 +48,7 @@ public class BlackjackDealer {
 
     @Override
     public String toString() {
-        String s = "Your cards are ";
+        String s = "Dealer's cards are ";
         for (Card c : hand.getHand()) {
             s += c.toString() + "  ";
         }

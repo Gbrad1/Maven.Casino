@@ -1,4 +1,5 @@
 package io.zipcoder.casino.game;
+
 import io.zipcoder.casino.card.Card;
 import io.zipcoder.casino.card.Deck;
 import io.zipcoder.casino.dealer.BlackjackDealer;
@@ -160,14 +161,28 @@ public class Blackjack {
                     console.println(player.toString() + "\n");
                     if (player.getScore() < 21) {
                         makeDecision = console.getIntegerInput("What would you like to do? \n1: Hit \n2: Stay");
-                    } if (player.getScore() > 21) {
+                    }
+                    if (player.getScore() > 21) {
                         console.println("You busted!");
                         break;
                     }
                 }
             }
             if (makeDecision == 2) {
+                dealer.toString();
+                if (dealer.getScore() < player.getScore()) {
+                    console.println("You win");
+                }
+                if (dealer.getScore() > player.getScore()) {
+                    console.println("You lose.");
+                }
+                if (dealer.getScore() < 21 && dealer.getScore() < 17) {
+                    drawCardDealer();
+                    if (dealer.getScore() > 21) {
+                        console.println("Dealer busted! You win!");
+                    }
 
+                }
             }
         }
     }
