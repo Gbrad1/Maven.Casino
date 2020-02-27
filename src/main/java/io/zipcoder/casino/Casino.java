@@ -142,8 +142,6 @@ public class Casino {
     public static void playSicBo(){
         Console consoleSicBo = new Console(System.in, System.out);
         SicBo sicBoGame = new SicBo(new SicBoPlayer(user));
-        SicBoTable sicBoTable = new SicBoTable();
-        sicBoGame.placeBet();
         sicBoGame.play();
     }
 
