@@ -1,18 +1,18 @@
 package io.zipcoder.casino;
 
 
+import io.zipcoder.casino.card.CrapsTable;
 import io.zipcoder.casino.card.SicBoTable;
 import io.zipcoder.casino.dealer.BlackjackDealer;
 import io.zipcoder.casino.dealer.GoFishDealer;
 import io.zipcoder.casino.game.Blackjack;
+import io.zipcoder.casino.game.Craps;
 import io.zipcoder.casino.game.SicBo;
 import io.zipcoder.casino.game.GoFish;
-import io.zipcoder.casino.player.BlackjackPlayer;
-import io.zipcoder.casino.player.GoFishPlayer;
-import io.zipcoder.casino.player.Multiplayer;
-import io.zipcoder.casino.player.Player;
-import io.zipcoder.casino.player.SicBoPlayer;
+import io.zipcoder.casino.player.*;
 import io.zipcoder.casino.utilities.Console;
+
+import java.lang.annotation.Target;
 
 public class Casino {
 
@@ -158,6 +158,9 @@ public class Casino {
     }
 
     public static void playCraps(){
+        CrapsTable table = new CrapsTable();
+        Craps crapsTable = new Craps(new CrapsPlayer(user), table);
+        crapsTable.play();
         menu();
 
     }
