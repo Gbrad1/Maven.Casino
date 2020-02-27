@@ -139,13 +139,31 @@ public class Blackjack {
             }
             getWager();
             placeBet();
-
-            player.toString();
-            player.getHand().toString();
+            if(checkBlackJack()){
+                break;
+            }
+            console.println(player.toString());
+            console.println(player.getHand().toString());
         }
-
-
+    }
+   public Boolean checkBlackJack(){
+            if(this.dealer.checkBlackjack() && this.player.checkBlackjack()) {
+                stillPlaying = false;
+                getWinnings(bet);
+                return true;
+            }if (this.dealer.checkBlackjack() && !this.player.checkBlackjack()) {
+                stillPlaying = false;
+                return true;
+            }if (!this.dealer.checkBlackjack() && this.player.checkBlackjack()) {
+                getWinnings(bet * 2);
+                stillPlaying = false;
+                return true;
+            }
+            return false;
+       }
     }
 
 
-}
+
+
+
