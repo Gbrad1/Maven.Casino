@@ -48,7 +48,7 @@ public class BlackjackPlayerTest {
     }
 
     @Test
-    public void getScore12Test() {
+    public void getScore12WithTwoAcesTest() {
         Card c1 = new Card("Hearts", 1);
         Card c2 = new Card("Diamonds", 1);
         blackjackPlayer.hit(c1);
