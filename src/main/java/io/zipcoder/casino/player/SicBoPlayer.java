@@ -23,6 +23,13 @@ public class SicBoPlayer extends DicePlayer{
     public SicBoPlayer() {
     }
 
+
+    public Random getRandom() {
+        return random;
+    }
+
+
+
     public void addTriple(int num) {
         triple.add(num);
     }

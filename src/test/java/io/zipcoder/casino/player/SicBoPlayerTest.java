@@ -9,12 +9,13 @@ import java.util.ArrayList;
 
 public class SicBoPlayerTest {
 
-    SicBoPlayer user = new SicBoPlayer();
+    SicBoPlayer user;
     ArrayList<Integer> triple = new ArrayList<>();
 
 
     @Before
     public void setUp() {
+        this.user = new SicBoPlayer();
         triple.clear();
     }
 
