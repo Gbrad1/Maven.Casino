@@ -20,7 +20,7 @@ public class SicBo implements Gambling {
 
 
     public int placeBet() {
-        bid = console.getIntegerInput("Enter a bet amount");
+
         while (bid > user.getPlayer().getBalance() && bid > 0) {
             bid = console.getIntegerInput("Please enter the right amount!");
         }
@@ -40,29 +40,40 @@ public class SicBo implements Gambling {
             switch (input)
             {
                 case 1:
+                    bid = console.getIntegerInput("Enter a bet amount");
                     placeBet();
                     console.print("You bet on SMALL with $" + bid + "!");
                     betSmall();
+                    console.print("\nUpdated balance $" + user.getPlayer().getBalance());
                     break;
                 case 2:
+                    bid = console.getIntegerInput("Enter a bet amount");
                     placeBet();
                     console.print("You bet on BIG with $" + bid + "!");
                     betBig();
+                    console.print("\nUpdated balance $" + user.getPlayer().getBalance());
                     break;
                 case 3:
+                    bid = console.getIntegerInput("Enter a bet amount");
                     placeBet();
                     console.print("You bet on EVEN with $" + bid + "!");
                     betEven();
+                    console.print("\nUpdated balance $" + user.getPlayer().getBalance());
                     break;
                 case 4:
+                    bid = console.getIntegerInput("Enter a bet amount");
                     placeBet();
                     console.print("You bet on ODD with $" + bid + "!");
                     betOdd();
+                    console.print("\nUpdated balance $" + user.getPlayer().getBalance());
                     break;
                 case 5:
+                    bid = console.getIntegerInput("Enter a bet amount");
                     placeBet();
                     console.print("You bet on ANY TRIPLE with $" + bid + "!");
                     betTriple();
+                    console.print("\nUpdated balance $" + user.getPlayer().getBalance());
+                    user.clearTriple();
                     break;
                 case 6:
                     Casino.menu();
@@ -154,7 +165,6 @@ public class SicBo implements Gambling {
             user.getPlayer().setBalance(user.getPlayer().getBalance() - bid);
             console.print("\nYou lost... ");
         }
-        user.clearTriple();
     }
 
     @Override
