@@ -197,17 +197,32 @@ public class GoFishTest {
     public void checkPlayerHandTest() {
         currentGame.createDeck();
         currentGame.setupPlayerHand();
+        currentGame.createDeck();
         currentGame.setupDealerHand();
         Integer toTest = currentGame.dealerChoiceToRequestFromPlayer();
-        Assert.assertTrue(currentGame.checkPlayerHand(toTest) || !currentGame.checkPlayerHand(toTest));
+        Assert.assertTrue(currentGame.checkPlayerHand(toTest));
     }
 
     @Test
     public void checkDealerHandTest() {
         currentGame.createDeck();
         currentGame.setupPlayerHand();
+        currentGame.createDeck();
         currentGame.setupDealerHand();
-        Integer toTest = 5;
-        Assert.assertTrue(currentGame.checkDealerHand(toTest) || !currentGame.checkDealerHand(toTest));
+        Assert.assertTrue(currentGame.checkDealerHand(12));
     }
+
+    @Test
+    public void checkWinConditionTest() {
+        goFishDealer.getDealerScore();
+        goFishPlayer.getPlayerScore();
+        for (int i = 0; i < 5; i++) {
+            goFishDealer.addBookToDealer();
+        }
+        for (int i = 0; i < 8; i++) {
+            goFishPlayer.addBookToPlayer();
+        }
+        Assert.assertTrue(currentGame.checkWinCondition());
+    }
+
 }

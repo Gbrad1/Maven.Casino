@@ -67,14 +67,6 @@ public class GoFish {
         }
     }
 
-//    public Integer getPlayerScore() {
-//        return goFishPlayer.getPlayerScore();
-//    }
-//
-//    public Integer getDealerScore() {
-//        return goFishDealer.getDealerScore();
-//    }
-
     public boolean checkPlayerHand(Integer a) {
         for (Card c : goFishPlayer.getPlayerHand()) {
             if (c.getRank().equals(a)) {
