@@ -157,6 +157,7 @@ public class Blackjack {
 
             makeDecision = console.getIntegerInput("What would you like to do? \n1: Hit \n2: Stay");
             while (player.getScore() <= 21) {
+                while(makeDecision != 1 && makeDecision != 2) {makeDecision = console.getIntegerInput("What would you like to do? \n1: Hit \n2: Stay");}
                 if (makeDecision == 1) {
                     drawCardPlayer();
                     console.println(player.toString() + "\n");
