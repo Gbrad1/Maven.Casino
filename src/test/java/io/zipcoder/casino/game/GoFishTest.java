@@ -225,4 +225,16 @@ public class GoFishTest {
         Assert.assertTrue(currentGame.checkWinCondition());
     }
 
+    /*@Test
+    public void dealerChoiceToRequestFromPlayerTest() {
+        currentGame.createDeck();
+        currentGame.setupDealerHand();
+        currentGame.sortDealerHand();
+        goFishDealer.getDealerHand();
+        Integer a = currentGame.dealerChoiceToRequestFromPlayer();
+        goFishDealer.getDealerHand().get(a);
+        Assert.assertTrue();
+        LOGGER.info("\n" + a);
+    }*/
+
 }

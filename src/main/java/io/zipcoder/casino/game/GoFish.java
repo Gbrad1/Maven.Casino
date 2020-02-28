@@ -1,5 +1,6 @@
 package io.zipcoder.casino.game;
 
+import io.zipcoder.casino.Casino;
 import io.zipcoder.casino.card.Card;
 import io.zipcoder.casino.card.Deck;
 import io.zipcoder.casino.dealer.GoFishDealer;
@@ -16,6 +17,7 @@ public class GoFish {
     private Deck deck = new Deck();
     private GoFishPlayer goFishPlayer;
     private GoFishDealer goFishDealer;
+    Casino casino = new Casino();
     ArrayList<Card> cardsToRemove = new ArrayList<>();
     Console console = new Console(System.in, System.out);
 
@@ -122,22 +124,27 @@ public class GoFish {
         return false;
     }
 
+    public void returnToMenu() {
+
+    }
+
     public void playerTurn() {
-        String request = console.getStringInput("What number would like to ask your opponent for?");
-        Integer requestAsInteger = parseInt(request);
-        while (!checkPlayerHand(requestAsInteger)) {
-            System.out.println("You do not own that card.");
-            request = console.getStringInput("What number would like to ask your opponent for?");
-            requestAsInteger = parseInt(request);
+        Integer request = console.getIntegerInput("What number would like to ask your opponent for?");
+        if (request.equals(0)) {
+            casino.menu();
         }
-        if (checkDealerHand(requestAsInteger)) {
+        while (!checkPlayerHand(request)) {
+            System.out.println("You do not own that card.");
+            request = console.getIntegerInput("What number would like to ask your opponent for?");
+        }
+        if (checkDealerHand(request)) {
             System.out.println("Nice guess!");
-            takeDealerCards(requestAsInteger);
+            takeDealerCards(request);
             sortPlayerHand();
             sortDealerHand();
             goFishPlayer.addBook();
             printPlayerHand();
-        } else if (!checkDealerHand(requestAsInteger)) {
+        } else if (!checkDealerHand(request)) {
             if (!deck.isEmpty()){
                 goFishPlayer.drawCard(drawCardPlayer());
             }
@@ -197,7 +204,7 @@ public class GoFish {
         sortDealerHand();
         System.out.println("Hello! please use the following for face cards.\nJack(11)\nQueen(12)\nKing(13)");
         System.out.println("\n");
-        System.out.println("Here is your starting hand.\n");
+        System.out.println("Here is your starting hand.\nYou may also type \"0\" to quit at anytime.");
         printPlayerHand();
 
         while(playStatus) {
