@@ -186,4 +186,17 @@ public class BlackjackPlayerTest {
 
         Assert.assertTrue(blackjackPlayer.checkBlackjack());
     }
+
+    @Test
+    public void checkToString() {
+        Card c1 = new Card("Diamonds", 2);
+        Card c2 = new Card("Hearts", 9);
+        blackjackPlayer.hit(c1);
+        blackjackPlayer.hit(c2);
+
+        String expected = "Your cards are 2 of ♦  9 of ♥  and your score is 11";
+        String actual = blackjackPlayer.toString();
+
+        Assert.assertEquals(expected, actual);
+    }
 }

@@ -122,6 +122,7 @@ public class Blackjack {
         if (!this.dealer.checkBlackjack() && this.player.checkBlackjack()) {
             console.println("You got Blackjack! You won!\n");
             stillPlaying = false;
+            getWinnings(bet * 2);
             return true;
         }
         return false;
@@ -183,12 +184,13 @@ public class Blackjack {
                         break;
                     } else if (dealer.getScore() < player.getScore()) {
                         console.println("You win!");
-                        getWinnings(bet);
+                        getWinnings(bet * 2);
                         player.getHand().clear();
                         dealer.getHand().clear();
                         break;
                     } else {
                         console.println("You pushed!");
+                        getWinnings(bet);
                         player.getHand().clear();
                         dealer.getHand().clear();
                         break;
