@@ -281,12 +281,14 @@ public class Craps{
     public void updateComeBets(Integer roll){
         dontComeBets.replace(roll, getDontCome());
         setDontCome(0);
-        if(getComeBets(roll) != 0) {
+        if(getComeBets(roll) == getCome()) {
             getWinnings(getComeBets(roll));
             console.println("You won your come bet on " + roll + ": " + getComeBets(roll));
         }else {
+            getWinnings(getComeBets(roll)*2);
+            console.println("You won your come bet on " + roll + ": " + getComeBets(roll)*2);
             comeBets.replace(roll, getCome());
-            come = 0;
+            setCome(0);
         }
     }
 

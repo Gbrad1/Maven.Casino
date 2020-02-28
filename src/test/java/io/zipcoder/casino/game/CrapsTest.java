@@ -214,7 +214,7 @@ public class CrapsTest {
 
         Integer expectedComeBets = 40;
         Integer expectedDonComeBets = 0;
-        Integer expectedBalance = 520;
+        Integer expectedBalance = 540;
         testCraps.updateComeBets(4);
         Integer actual4Come = testCraps.getComeBets(4);
         Integer actual4DontCome = testCraps.getDontComeBets(4);
@@ -316,7 +316,7 @@ public class CrapsTest {
         testCraps.setCurrentPoint(5);
         testCraps.checkLineBetPointOn(5);
         Integer expectedZero = 0;
-        Integer expectedWin = 570;
+        Integer expectedWin = 580;
         Integer actual5DontCome = testCraps.getDontComeBets(5);
         Integer actualBalance = testPlayer.getPlayer().getBalance();
 
@@ -343,17 +343,18 @@ public class CrapsTest {
 
     @Test
     public void checkLineBetPointOn12() {
-        testCraps.setComeBets(5, 10);
-        testCraps.setDontComeBets(5, 20);
+        testCraps.setCome(expectedBet);
+        testCraps.setDontCome(50);
 
-        testCraps.checkLineBetPointOn(5);
+        testCraps.checkLineBetPointOn(12);
         Integer expectedZero = 0;
-        Integer expectedWin = 510;
+        Integer expectedDontCome = 50;
+        Integer expectedWin = 500;
         Integer actualBalance = testPlayer.getPlayer().getBalance();
 
         assertEquals(expectedWin, actualBalance);
-        assertEquals(expectedZero, testCraps.getDontComeBets(5));
-        assertEquals(expectedZero, testCraps.getComeBets(5));
+        assertEquals(expectedDontCome, testCraps.getDontCome());
+        assertEquals(expectedZero, testCraps.getCome());
     }
 
     @Test
