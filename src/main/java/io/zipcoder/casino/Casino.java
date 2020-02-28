@@ -11,7 +11,6 @@ import io.zipcoder.casino.game.SicBo;
 import io.zipcoder.casino.game.GoFish;
 import io.zipcoder.casino.player.*;
 import io.zipcoder.casino.utilities.Console;
-
 import java.lang.annotation.Target;
 
 public class Casino {
@@ -21,23 +20,8 @@ public class Casino {
     private static Console console = new Console(System.in, System.out);
 
     public static void welcome(){
-        System.out.println("██╗    ██╗███████╗██╗      ██████╗ ██████╗ ███╗   ███╗███████╗    ████████╗ ██████╗     ███████╗██╗██████╗      ██████╗ ██████╗ ██████╗ ███████╗\n" +
-                "██║    ██║██╔════╝██║     ██╔════╝██╔═══██╗████╗ ████║██╔════╝    ╚══██╔══╝██╔═══██╗    ╚══███╔╝██║██╔══██╗    ██╔════╝██╔═══██╗██╔══██╗██╔════╝\n" +
-                "██║ █╗ ██║█████╗  ██║     ██║     ██║   ██║██╔████╔██║█████╗         ██║   ██║   ██║      ███╔╝ ██║██████╔╝    ██║     ██║   ██║██║  ██║█████╗  \n" +
-                "██║███╗██║██╔══╝  ██║     ██║     ██║   ██║██║╚██╔╝██║██╔══╝         ██║   ██║   ██║     ███╔╝  ██║██╔═══╝     ██║     ██║   ██║██║  ██║██╔══╝  \n" +
-                "╚██22█╔███╔╝███████╗███████╗╚██████╗╚██████╔╝██║ ╚═╝ ██║███████╗       ██║   ╚██████╔╝    ███████╗██║██║         ╚██████╗╚██████╔╝██████╔╝███████╗\n" +
-                " ╚══╝╚══╝ ╚══════╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝       ╚═╝    ╚═════╝     ╚══════╝╚═╝╚═╝          ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝\n" +
-                "                                                                                                                                                \n" +
-                " ██████╗ █████╗ ███████╗██╗███╗   ██╗ ██████╗ ██╗     ██╗██████╗  ██╗     █████╗ ███╗   ██╗██████╗      ██████╗ ██╗   ██╗███████╗██████╗ ██╗    \n" +
-                "██╔════╝██╔══██╗██╔════╝██║████╗  ██║██╔═══██╗██║    ██╔╝╚════██╗███║    ██╔══██╗████╗  ██║██╔══██╗    ██╔═══██╗██║   ██║██╔════╝██╔══██╗╚██╗   \n" +
-                "██║     ███████║███████╗██║██╔██╗ ██║██║   ██║██║    ██║  █████╔╝╚██║    ███████║██╔██╗ ██║██║  ██║    ██║   ██║██║   ██║█████╗  ██████╔╝ ██║   \n" +
-                "██║     ██╔══██║╚════██║██║██║╚██╗██║██║   ██║╚═╝    ██║ ██╔═══╝  ██║    ██╔══██║██║╚██╗██║██║  ██║    ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗ ██║   \n" +
-                "╚██████╗██║  ██║███████║██║██║ ╚████║╚██████╔╝██╗    ╚██╗███████╗ ██║    ██║  ██║██║ ╚████║██████╔╝    ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║██╔╝   \n" +
-                " ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝ ╚═╝    ╚═╝  ╚═╝╚═╝  ╚═══╝╚═════╝      ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝╚═╝    \n" +
-                "                                                                                                                                                ");
+        console.welcome();
     }
-
-
     public static void intro(){
         Integer loginOrCreatePlayer = console.getIntegerInput("Enter: \n1 to create account\n2 to log in.");
         if (loginOrCreatePlayer == 1){
@@ -88,7 +72,10 @@ public class Casino {
 
     public static void menu(){
         while (true) {
-            Integer choice = console.getIntegerInput("Enter: \n1 to play Blackjack\n2 to play Go Fish" +
+            System.out.println("===============\nUsername: "
+                    + user.getName() + "\nBalance: $"
+                    + user.getBalance() + "\n===============");
+            Integer choice = console.getIntegerInput("\nEnter: \n1 to play Blackjack\n2 to play Go Fish" +
                     "\n3 to play Craps\n4 to play SicBo" +
                     "\n5 to return to login\n6 to create a new account" +
                     "\n7 to leave the casino");

@@ -1,5 +1,6 @@
 package io.zipcoder.casino.game;
 
+import io.zipcoder.casino.Casino;
 import io.zipcoder.casino.card.Card;
 import io.zipcoder.casino.card.Deck;
 import io.zipcoder.casino.dealer.GoFishDealer;
@@ -16,6 +17,7 @@ public class GoFish {
     private Deck deck = new Deck();
     private GoFishPlayer goFishPlayer;
     private GoFishDealer goFishDealer;
+    Casino casino = new Casino();
     ArrayList<Card> cardsToRemove = new ArrayList<>();
     Console console = new Console(System.in, System.out);
 
@@ -66,14 +68,6 @@ public class GoFish {
             System.out.println(goFishDealer.getDealerHand().get(i).toString());
         }
     }
-
-//    public Integer getPlayerScore() {
-//        return goFishPlayer.getPlayerScore();
-//    }
-//
-//    public Integer getDealerScore() {
-//        return goFishDealer.getDealerScore();
-//    }
 
     public boolean checkPlayerHand(Integer a) {
         for (Card c : goFishPlayer.getPlayerHand()) {
@@ -129,28 +123,31 @@ public class GoFish {
         }
         return false;
     }
+    public void returnToMenu() {
+    }
 
     public void playerTurn() {
-        String request = console.getStringInput("What number would like to ask your opponent for?");
-        Integer requestAsInteger = parseInt(request);
-        while (!checkPlayerHand(requestAsInteger)) {
-            System.out.println("You do not own that card.");
-            request = console.getStringInput("What number would like to ask your opponent for?");
-            requestAsInteger = parseInt(request);
+        Integer request = console.getIntegerInput("What number would like to ask your opponent for?");
+        if (request.equals(0)) {
+            casino.menu();
         }
-        if (checkDealerHand(requestAsInteger)) {
+        while (!checkPlayerHand(request)) {
+            System.out.println("You do not own that card.");
+            request = console.getIntegerInput("What number would like to ask your opponent for?");
+        }
+        if (checkDealerHand(request)) {
             System.out.println("Nice guess!");
-            takeDealerCards(requestAsInteger);
+            takeDealerCards(request);
             sortPlayerHand();
             sortDealerHand();
             goFishPlayer.addBook();
             printPlayerHand();
-        } else if (!checkDealerHand(requestAsInteger)) {
+        } else if (!checkDealerHand(request)) {
             if (!deck.isEmpty()){
                 goFishPlayer.drawCard(drawCardPlayer());
             }
-            System.out.println("\n\"Go Fish!\" - evil NPC\n");
-            System.out.println("You draw a card and add it to you hand.");
+            System.out.println("\n\"Go Fish!\" - evil Jeff\n");
+            System.out.println("You draw a card and add it to your hand.");
             sortPlayerHand();
             sortDealerHand();
             goFishPlayer.addBook();
@@ -169,7 +166,7 @@ public class GoFish {
         if (checkPlayerHand(dealerPick)) {
             takePlayerCards(dealerPick);
             System.out.println("Picked " + dealerPick);
-            System.out.println("The rascal NPC stole from you. Your new hand is below.\n");
+            System.out.println("That rascal Jeff stole from you. Your new hand is below.\n");
             sortPlayerHand();
             sortDealerHand();
             goFishDealer.addBook();
@@ -178,7 +175,7 @@ public class GoFish {
             if (!deck.isEmpty()){
                 goFishDealer.drawCard(drawCardDealer());
             }
-            System.out.println("Your opponent did not guess correctly.");
+            System.out.println("Jeff did not guess correctly.\n");
             sortPlayerHand();
             sortDealerHand();
             goFishDealer.addBook();
@@ -189,14 +186,7 @@ public class GoFish {
 
     public void play() {
         boolean playStatus = true;
-        System.out.println("██╗    ██╗███████╗██╗      ██████╗ ██████╗ ███╗   ███╗███████╗    ████████╗ ██████╗      ██████╗  ██████╗ ███████╗██╗███████╗██╗  ██╗\n" +
-                "██║    ██║██╔════╝██║     ██╔════╝██╔═══██╗████╗ ████║██╔════╝    ╚══██╔══╝██╔═══██╗    ██╔════╝ ██╔═══██╗██╔════╝██║██╔════╝██║  ██║\n" +
-                "██║ █╗ ██║█████╗  ██║     ██║     ██║   ██║██╔████╔██║█████╗         ██║   ██║   ██║    ██║  ███╗██║   ██║█████╗  ██║███████╗███████║\n" +
-                "██║███╗██║██╔══╝  ██║     ██║     ██║   ██║██║╚██╔╝██║██╔══╝         ██║   ██║   ██║    ██║   ██║██║   ██║██╔══╝  ██║╚════██║██╔══██║\n" +
-                "╚███╔███╔╝███████╗███████╗╚██████╗╚██████╔╝██║ ╚═╝ ██║███████╗       ██║   ╚██████╔╝    ╚██████╔╝╚██████╔╝██║     ██║███████║██║  ██║\n" +
-                " ╚══╝╚══╝ ╚══════╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝       ╚═╝    ╚═════╝      ╚═════╝  ╚═════╝ ╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝\n" +
-                "                                                                                                                                     ");
-
+        console.welcomeGoFish();
         createDeck();
         shuffleDeck();
         setupPlayerHand();
@@ -205,7 +195,7 @@ public class GoFish {
         sortDealerHand();
         System.out.println("Hello! please use the following for face cards.\nJack(11)\nQueen(12)\nKing(13)");
         System.out.println("\n");
-        System.out.println("Here is your starting hand.\n");
+        System.out.println("Here is your starting hand.\nYou may also type \"0\" to quit at anytime.\n");
         printPlayerHand();
 
         while(playStatus) {
@@ -219,7 +209,7 @@ public class GoFish {
                     System.out.println("You won!");
                     break;
                 } else
-                    System.out.println("YOU LOSE");
+                    System.out.println("You lose. D:");
                     break;
             }
 
