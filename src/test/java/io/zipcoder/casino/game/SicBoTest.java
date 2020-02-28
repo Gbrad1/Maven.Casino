@@ -13,8 +13,6 @@ public class SicBoTest {
 
     @Test
     public void placeBetTest() {
-        Console console = new Console(System.in, System.out);
-        Assert.assertTrue(sicBoGame.placeBet() > 0 && sicBoGame.placeBet() <= user.getPlayer().getBalance());
     }
 
     @Test
@@ -22,8 +20,7 @@ public class SicBoTest {
     }
 
     @Test
-    public void newRollTest() {
-
+    public void getRollTest() {
     }
 
     @Test
