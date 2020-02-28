@@ -60,10 +60,13 @@ public class Craps{
     }
 
     public void playerTurn(){
-        while (true) {
-            if (!isStillPlaying || (isBroke() && !isPointOn)) {
+        while (isStillPlaying) {
+            if (isBroke() && !isPointOn) {
                 returnBets(isPointOn);
-                console.println("Thank You for playig :D");
+                console.println("You were refunded : " + refund + ".\n" +
+                        "Your balance is : " + crapsPlayer.getPlayer().getBalance()+ ".\n" +
+                        "Thank You for playing :D");
+                exit();
                 break;
             }
             if (!isPointOn) {
@@ -135,6 +138,11 @@ public class Craps{
             checkLineBetComeOut(roll);
             setIsPointOn();
             setCurrentPoint(roll);
+            if(getComeBets(roll) != 0){
+                getWinnings(getComeBets(roll));
+                console.println("You won your come bet on " + roll + ": " + getComeBets(roll));
+                setComeBets(roll, 0);
+            }
             playerTurn();
         }else {
             console.println("Thank You for playing :D");
@@ -148,12 +156,12 @@ public class Craps{
             if (decision == 1) {
                 getWager();
                 placeBet();
-                setCome(bet);
+                setCome(bet+come);
                 updateTable();
             } else if (decision == 2) {
                 getWager();
                 placeBet();
-                setDontCome(bet);
+                setDontCome(bet+dontCome);
                 updateTable();
             }else if (decision == 3){
                 makeFieldBet();
@@ -193,10 +201,13 @@ public class Craps{
     public void payField(Integer roll){
         if((roll >= 3 && roll < 5) || (roll >= 9 && roll < 12)){
             getWinnings(getField());
+            console.println("You won your field bet: " + getField());
         }else if(roll == 2 || roll == 12){
             getWinnings(getField()*2);
+            console.println("You won DOUBLE your field bet: " + (getField()*2));
         }
         else {
+            console.println("You lost your field bet: " + getField());
             setField(0);
         }
     }
@@ -213,6 +224,7 @@ public class Craps{
             setField(0);
             setDontCome(0);
             getWinnings(come*2);
+            console.println("You won come bet: " + come);
             setCome(0);
             setIsPointOn();
             setCurrentPoint(0);
@@ -250,11 +262,17 @@ public class Craps{
         }else if((roll != currentPoint) && (roll >= 4 && roll <= 10)){
             updateComeBets(roll);
         }else if(roll == 2 || roll == 3){
+            console.println("You lost your come bet: " + getCome());
+            console.println("You won your dont come bet: " + getDontCome());
             getWinnings(getDontCome());
             setCome(0);
         }else if(roll == 12){
+            console.println("You lost your come bet: " + getCome());
+            console.println("You push on your dont come bet");
             setCome(0);
         }else if(roll == 11){
+            console.println("You lost your come bet: " + getCome());
+            console.println("You won your dont come bet: " + getDontCome());
             getWinnings(getCome());
             setDontCome(0);
         }
@@ -263,36 +281,46 @@ public class Craps{
     public void updateComeBets(Integer roll){
         dontComeBets.replace(roll, getDontCome());
         setDontCome(0);
-        getWinnings(comeBets.get(roll));
-        comeBets.replace(roll, getCome());
-        come = 0;
+        if(getComeBets(roll) != 0) {
+            getWinnings(getComeBets(roll));
+            console.println("You won your come bet on " + roll + ": " + getComeBets(roll));
+        }else {
+            comeBets.replace(roll, getCome());
+            come = 0;
+        }
     }
 
     public void clearComeBets(){
+        Integer sum = 0;
         for (int i = 4; i <= 6; i++) {
             getWinnings(getDontComeBets(i)*2);
             getWinnings(getDontComeBets(i+4)*2);
+            sum += getDontComeBets(i) + getDontComeBets(i+4);
             comeBets.replace(i, 0);
             comeBets.replace(i+4, 0);
             dontComeBets.replace(i, 0);
             dontComeBets.replace(i+4, 0);
         }
+        console.println("You won your dont come bets: " + sum);
     }
 
     public void updatePassLine(String decision){
         if(decision.equalsIgnoreCase("pass")){
             getWinnings(getPassLine()*2);
+            console.println("You won your pass line bet: " + getPassLine());
             setPassLine(0);
             setDontPassLine(0);
             setIsOnLine();
         }else if(decision.equalsIgnoreCase("dont")){
             getWinnings(getDontPassLine()*2);
+            console.println("You won your dont pass line bet: " + getDontPassLine());
             setPassLine(0);
             setDontPassLine(0);
             setIsOnLine();
         }else if(decision.equalsIgnoreCase("12")){
             setPassLine(0);
             getWinnings(getDontPassLine());
+            console.println("You push on your dont pass line bet");
             setIsOnLine();
         }
     }
