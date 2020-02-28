@@ -156,11 +156,11 @@ public class Blackjack {
             }
 
             makeDecision = console.getIntegerInput("What would you like to do? \n1: Hit \n2: Stay");
-            while (player.getScore() < 21) {
+            while (player.getScore() <= 21) {
                 if (makeDecision == 1) {
                     drawCardPlayer();
                     console.println(player.toString() + "\n");
-                    if (player.getScore() < 21) {
+                    if (player.getScore() <= 21) {
                         makeDecision = console.getIntegerInput("What would you like to do? \n1: Hit \n2: Stay");
                     }
                     if (player.getScore() > 21) {
@@ -176,6 +176,13 @@ public class Blackjack {
                     while (dealer.getScore() < 17){
                         drawCardDealer();
                         console.println(dealer.toString());
+                    }
+                    if (dealer.getScore() > 21) {
+                        console.println("Dealer busted. You win!");
+                        getWinnings(bet * 2);
+                        player.getHand().clear();
+                        dealer.getHand().clear();
+                        break;
                     }
                     if (dealer.getScore() > player.getScore()) {
                         console.println("Dealer wins!");
