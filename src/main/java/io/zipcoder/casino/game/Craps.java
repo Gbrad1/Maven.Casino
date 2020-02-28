@@ -60,12 +60,13 @@ public class Craps{
     }
 
     public void playerTurn(){
-        while (true) {
-            if (!isStillPlaying || (isBroke() && !isPointOn)) {
+        while (isStillPlaying) {
+            if (isBroke() && !isPointOn) {
                 returnBets(isPointOn);
                 console.println("You were refunded : " + refund + ".\n" +
                         "Your balance is : " + crapsPlayer.getPlayer().getBalance()+ ".\n" +
                         "Thank You for playing :D");
+                exit();
                 break;
             }
             if (!isPointOn) {
@@ -206,7 +207,7 @@ public class Craps{
             console.println("You won DOUBLE your field bet: " + (getField()*2));
         }
         else {
-            console.println("You lost your field bet: -" + getField());
+            console.println("You lost your field bet: " + getField());
             setField(0);
         }
     }
