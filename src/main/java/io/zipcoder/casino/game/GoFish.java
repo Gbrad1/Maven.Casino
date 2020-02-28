@@ -211,7 +211,7 @@ public class GoFish {
                     System.out.println("You won!");
                     break;
                 } else
-                    System.out.println("YOU LOSE");
+                    System.out.println("You lose. D:");
                     break;
             }
 
