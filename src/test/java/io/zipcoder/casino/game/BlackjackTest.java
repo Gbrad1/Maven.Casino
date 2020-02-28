@@ -172,4 +172,26 @@ public class BlackjackTest {
         LOGGER.info(result);
         LOGGER.info(str);
     }
+
+    @Test
+    public void checkBlackjackUsingMethodTest() {
+        newGame.createDeck();
+        newGame.shuffleDeck();
+        newGame.setHandPlayer();
+        newGame.setDealerPlayer();
+        newGame.checkBlackjack();
+
+        String player = "";
+        for (Card c : blackjackPlayer.getHand()) {
+            player += c.toString() + " ";
+        }
+
+        String dealer = "";
+        for (Card c : blackjackDealer.getHand()) {
+            dealer += c.toString() + " ";
+        }
+
+        LOGGER.info(player);
+        LOGGER.info(dealer);
+    }
 }

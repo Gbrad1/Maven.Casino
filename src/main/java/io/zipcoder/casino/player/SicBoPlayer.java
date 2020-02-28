@@ -1,5 +1,7 @@
 package io.zipcoder.casino.player;
 
+import io.zipcoder.casino.utilities.Console;
+
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
@@ -10,6 +12,7 @@ public class SicBoPlayer extends DicePlayer{
     private Player user;
     private ArrayList<Integer> triple = new ArrayList<>();
     private Random random;
+    private Console console = new Console(System.in, System.out);
 
 
     public SicBoPlayer(Player user) {
@@ -56,12 +59,10 @@ public class SicBoPlayer extends DicePlayer{
 
 
     public boolean isTriple(ArrayList<Integer> triple) {
-        System.out.println("The three dice total to " + triple.get(0) +
+        console.print("\nResult of all 3 dice is " + triple.get(0) +
                 " , " + triple.get(1) + " , " + triple.get(2));
 
         return triple.get(0) == triple.get(1) && triple.get(1) == triple.get(2);
     }
-
-
 
 }
