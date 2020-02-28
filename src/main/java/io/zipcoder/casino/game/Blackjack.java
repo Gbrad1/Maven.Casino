@@ -110,18 +110,15 @@ public class Blackjack {
     public Boolean checkBlackjack() {
         if (this.dealer.checkBlackjack() && this.player.checkBlackjack()) {
             console.println("You both got Blackjack. Push!\n");
-            stillPlaying = false;
             getWinnings(bet);
             return true;
         }
         if (this.dealer.checkBlackjack() && !this.player.checkBlackjack()) {
             console.println("Dealer got Blackjack! You lost.\n");
-            stillPlaying = false;
             return true;
         }
         if (!this.dealer.checkBlackjack() && this.player.checkBlackjack()) {
             console.println("You got Blackjack! You won!\n");
-            stillPlaying = false;
             getWinnings(bet * 2);
             return true;
         }
@@ -139,11 +136,8 @@ public class Blackjack {
             while (input != 1 && input != 2) {
                 input = console.getIntegerInput("Would you like to play or exit? \n1: Play a hand \n2: Exit the game\n");
             }
-            if (input == 1) {
-
-            }
             if (input == 2) {
-                break;
+                return;
             }
 
             getWager();
@@ -152,7 +146,7 @@ public class Blackjack {
             console.println(dealer.dealerShowCard() + "\n");
             console.println(player.toString() + "\n");
             if (checkBlackjack()) {
-                break;
+                continue;
             }
 
             makeDecision = console.getIntegerInput("What would you like to do? \n1: Hit \n2: Stay");
@@ -178,7 +172,7 @@ public class Blackjack {
                     console.println(dealer.toString());
                     while (dealer.getScore() < 17){
                         drawCardDealer();
-                        console.println(dealer.toString());
+                        console.println(dealer.toString() + "\n");
                     }
                     if (dealer.getScore() > 21) {
                         console.println("Dealer busted. You win!");
