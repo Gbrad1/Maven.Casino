@@ -23,6 +23,9 @@ public class BlackjackDealer {
         if (getHand().size() == 2 && (getHand().get(0).getRank() == 1 && getHand().get(1).getRank() == 1)){
             return 12;
         }
+        else if (getHand().size() == 2 && getHand().get(0).getRank() == 1 && getHand().get(1).getRank() > 10) {
+            return 21;
+        }
         else if (getHand().size() == 2 && getHand().get(0).getRank() == 1){
             return 11 + getHand().get(1).getRank();
         }
@@ -46,5 +49,21 @@ public class BlackjackDealer {
         }
             return false;
 
+    }
+
+    @Override
+    public String toString(){
+        String s = "Dealer's cards are ";
+        for (Card c : hand.getHand()) {
+            s += c.toString() + "  ";
+        }
+        s += "and his score is " + getScore();
+        return s;
+    }
+
+    public String dealerShowCard() {
+        String s = "Dealer is showing: ";
+        s += hand.getHand().get(1);
+        return s;
     }
 }
