@@ -123,9 +123,7 @@ public class GoFish {
         }
         return false;
     }
-
     public void returnToMenu() {
-
     }
 
     public void playerTurn() {
@@ -148,8 +146,8 @@ public class GoFish {
             if (!deck.isEmpty()){
                 goFishPlayer.drawCard(drawCardPlayer());
             }
-            System.out.println("\n\"Go Fish!\" - evil NPC\n");
-            System.out.println("You draw a card and add it to you hand.");
+            System.out.println("\n\"Go Fish!\" - evil Jeff\n");
+            System.out.println("You draw a card and add it to your hand.");
             sortPlayerHand();
             sortDealerHand();
             goFishPlayer.addBook();
@@ -168,7 +166,7 @@ public class GoFish {
         if (checkPlayerHand(dealerPick)) {
             takePlayerCards(dealerPick);
             System.out.println("Picked " + dealerPick);
-            System.out.println("The rascal NPC stole from you. Your new hand is below.\n");
+            System.out.println("That rascal Jeff stole from you. Your new hand is below.\n");
             sortPlayerHand();
             sortDealerHand();
             goFishDealer.addBook();
@@ -177,7 +175,7 @@ public class GoFish {
             if (!deck.isEmpty()){
                 goFishDealer.drawCard(drawCardDealer());
             }
-            System.out.println("Your opponent did not guess correctly.");
+            System.out.println("Jeff did not guess correctly.\n");
             sortPlayerHand();
             sortDealerHand();
             goFishDealer.addBook();
@@ -188,14 +186,7 @@ public class GoFish {
 
     public void play() {
         boolean playStatus = true;
-        System.out.println("██╗    ██╗███████╗██╗      ██████╗ ██████╗ ███╗   ███╗███████╗    ████████╗ ██████╗      ██████╗  ██████╗ ███████╗██╗███████╗██╗  ██╗\n" +
-                "██║    ██║██╔════╝██║     ██╔════╝██╔═══██╗████╗ ████║██╔════╝    ╚══██╔══╝██╔═══██╗    ██╔════╝ ██╔═══██╗██╔════╝██║██╔════╝██║  ██║\n" +
-                "██║ █╗ ██║█████╗  ██║     ██║     ██║   ██║██╔████╔██║█████╗         ██║   ██║   ██║    ██║  ███╗██║   ██║█████╗  ██║███████╗███████║\n" +
-                "██║███╗██║██╔══╝  ██║     ██║     ██║   ██║██║╚██╔╝██║██╔══╝         ██║   ██║   ██║    ██║   ██║██║   ██║██╔══╝  ██║╚════██║██╔══██║\n" +
-                "╚███╔███╔╝███████╗███████╗╚██████╗╚██████╔╝██║ ╚═╝ ██║███████╗       ██║   ╚██████╔╝    ╚██████╔╝╚██████╔╝██║     ██║███████║██║  ██║\n" +
-                " ╚══╝╚══╝ ╚══════╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝       ╚═╝    ╚═════╝      ╚═════╝  ╚═════╝ ╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝\n" +
-                "                                                                                                                                     ");
-
+        console.welcomeGoFish();
         createDeck();
         shuffleDeck();
         setupPlayerHand();
@@ -204,7 +195,7 @@ public class GoFish {
         sortDealerHand();
         System.out.println("Hello! please use the following for face cards.\nJack(11)\nQueen(12)\nKing(13)");
         System.out.println("\n");
-        System.out.println("Here is your starting hand.\nYou may also type \"0\" to quit at anytime.");
+        System.out.println("Here is your starting hand.\nYou may also type \"0\" to quit at anytime.\n");
         printPlayerHand();
 
         while(playStatus) {

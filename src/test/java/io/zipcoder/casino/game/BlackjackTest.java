@@ -123,6 +123,10 @@ public class BlackjackTest {
         newGame.setHandPlayer();
         newGame.drawCardPlayer();
         newGame.drawCardPlayer();
+        newGame.drawCardPlayer();
+        newGame.drawCardPlayer();
+        newGame.drawCardPlayer();
+        newGame.drawCardPlayer();
 
         String result = "";
         for (Card c : blackjackPlayer.getHand()) {
@@ -141,6 +145,10 @@ public class BlackjackTest {
         newGame.createDeck();
         newGame.shuffleDeck();
         newGame.setDealerPlayer();
+        newGame.drawCardDealer();
+        newGame.drawCardDealer();
+        newGame.drawCardDealer();
+        newGame.drawCardDealer();
         newGame.drawCardDealer();
         newGame.drawCardDealer();
 
