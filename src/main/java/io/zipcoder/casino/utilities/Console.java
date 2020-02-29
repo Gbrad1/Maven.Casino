@@ -57,5 +57,25 @@ public final class Console {
     public Integer getIntegerInput(String prompt, Object... args) {
         return getLongInput(prompt, args).intValue();
     }
+
+    public void printYourOutOfMoney(){
+        println("You're out of funds. Please roll");
+    }
+
+    public void printRefund(Integer refund, Integer balance){
+        println("You were refunded : " + refund + ".\n" +
+                "Your balance is : " + balance + ".\n" +
+                "Thank You for playing :D");
+    }
+
+    public void printComeBetsWinning(Integer num, Integer winnings){
+        println("You won your come bet on " + num + ": " + winnings);
+    }
+
+    public void printPayFied(boolean isDouble){
+        if(isDouble){
+            println("You won DOUBLE your field bet:");
+        }
+    }
 }
 

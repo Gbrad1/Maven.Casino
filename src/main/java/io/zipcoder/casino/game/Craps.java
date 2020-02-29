@@ -63,9 +63,7 @@ public class Craps{
         while (isStillPlaying) {
             if (isBroke() && !isPointOn) {
                 returnBets(isPointOn);
-                console.println("You were refunded : " + refund + ".\n" +
-                        "Your balance is : " + crapsPlayer.getPlayer().getBalance()+ ".\n" +
-                        "Thank You for playing :D");
+                console.printRefund(refund, crapsPlayer.getPlayer().getBalance());
                 exit();
                 break;
             }
@@ -80,7 +78,7 @@ public class Craps{
     public void getWager(){
         if(isBroke()){
             bet = 0;
-            console.println("You're out of funds. Please roll");
+            console.printYourOutOfMoney();
         }else {
             bet = console.getIntegerInput("Enter how much to wager");
             while (bet > crapsPlayer.getPlayer().getBalance() || bet < 1) {
@@ -92,7 +90,7 @@ public class Craps{
     public void getWager(String prompt){
         if(isBroke()){
             bet = 0;
-            console.println("You're out of funds. Please roll");
+            console.printYourOutOfMoney();
         }else {
             bet = console.getIntegerInput(prompt);
             while (bet > crapsPlayer.getPlayer().getBalance() || bet < 0) {
@@ -140,7 +138,7 @@ public class Craps{
             setCurrentPoint(roll);
             if(getComeBets(roll) != 0){
                 getWinnings(getComeBets(roll));
-                console.println("You won your come bet on " + roll + ": " + getComeBets(roll));
+                console.printComeBetsWinning(roll, getComeBets(roll));
                 setComeBets(roll, 0);
             }
             playerTurn();
