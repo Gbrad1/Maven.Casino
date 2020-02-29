@@ -1,5 +1,6 @@
 package io.zipcoder.casino.game;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import io.zipcoder.casino.card.CrapsTable;
 import io.zipcoder.casino.player.CrapsPlayer;
 import io.zipcoder.casino.utilities.Console;
@@ -197,15 +198,17 @@ public class Craps{
     }
 
     public void payField(Integer roll){
+        boolean isDouble = false;
         if((roll >= 3 && roll < 5) || (roll >= 9 && roll < 12)){
             getWinnings(getField());
-            console.println("You won your field bet: " + getField());
+            console.printPayFied(isDouble, getField(), "win");
         }else if(roll == 2 || roll == 12){
+            isDouble = true;
             getWinnings(getField()*2);
-            console.println("You won DOUBLE your field bet: " + (getField()*2));
+            console.printPayFied(isDouble, getField(), "win");
         }
         else {
-            console.println("You lost your field bet: " + getField());
+            console.printPayFied(isDouble, getField(), "loss");
             setField(0);
         }
     }

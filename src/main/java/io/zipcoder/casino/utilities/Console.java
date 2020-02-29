@@ -99,9 +99,13 @@ public final class Console {
         println("You won your come bet on " + num + ": " + winnings);
     }
 
-    public void printPayFied(boolean isDouble){
-        if(isDouble){
-            println("You won DOUBLE your field bet:");
+    public void printPayFied(boolean isDouble, Integer bet, String winLoss){
+        if(isDouble && winLoss.equalsIgnoreCase("win")){
+            println("You won DOUBLE your field bet: " + bet * 2);
+        }else if(winLoss.equalsIgnoreCase("win")){
+            println("You won your field bet: " + bet);
+        }else {
+            println("You lost your field bet: " + bet);
         }
     }
 }
