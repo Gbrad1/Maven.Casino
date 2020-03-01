@@ -48,12 +48,7 @@ public class Craps{
         this.field = 0;
         this.currentPoint = 0;
         this.refund = 0;
-        for (int i = 4; i <= 6; i++) {
-            comeBets.put(i, 0);
-            comeBets.put(i+4, 0);
-            dontComeBets.put(i, 0);
-            dontComeBets.put(i+4, 0);
-        }
+        initializeComeBets();
     }
 
     public void play(){
@@ -139,12 +134,12 @@ public class Craps{
             setCurrentPoint(roll);
             if(getComeBets(roll) != 0){
                 getWinnings(getComeBets(roll));
-                console.printComeBetsWinning(roll, getComeBets(roll));
+                console.printComeBetsWinnings(roll, getComeBets(roll));
                 setComeBets(roll, 0);
             }
             playerTurn();
         }else {
-            console.println("Thank You for playing :D");
+            console.printThankYou();
         }
     }
 
@@ -220,7 +215,7 @@ public class Craps{
     }
 
     public void checkSeven(Boolean crapOut){
-        clearComeBets();
+        clearComeBets("clear");
         if(crapOut){
             setField(0);
             setDontCome(0);
@@ -284,16 +279,16 @@ public class Craps{
         setDontCome(0);
         if(getComeBets(roll) == getCome()) {
             getWinnings(getComeBets(roll));
-            console.println("You won your come bet on " + roll + ": " + getComeBets(roll));
+            console.printComeBetsWinnings(roll, getComeBets(roll));
         }else {
             getWinnings(getComeBets(roll)*2);
-            console.println("You won your come bet on " + roll + ": " + getComeBets(roll)*2);
+            console.printComeBetsWinnings(roll, getComeBets(roll)*2);
             comeBets.replace(roll, getCome());
             setCome(0);
         }
     }
 
-    public void clearComeBets(){
+    public void clearComeBets(String clearOrRefund){
         Integer sum = 0;
         for (int i = 4; i <= 6; i++) {
             getWinnings(getDontComeBets(i)*2);
@@ -304,28 +299,74 @@ public class Craps{
             dontComeBets.replace(i, 0);
             dontComeBets.replace(i+4, 0);
         }
-        console.println("You won your dont come bets: " + sum);
+        if(clearOrRefund.equalsIgnoreCase("clear")) {
+            console.printDontComeBetsWinnings(sum);
+        }else {
+            refund += sum;
+        }
     }
 
     public void updatePassLine(String decision){
         if(decision.equalsIgnoreCase("pass")){
             getWinnings(getPassLine()*2);
-            console.println("You won your pass line bet: " + getPassLine());
+            console.printPassLineWinnings("won", getPassLine());
             setPassLine(0);
             setDontPassLine(0);
             setIsOnLine();
         }else if(decision.equalsIgnoreCase("dont")){
             getWinnings(getDontPassLine()*2);
-            console.println("You won your dont pass line bet: " + getDontPassLine());
+            console.printDontPassLineWinnings("won", getDontPassLine());
             setPassLine(0);
             setDontPassLine(0);
             setIsOnLine();
         }else if(decision.equalsIgnoreCase("12")){
             setPassLine(0);
             getWinnings(getDontPassLine());
-            console.println("You push on your dont pass line bet");
+            console.printDontPassLineWinnings("tie", getDontPassLine());
             setIsOnLine();
         }
+    }
+
+    public Boolean isBroke(){
+        if(crapsPlayer.getPlayer().getBalance() == 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public void returnBets(Boolean isPointOn){
+        if(isPointOn){
+            getWinnings(come);
+            getWinnings(dontCome);
+            refund += getCome() + getDontCome();
+            setCome(0);
+            setDontCome(0);
+        }else {
+            getWinnings(passLine);
+            refund += passLine;
+            setPassLine(0);
+        }
+        getWinnings(field);
+        getWinnings(dontPassLine);
+        refund += field + dontPassLine;
+        setField(0);
+        setDontPassLine(0);
+        clearComeBets("refund");
+    }
+
+    public void initializeComeBets(){
+        for (int i = 4; i <= 6; i++) {
+            comeBets.put(i, 0);
+            comeBets.put(i+4, 0);
+            dontComeBets.put(i, 0);
+            dontComeBets.put(i+4, 0);
+        }
+    }
+
+    public void updateTable(){
+        console.print(table.printTable(crapsPlayer.getPlayer().getBalance(), passLine,
+                dontPassLine, field, come, dontCome, comeBets, dontComeBets, roll, currentPoint));
     }
 
     public void setPassLine(Integer bet){
@@ -422,47 +463,5 @@ public class Craps{
 
     public boolean getIsStillPlaying(){
         return isStillPlaying;
-    }
-
-    public Boolean isBroke(){
-        if(crapsPlayer.getPlayer().getBalance() == 0){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    public void returnBets(Boolean isPointOn){
-        if(isPointOn){
-            getWinnings(come);
-            getWinnings(dontCome);
-            refund += getCome() + getDontCome();
-            setCome(0);
-            setDontCome(0);
-        }else {
-            getWinnings(passLine);
-            refund += passLine;
-            setPassLine(0);
-        }
-        getWinnings(field);
-        getWinnings(dontPassLine);
-        refund += field + dontPassLine;
-        setField(0);
-        setDontPassLine(0);
-        for (int i = 4; i <= 6; i++) {
-            getWinnings(getDontComeBets(i));
-            getWinnings(getDontComeBets(i+4));
-            comeBets.replace(i, 0);
-            comeBets.replace(i+4, 0);
-            dontComeBets.replace(i, 0);
-            dontComeBets.replace(i+4, 0);
-            refund += getDontComeBets(i);
-            refund += getDontComeBets(i+4);
-        }
-    }
-
-    public void updateTable(){
-        console.print(table.printTable(crapsPlayer.getPlayer().getBalance(), passLine,
-                dontPassLine, field, come, dontCome, comeBets, dontComeBets, roll, currentPoint));
     }
 }

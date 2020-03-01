@@ -85,18 +85,44 @@ public final class Console {
                 "                                                                                                                                     ");
     }
 
+    public void printThankYou(){
+        println("Thank you for playing :D");
+    }
+
     public void printYourOutOfMoney(){
         println("You're out of funds. Please roll");
     }
 
     public void printRefund(Integer refund, Integer balance){
         println("You were refunded : " + refund + ".\n" +
-                "Your balance is : " + balance + ".\n" +
-                "Thank You for playing :D");
+                "Your balance is : " + balance + ".\n");
+        printThankYou();
     }
 
-    public void printComeBetsWinning(Integer num, Integer winnings){
+    public void printPassLineWinnings(String winOrLoss, Integer bet){
+        if(winOrLoss.equalsIgnoreCase("won") ){
+            println("You won your pass line bet: " +  bet);
+        }else {
+            println("You lost your pass line bet: " + bet);
+        }
+    }
+
+    public void printDontPassLineWinnings(String winOrLoss, Integer bet){
+        if(winOrLoss.equalsIgnoreCase("won") ){
+            println("You won your dont pass line bet: " +  bet);
+        }else if(winOrLoss.equalsIgnoreCase("loss")){
+            println("You lost your dont pass line bet: " + bet);
+        }else {
+            println("You tie on your dont pass line bet: " + bet);
+        }
+    }
+
+    public void printComeBetsWinnings(Integer num, Integer winnings){
         println("You won your come bet on " + num + ": " + winnings);
+    }
+
+    public void printDontComeBetsWinnings(Integer winnings){
+        println("You won your dont come bets: " + winnings);
     }
 
     public void printPayFied(boolean isDouble, Integer bet, String winLoss){
