@@ -2,7 +2,6 @@ package io.zipcoder.casino;
 
 
 import io.zipcoder.casino.card.CrapsTable;
-import io.zipcoder.casino.card.SicBoTable;
 import io.zipcoder.casino.dealer.BlackjackDealer;
 import io.zipcoder.casino.dealer.GoFishDealer;
 import io.zipcoder.casino.game.Blackjack;
@@ -11,7 +10,7 @@ import io.zipcoder.casino.game.SicBo;
 import io.zipcoder.casino.game.GoFish;
 import io.zipcoder.casino.player.*;
 import io.zipcoder.casino.utilities.Console;
-import java.lang.annotation.Target;
+
 
 public class Casino {
 
@@ -127,7 +126,6 @@ public class Casino {
     }
 
     public static void playSicBo(){
-        Console consoleSicBo = new Console(System.in, System.out);
         SicBo sicBoGame = new SicBo(new SicBoPlayer(user));
         sicBoGame.play();
     }
