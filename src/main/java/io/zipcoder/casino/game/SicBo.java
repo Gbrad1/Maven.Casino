@@ -158,7 +158,7 @@ public class SicBo implements Gambling {
         getRoll();
 
         if (user.isTriple(user.getTriple())) {
-            user.getPlayer().setBalance(user.getPlayer().getBalance() + bid);
+            user.getPlayer().setBalance(user.getPlayer().getBalance() + (bid * 30));
             console.print("\nYou Win!");
 
         } else {
