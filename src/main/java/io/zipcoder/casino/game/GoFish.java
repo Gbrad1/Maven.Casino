@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-import static java.lang.Integer.parseInt;
 
 public class GoFish {
 

@@ -3,7 +3,6 @@ import io.zipcoder.casino.card.Card;
 import io.zipcoder.casino.card.Deck;
 import io.zipcoder.casino.dealer.BlackjackDealer;
 import io.zipcoder.casino.player.BlackjackPlayer;
-import io.zipcoder.casino.player.Player;
 import io.zipcoder.casino.utilities.Console;
 
 import java.util.ArrayList;
